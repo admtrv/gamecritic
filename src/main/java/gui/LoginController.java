@@ -1,0 +1,50 @@
+package gui;
+
+import users.*;
+import database.*;
+import session.*;
+
+import javafx.application.Platform;
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
+import java.sql.SQLException;
+import java.io.IOException;
+
+public class LoginController{
+    @FXML
+    private TextField usernameField;
+    @FXML
+    private PasswordField passwordField;
+
+    @FXML
+    private void initialize() {
+        Platform.runLater(() -> usernameField.requestFocus());
+    }
+
+    @FXML
+    private void login() {
+        String username = usernameField.getText();
+        String password = passwordField.getText();
+
+        try {
+            User user = DataBaseUtil.findUser(username, password);
+            if (user != null) {
+                System.out.println("User found successfully!");
+                CurrentUser.getInstance().setUser(user);
+                // Переключаемся на следующую сцену после удачного входа
+            } else {
+                System.out.println("There is no user with that username!");
+                // Показываем сообщение об ошибке
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Error finding user: " + e.getMessage());
+            // Обрабатываем ошибку
+        }
+    }
+
+    public void switchToRegisterScene() throws IOException {
+        SceneController.getInstance().switchScene("register.fxml");
+    }
+
+}
