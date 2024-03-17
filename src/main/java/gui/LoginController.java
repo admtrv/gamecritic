@@ -11,18 +11,15 @@ import java.sql.SQLException;
 import java.io.IOException;
 
 public class LoginController{
-    @FXML
-    private TextField usernameField;
-    @FXML
-    private PasswordField passwordField;
-
+    @FXML private TextField usernameField;
+    @FXML private PasswordField passwordField;
     @FXML
     private void initialize() {
         Platform.runLater(() -> usernameField.requestFocus());
     }
 
     @FXML
-    private void login() {
+    private void signIn() {
         String username = usernameField.getText();
         String password = passwordField.getText();
 
@@ -30,21 +27,25 @@ public class LoginController{
             User user = DataBaseUtil.findUser(username, password);
             if (user != null) {
                 System.out.println("User found successfully!");
-                CurrentUser.getInstance().setUser(user);
-                // Переключаемся на следующую сцену после удачного входа
+                CurrentUser.getInstance().logIn(user);
+                CurrentUser.getInstance().saveCurrentUser();
+                switchToHomeScene();
             } else {
                 System.out.println("There is no user with that username!");
-                // Показываем сообщение об ошибке
             }
-
         } catch (SQLException e) {
-            System.err.println("Error finding user: " + e.getMessage());
-            // Обрабатываем ошибку
+            System.err.println("Error finding user!");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
     public void switchToRegisterScene() throws IOException {
         SceneController.getInstance().switchScene("register.fxml");
+    }
+
+    public void switchToHomeScene() throws IOException {
+        SceneController.getInstance().switchScene("home.fxml");
     }
 
 }

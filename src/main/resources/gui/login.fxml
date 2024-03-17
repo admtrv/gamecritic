@@ -49,7 +49,7 @@
                     <Font name="Proxima Nova Regular" size="14.0" />
                 </font>
             </PasswordField>
-            <Button layoutX="52.0" layoutY="186.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#login" prefHeight="30.0" prefWidth="330.0" style="-fx-background-color: #3b3b3b;" text="Sign In" textFill="WHITE">
+            <Button layoutX="52.0" layoutY="186.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#signIn" prefHeight="30.0" prefWidth="330.0" style="-fx-background-color: #3b3b3b;" text="Sign In" textFill="WHITE">
                 <font>
                     <Font name="Proxima Nova Regular" size="14.0" />
                 </font>

@@ -9,4 +9,7 @@ public class Critic extends User {
     }
 
     // Геттеры и сеттеры
+    public double getBalance() {
+        return balance;
+    }
 }

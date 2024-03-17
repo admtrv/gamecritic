@@ -30,8 +30,7 @@ public class RegisterController{
             System.out.println("User registered successfully!");
             switchToLoginScene();
         } catch (SQLException e) {
-            System.err.println("Error registering user: " + e.getMessage());
-            // Отображение ошибки пользователю
+            System.err.println("Error registering user!");
         } catch (IOException e) {
             e.printStackTrace();
         }

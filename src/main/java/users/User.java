@@ -1,6 +1,8 @@
 package users;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     private int id;
     private String username;
     private String password;
@@ -12,4 +14,23 @@ public class User {
     }
 
     // Геттеры и сеттеры
+    public String getUsername(){
+        return username;
+    }
+
+    public String getPassword(){
+        return password;
+    }
+
+    public int getId(){
+        return id;
+    }
+
+    public void setUsername(String newUsername) {
+        username = newUsername;
+    }
+
+    public void setPassword(String newPassword) {
+        password = newPassword;
+    }
 }
