@@ -1,6 +1,6 @@
 package session;
 
-import users.User;
+import users.*;
 
 import java.io.*;
 

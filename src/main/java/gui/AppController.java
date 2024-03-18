@@ -1,10 +1,10 @@
 package gui;
 
+import session.*;
+
 import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import session.*;
-
 import java.io.IOException;
 
 public class AppController extends Application {
@@ -13,7 +13,7 @@ public class AppController extends Application {
     public void start(Stage primaryStage) {
         SceneController sceneController = SceneController.getInstance();
         sceneController.setStage(primaryStage);
-        Image WindowLogo = new Image(getClass().getResourceAsStream("/images/logo_icon.png"));
+        Image WindowLogo = new Image(getClass().getResourceAsStream("/images/logos/logo_icon.png"));
         primaryStage.getIcons().add(WindowLogo);
         primaryStage.setTitle("gamecritic");
 

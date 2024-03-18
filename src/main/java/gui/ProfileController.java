@@ -8,7 +8,6 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import session.CurrentUser;
-
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -17,10 +16,22 @@ public class ProfileController {
     @FXML private PasswordField CurrentPasswordField;
     @FXML private PasswordField NewPasswordField;
     @FXML private PasswordField ConfirmPasswordField;
+    @FXML private Label balanceTextLabel;
+    @FXML private Label balanceValueLabel;
+
     User user = CurrentUser.getInstance().getUser();
     @FXML
     private void initialize() {
         usernameField.setText(user.getUsername());
+        if (user instanceof Critic) {
+            Critic critic = (Critic) user;
+            balanceValueLabel.setVisible(true);
+            balanceTextLabel.setVisible(true);
+            balanceValueLabel.setText(critic.getBalance() + " $");
+        } else {
+            balanceValueLabel.setVisible(false);
+            balanceTextLabel.setVisible(false);
+        }
     }
     public void switchToGamesScene() throws IOException {
     }

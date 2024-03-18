@@ -4,6 +4,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -14,7 +15,7 @@
          <children>
             <ImageView fitHeight="37.0" fitWidth="176.0" layoutX="57.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/logo_horizontal_white.png" />
+                  <Image url="@../images/logos/logo_horizontal_white.png" />
                </image>
             </ImageView>
             <Button layoutX="275.0" layoutY="18.0" mnemonicParsing="false" onAction="#switchToGamesScene" prefHeight="31.0" prefWidth="70.0" style="-fx-background-color: #000000;" text="Games" textFill="WHITE">
@@ -42,12 +43,14 @@
                   <Font name="ProximaNova-ExtraBold" size="20.0" />
                </font>
             </Text>
+            <HBox fx:id="LatestGamesContainer" layoutX="61.0" layoutY="82.0" prefHeight="170.0" prefWidth="128.0" spacing="10">
+            </HBox>
          </children>
       </AnchorPane>
       <AnchorPane layoutY="373.0" prefHeight="333.0" prefWidth="1000.0">
          <children>
-            <Line endX="777.0" endY="-1.52587890625E-5" layoutX="154.0" layoutY="67.0" startX="-100.0" strokeWidth="2.0" />
-            <Text layoutX="53.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Best Games of All Time">
+            <Line endX="777.0" endY="-1.52587890625E-5" layoutX="154.0" layoutY="67.0" startX="-91.60000610351562" startY="-3.0517578125E-5" strokeWidth="2.0" />
+            <Text layoutX="61.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Best Games of All Time">
                <font>
                   <Font name="ProximaNova-ExtraBold" size="20.0" />
                </font>
