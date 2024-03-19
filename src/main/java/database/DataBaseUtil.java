@@ -88,26 +88,31 @@ public class DataBaseUtil {
         List<Game> games = new ArrayList<>();
         String sql = "SELECT * FROM games ORDER BY release_date DESC LIMIT ?";
 
-        try (Connection conn = getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
-            pstmt.setInt(1, limit);
+            preparedStatement.setInt(1, limit);
 
-            try (ResultSet rs = pstmt.executeQuery()) {
-                while (rs.next()) {
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
                     games.add(new Game(
-                            rs.getInt("id"),
-                            rs.getString("title"),
-                            rs.getString("developer"),
-                            rs.getString("release_date"),
-                            rs.getString("platforms"),
-                            rs.getString("genre"),
-                            rs.getBoolean("award"),
-                            rs.getString("store_link"),
-                            rs.getString("description"),
-                            rs.getDouble("critics_score"),
-                            rs.getDouble("users_score"),
-                            rs.getString("image_path")
+                            resultSet.getInt("id"),
+                            resultSet.getString("title"),
+                            resultSet.getString("developer"),
+                            resultSet.getString("release_date"),
+                            resultSet.getString("platforms"),
+                            resultSet.getString("genre"),
+                            resultSet.getBoolean("award"),
+                            resultSet.getString("store_link"),
+                            resultSet.getString("description"),
+                            resultSet.getString("image_path"),
+                            resultSet.getInt("critics_count"),
+                            resultSet.getInt("users_count"),
+                            resultSet.getInt("critics_sum"),
+                            resultSet.getInt("users_sum"),
+                            resultSet.getDouble("critics_score"),
+                            resultSet.getDouble("users_score"),
+                            resultSet.getDouble("average_score")
                     ));
                 }
             }
@@ -115,5 +120,39 @@ public class DataBaseUtil {
         return games;
     }
 
+    public static List<Game> getTopGames(int limit) throws SQLException {
+        List<Game> games = new ArrayList<>();
+        String sql = "SELECT * FROM games ORDER BY average_score DESC LIMIT ?";
 
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
+            preparedStatement.setInt(1, limit);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    games.add(new Game(
+                            resultSet.getInt("id"),
+                            resultSet.getString("title"),
+                            resultSet.getString("developer"),
+                            resultSet.getString("release_date"),
+                            resultSet.getString("platforms"),
+                            resultSet.getString("genre"),
+                            resultSet.getBoolean("award"),
+                            resultSet.getString("store_link"),
+                            resultSet.getString("description"),
+                            resultSet.getString("image_path"),
+                            resultSet.getInt("critics_count"),
+                            resultSet.getInt("users_count"),
+                            resultSet.getInt("critics_sum"),
+                            resultSet.getInt("users_sum"),
+                            resultSet.getDouble("critics_score"),
+                            resultSet.getDouble("users_score"),
+                            resultSet.getDouble("average_score")
+                    ));
+                }
+            }
+        }
+        return games;
+    }
 }

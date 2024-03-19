@@ -22,7 +22,6 @@ public class AppController extends Application {
             if (CurrentUser.getInstance().getUser() != null) {
                 sceneController.switchScene("home.fxml"); // Пользователь уже был в системе, перейти на домашний экран
             } else {
-
                 sceneController.switchScene("login.fxml"); // Пользователь не вошел, показать экран входа
             }
         } catch (IOException e) {

@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ProfileController">
+<AnchorPane prefHeight="730.0" prefWidth="1000.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ProfileController">
     <children>
         <AnchorPane prefHeight="67.0" prefWidth="1000.0" style="-fx-background-color: #000000;">
             <children>
@@ -37,7 +37,7 @@
                 </ImageView>
             </children>
         </AnchorPane>
-      <AnchorPane layoutX="6.0" layoutY="67.0" prefHeight="634.0" prefWidth="608.0">
+      <AnchorPane layoutX="6.0" layoutY="67.0" prefHeight="662.0" prefWidth="608.0">
          <children>
             <TextField fx:id="usernameField" layoutX="51.0" layoutY="114.0" prefHeight="30.0" prefWidth="480.0" style="-fx-background-color: #ffffff; -fx-border-color: #3d3d3d;" />
             <Text layoutX="51.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="My Profile">
@@ -86,7 +86,7 @@
             <Line endX="377.20001220703125" layoutX="152.0" layoutY="65.0" startX="-100.0" strokeWidth="2.0" />
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="614.0" layoutY="67.0" prefHeight="634.0" prefWidth="385.0" style="-fx-background-color: #f2f2f2;">
+      <AnchorPane layoutX="614.0" layoutY="67.0" prefHeight="662.0" prefWidth="385.0" style="-fx-background-color: #f2f2f2;">
          <children>
               <Label fx:id="balanceValueLabel" layoutX="25.0" layoutY="106.0" text="1000.0 $">
                <font>
@@ -98,7 +98,7 @@
                      <Font name="ProximaNova-ExtraBold" size="20.0" />
                  </font>
              </Label>
-            <Line endX="249.6666259765625" endY="-1.52587890625E-5" layoutX="115.0" layoutY="66.0" startX="-89.0" startY="-1.52587890625E-5" strokeWidth="2.0" />
+            <Line fx:id="additionalLine" endX="249.6666259765625" endY="-1.52587890625E-5" layoutX="115.0" layoutY="66.0" startX="-89.0" startY="-1.52587890625E-5" strokeWidth="2.0" />
 
          </children></AnchorPane>
     </children>

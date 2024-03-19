@@ -10,14 +10,21 @@ public class Game {
     private boolean award;
     private String storeLink;
     private String description;
+    private String imagePath;
+    private int criticsCount;
+    private int usersCount;
+    private int criticsSum;
+    private int usersSum;
     private double criticsScore;
     private double usersScore;
-    private String imagePath;
+    private double averageScore;
+
 
     // Конструктор
     public Game(int id, String title, String developer, String releaseDate, String platforms,
-                String genre, boolean award, String storeLink, String description,
-                double criticsScore, double usersScore, String imagePath) {
+                String genre, boolean award, String storeLink, String description, String imagePath,
+                int criticsCount, int usersCount, int criticsSum, int usersSum,
+                double criticsScore, double usersScore, double averageScore) {
         this.id = id;
         this.title = title;
         this.developer = developer;
@@ -27,14 +34,24 @@ public class Game {
         this.award = award;
         this.storeLink = storeLink;
         this.description = description;
+        this.imagePath = imagePath;
+        this.criticsCount = criticsCount;
+        this.usersCount = usersCount;
+        this.criticsSum = criticsSum;
+        this.usersSum = usersSum;
         this.criticsScore = criticsScore;
         this.usersScore = usersScore;
-        this.imagePath = imagePath;
+        this.averageScore = averageScore;
     }
 
+    // Агрегация оценок
+    /*
+    criticsScore = criticsCount == criticsSum / criticsCount;
+    usersScore = usersCount == usersSum / usersCount;
+    averageScore = (criticsSum + usersSum) / (criticsCount +  usersCount);
+    */
+
     // Геттеры и сеттеры
-
-
     public int getId() {
         return id;
     }
@@ -50,6 +67,10 @@ public class Game {
     public String getReleaseDate() {
         return releaseDate;
     }
+
+    //SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    //String dateString = sdf.format(game.getReleaseDate()); // Для сохранения в БД
+    //Date date = sdf.parse("2024-01-01"); // Для чтения из строки
 
     public String getPlatforms() {
         return platforms;
@@ -71,19 +92,28 @@ public class Game {
         return description;
     }
 
-    public double getCriticsScore() {
-        return criticsScore;
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public int getCriticsCount() {
+        return criticsCount;
+    }
+
+    public int getUsersCount() {
+        return usersCount;
     }
 
     public double getUsersScore() {
         return usersScore;
     }
 
-    public String getImagePath() {
-        return imagePath;
+    public double getCriticsScore() {
+        return criticsScore;
     }
 
-    //SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-    //String dateString = sdf.format(game.getReleaseDate()); // Для сохранения в БД
-    //Date date = sdf.parse("2024-01-01"); // Для чтения из строки
+    public double getAverageScore() {
+        return averageScore;
+    }
+
 }

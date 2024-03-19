@@ -1,6 +1,7 @@
 package gui;
 
 import database.*;
+import javafx.scene.shape.Line;
 import session.*;
 import users.*;
 
@@ -16,8 +17,10 @@ public class ProfileController {
     @FXML private PasswordField CurrentPasswordField;
     @FXML private PasswordField NewPasswordField;
     @FXML private PasswordField ConfirmPasswordField;
+
     @FXML private Label balanceTextLabel;
     @FXML private Label balanceValueLabel;
+    @FXML private Line additionalLine;
 
     User user = CurrentUser.getInstance().getUser();
     @FXML
@@ -27,18 +30,13 @@ public class ProfileController {
             Critic critic = (Critic) user;
             balanceValueLabel.setVisible(true);
             balanceTextLabel.setVisible(true);
+            additionalLine.setVisible(true);
             balanceValueLabel.setText(critic.getBalance() + " $");
         } else {
             balanceValueLabel.setVisible(false);
             balanceTextLabel.setVisible(false);
+            additionalLine.setVisible(false);
         }
-    }
-    public void switchToGamesScene() throws IOException {
-    }
-    public void switchToYearsScene() throws IOException {
-    }
-    public void switchToHomeScene() throws IOException {
-        SceneController.getInstance().switchScene("home.fxml");
     }
 
     public void updateUsername() throws IOException {
@@ -96,4 +94,11 @@ public class ProfileController {
         System.out.println("User signed out!");
     }
 
+    public void switchToGamesScene() throws IOException {
+    }
+    public void switchToYearsScene() throws IOException {
+    }
+    public void switchToHomeScene() throws IOException {
+        SceneController.getInstance().switchScene("home.fxml");
+    }
 }

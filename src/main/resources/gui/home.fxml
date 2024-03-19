@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.HomeController">
+<AnchorPane prefHeight="730.0" prefWidth="1000.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.HomeController">
    <children>
       <AnchorPane prefHeight="67.0" prefWidth="1000.0" style="-fx-background-color: #000000;">
          <children>
@@ -43,11 +43,11 @@
                   <Font name="ProximaNova-ExtraBold" size="20.0" />
                </font>
             </Text>
-            <HBox fx:id="LatestGamesContainer" layoutX="61.0" layoutY="82.0" prefHeight="170.0" prefWidth="128.0" spacing="10">
+            <HBox fx:id="LatestGamesContainer" layoutX="61.0" layoutY="74.0" prefHeight="170.0" prefWidth="128.0" spacing="10">
             </HBox>
          </children>
       </AnchorPane>
-      <AnchorPane layoutY="373.0" prefHeight="333.0" prefWidth="1000.0">
+      <AnchorPane layoutY="373.0" prefHeight="356.0" prefWidth="1000.0">
          <children>
             <Line endX="777.0" endY="-1.52587890625E-5" layoutX="154.0" layoutY="67.0" startX="-91.60000610351562" startY="-3.0517578125E-5" strokeWidth="2.0" />
             <Text layoutX="61.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Best Games of All Time">
@@ -55,6 +55,8 @@
                   <Font name="ProximaNova-ExtraBold" size="20.0" />
                </font>
             </Text>
+            <HBox fx:id="TopGamesContainer" layoutX="61.0" layoutY="79.0" prefHeight="170.0" prefWidth="128.0" spacing="10">
+            </HBox>
          </children>
       </AnchorPane>
    </children>
