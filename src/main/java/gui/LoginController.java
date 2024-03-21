@@ -10,7 +10,7 @@ import javafx.scene.control.*;
 import java.sql.SQLException;
 import java.io.IOException;
 
-public class LoginController{
+public class LoginController implements FieldInterface {
     @FXML private TextField usernameField;
     @FXML private PasswordField passwordField;
     @FXML
@@ -23,21 +23,52 @@ public class LoginController{
         String username = usernameField.getText();
         String password = passwordField.getText();
 
+        setUsernameNormalStyle();
+        setPasswordNormalStyle();
+
         try {
-            User user = DataBaseUtil.findUser(username, password);
+            User user = DataBaseUtil.findUser(username);
             if (user != null) {
-                System.out.println("User found successfully!");
-                CurrentUser.getInstance().logIn(user);
-                CurrentUser.getInstance().saveCurrentUser();
-                switchToHomeScene();
+                if (user.getPassword().equals(password)) {
+                    System.out.println("User found successfully!");
+                    CurrentUser.getInstance().logIn(user);
+                    CurrentUser.getInstance().saveCurrentUser();
+                    switchToHomeScene();
+                } else {
+                    setPasswordErrorStyle();
+                    System.out.println("Password does not match!");
+                }
             } else {
                 System.out.println("There is no user with that username!");
+                setUsernameErrorStyle();
             }
         } catch (SQLException e) {
             System.err.println("Error finding user!");
+            e.printStackTrace();
         } catch (IOException e) {
+            System.err.println("Error switching scene!");
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void setUsernameErrorStyle() {
+        usernameField.setStyle(errorFieldStyle);
+    }
+
+    @Override
+    public void setPasswordErrorStyle() {
+        passwordField.setStyle(errorFieldStyle);
+    }
+
+    @Override
+    public void setUsernameNormalStyle() {
+        usernameField.setStyle(normalFieldStyle);
+    }
+
+    @Override
+    public void setPasswordNormalStyle() {
+        passwordField.setStyle(normalFieldStyle);
     }
 
     public void switchToRegisterScene() throws IOException {

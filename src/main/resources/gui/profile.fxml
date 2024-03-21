@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
@@ -19,27 +20,39 @@
                     <image>
                         <Image url="@../images/logos/logo_horizontal_white.png" />
                     </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
                 </ImageView>
-                <Button layoutX="275.0" layoutY="18.0" mnemonicParsing="false" onAction="#switchToGamesScene" prefHeight="31.0" prefWidth="70.0" style="-fx-background-color: #000000;" text="Games" textFill="WHITE">
+                <Button layoutX="270.0" layoutY="18.0" mnemonicParsing="false" onAction="#switchToGamesScene" prefHeight="31.0" prefWidth="77.0" style="-fx-background-color: #000000;" text="Games" textFill="WHITE">
                     <font>
-                        <Font name="ProximaNova-ExtraBold" size="14.0" />
+                        <Font name="ProximaNova-ExtraBold" size="16.0" />
                     </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
                 </Button>
-                <Button layoutX="384.0" layoutY="18.0" mnemonicParsing="false" onAction="#switchToYearsScene" prefHeight="31.0" prefWidth="70.0" style="-fx-background-color: #000000;" text="Years" textFill="WHITE">
+                <Button layoutX="384.0" layoutY="18.0" mnemonicParsing="false" onAction="#switchToYearsScene" prefHeight="31.0" prefWidth="64.0" style="-fx-background-color: #000000;" text="Years" textFill="WHITE">
                     <font>
-                        <Font name="ProximaNova-ExtraBold" size="14.0" />
+                        <Font name="ProximaNova-ExtraBold" size="16.0" />
                     </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
                 </Button>
                 <ImageView fitHeight="37.0" fitWidth="48.0" layoutX="904.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../images/user.png" />
                     </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
                 </ImageView>
             </children>
         </AnchorPane>
       <AnchorPane layoutX="6.0" layoutY="67.0" prefHeight="662.0" prefWidth="608.0">
          <children>
-            <TextField fx:id="usernameField" layoutX="51.0" layoutY="114.0" prefHeight="30.0" prefWidth="480.0" style="-fx-background-color: #ffffff; -fx-border-color: #3d3d3d;" />
+            <TextField fx:id="usernameField" layoutX="51.0" layoutY="114.0" prefHeight="30.0" prefWidth="480.0" style="-fx-background-color: #ffffff; -fx-border-color: #3d3d3d; -fx-border-radius: 3;" />
             <Text layoutX="51.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="My Profile">
                <font>
                   <Font name="ProximaNova-ExtraBold" size="20.0" />
@@ -50,38 +63,47 @@
                   <Font name="Proxima Nova Regular" size="12.0" />
                </font>
             </Text>
-            <Button layoutX="369.0" layoutY="169.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#updateUsername" prefHeight="30.0" prefWidth="160.0" style="-fx-background-color: #3b3b3b;" text="Update Username" textFill="WHITE">
+            <Button layoutX="369.0" layoutY="169.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#updateUsername" prefHeight="30.0" prefWidth="160.0" style="-fx-background-color: #3b3b3b; -fx-border-radius: 3;" text="Update Username" textFill="WHITE">
                <font>
                   <Font name="Proxima Nova Regular" size="14.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
-            <PasswordField fx:id="CurrentPasswordField" layoutX="51.0" layoutY="247.0" prefHeight="30.0" prefWidth="480.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #3d3d3d;" />
+            <PasswordField fx:id="CurrentPasswordField" layoutX="51.0" layoutY="247.0" prefHeight="30.0" prefWidth="480.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #3d3d3d; -fx-border-radius: 3;" />
             <Text layoutX="51.0" layoutY="242.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Current Password">
                <font>
                   <Font name="Proxima Nova Regular" size="12.0" />
                </font>
             </Text>
-            <PasswordField fx:id="NewPasswordField" layoutX="51.0" layoutY="316.0" prefHeight="30.0" prefWidth="480.0" style="-fx-background-color: #ffffff; -fx-border-color: #3d3d3d;" />
+            <PasswordField fx:id="NewPasswordField" layoutX="51.0" layoutY="316.0" prefHeight="30.0" prefWidth="480.0" style="-fx-background-color: #ffffff; -fx-border-color: #3d3d3d; -fx-border-radius: 3;" />
             <Text layoutX="51.0" layoutY="311.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New Password">
                <font>
                   <Font name="Proxima Nova Regular" size="12.0" />
                </font>
             </Text>
-            <PasswordField fx:id="ConfirmPasswordField" layoutX="51.0" layoutY="384.0" prefHeight="30.0" prefWidth="480.0" style="-fx-background-color: #ffffff; -fx-border-color: #3d3d3d;" />
+            <PasswordField fx:id="ConfirmPasswordField" layoutX="51.0" layoutY="384.0" prefHeight="30.0" prefWidth="480.0" style="-fx-background-color: #ffffff; -fx-border-color: #3d3d3d; -fx-border-radius: 3;" />
             <Text layoutX="51.0" layoutY="379.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Confirm Password">
                <font>
                   <Font name="Proxima Nova Regular" size="12.0" />
                </font>
             </Text>
-            <Button layoutX="369.0" layoutY="440.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#updatePassword" prefHeight="30.0" prefWidth="160.0" style="-fx-background-color: #3B3B3B;" text="Update Password" textFill="WHITE">
+            <Button layoutX="369.0" layoutY="435.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#updatePassword" prefHeight="30.0" prefWidth="160.0" style="-fx-background-color: #3B3B3B; -fx-border-radius: 3;" text="Update Password" textFill="WHITE">
                <font>
                   <Font name="Proxima Nova Regular" size="14.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
             <Button layoutX="455.0" layoutY="43.0" mnemonicParsing="false" onAction="#signOut" prefHeight="15.0" prefWidth="74.0" style="-fx-background-color: #ffffff;" text="SIGN OUT" textFill="#aeaeae">
                <font>
                   <Font name="ProximaNova-ExtraBold" size="12.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
             <Line endX="377.20001220703125" layoutX="152.0" layoutY="65.0" startX="-100.0" strokeWidth="2.0" />
          </children>

@@ -16,16 +16,16 @@ import javafx.scene.text.Font;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-
-public class HomeController {
+import javafx.scene.Cursor;
+public class HomeController implements ColorInterface {
     private List<Game> latestGames;
     private List<Game> topGames;
     @FXML private HBox LatestGamesContainer;
     @FXML private HBox TopGamesContainer;
     public void initialize() throws IOException {
         try {
-            latestGames = DataBaseUtil.getLastGames(5);
-            topGames = DataBaseUtil.getTopGames(5);
+            latestGames = DataBaseUtil.getGames(5, "release_date");
+            topGames = DataBaseUtil.getGames(5, "average_score");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -38,7 +38,7 @@ public class HomeController {
         for (Game game : games) {
             VBox gameBox = new VBox(5);
             gameBox.setPadding(new Insets(10));
-            gameBox.setStyle("-fx-background-color: #fafafa; -fx-background-radius: 10");
+            gameBox.setStyle("-fx-background-color: " + BoxBackgroundColor + " -fx-background-radius: 10");
 
             ImageView imageView = new ImageView(new Image(getClass().getResourceAsStream(game.getImagePath())));
             imageView.setFitHeight(160); // Высота : Ширина = 15 : 10
@@ -50,7 +50,7 @@ public class HomeController {
 
             Label scoreLabel = new Label(Double.toString(game.getAverageScore()));
             scoreLabel.setFont(new Font("ProximaNova-ExtraBold", 14));
-            scoreLabel.setStyle(getScoreColor(game.getAverageScore()));
+            scoreLabel.setStyle(getScoreColor(game.getAverageScore()) + "-fx-background-radius: 8;");
             scoreLabel.setAlignment(Pos.CENTER);
             scoreLabel.setMinWidth(30);
             scoreLabel.setMinHeight(30);
@@ -60,6 +60,7 @@ public class HomeController {
 
             gameBox.getChildren().addAll(imageView, titleLabel, scoreLabel, developerLabel);
             HBox.setMargin(gameBox, new Insets(0, 45, 0, 0));
+            gameBox.setCursor(Cursor.HAND);
             gameBox.setOnMouseClicked(e -> {
                 try {
                     CurrentGame.getInstance().setGame(game);
@@ -74,11 +75,11 @@ public class HomeController {
 
     private String getScoreColor(double score) {
         if (score >= 8) {
-            return "-fx-background-color: #00ce7a; -fx-background-radius: 8; -fx-text-fill: black;"; // Зеленый
+            return "-fx-background-color:" + GreenColor;
         } else if (score >= 5) {
-            return "-fx-background-color: #ffbd3f; -fx-background-radius: 8; -fx-text-fill: black;"; // Желтый
+            return "-fx-background-color:" + YellowColor;
         } else {
-            return "-fx-background-color: #ff6874; -fx-background-radius: 8; -fx-text-fill: black;"; // Красный
+            return "-fx-background-color:" + RedColor;
         }
     }
 

@@ -16,6 +16,7 @@ public class AppController extends Application {
         Image WindowLogo = new Image(getClass().getResourceAsStream("/images/logos/logo_icon.png"));
         primaryStage.getIcons().add(WindowLogo);
         primaryStage.setTitle("gamecritic");
+        primaryStage.setResizable(false);
 
         CurrentUser.getInstance().loadCurrentUser(); // Попытка загрузить данные текущего пользователя
         try {

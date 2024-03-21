@@ -1,11 +1,11 @@
 package database;
 
+import users.*;
+import game.*;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import users.*;
-import game.*;
 public class DataBaseUtil {
     private static final String URL = "jdbc:sqlite:src/main/resources/database.db";
 
@@ -28,20 +28,20 @@ public class DataBaseUtil {
     }
 
     //Проверяет, существует ли пользователь с заданным именем пользователя и паролем
-    public static User findUser(String username, String password) throws SQLException {
+    public static User findUser(String username) throws SQLException {
         User user = null;
-        String sql = "SELECT * FROM users WHERE username = ? AND password = ?";
+        String sql = "SELECT * FROM users WHERE username = ?";
 
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, username);
-            preparedStatement.setString(2, password);
 
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 String userType = resultSet.getString("userType");
                 int id = resultSet.getInt("id");
                 double balance = resultSet.getDouble("balance");
+                String password = resultSet.getString("password");
 
                 switch (userType) {
                     case "User":
@@ -84,14 +84,14 @@ public class DataBaseUtil {
         }
     }
 
-    public static List<Game> getLastGames(int limit) throws SQLException {
+    public static List<Game> getGames(int number, String attribute) throws SQLException {
         List<Game> games = new ArrayList<>();
-        String sql = "SELECT * FROM games ORDER BY release_date DESC LIMIT ?";
+        String sql = "SELECT * FROM games ORDER BY " + attribute + " DESC LIMIT ?";
 
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
-            preparedStatement.setInt(1, limit);
+            preparedStatement.setInt(1, number);
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
@@ -120,39 +120,4 @@ public class DataBaseUtil {
         return games;
     }
 
-    public static List<Game> getTopGames(int limit) throws SQLException {
-        List<Game> games = new ArrayList<>();
-        String sql = "SELECT * FROM games ORDER BY average_score DESC LIMIT ?";
-
-        try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-
-            preparedStatement.setInt(1, limit);
-
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                while (resultSet.next()) {
-                    games.add(new Game(
-                            resultSet.getInt("id"),
-                            resultSet.getString("title"),
-                            resultSet.getString("developer"),
-                            resultSet.getString("release_date"),
-                            resultSet.getString("platforms"),
-                            resultSet.getString("genre"),
-                            resultSet.getBoolean("award"),
-                            resultSet.getString("store_link"),
-                            resultSet.getString("description"),
-                            resultSet.getString("image_path"),
-                            resultSet.getInt("critics_count"),
-                            resultSet.getInt("users_count"),
-                            resultSet.getInt("critics_sum"),
-                            resultSet.getInt("users_sum"),
-                            resultSet.getDouble("critics_score"),
-                            resultSet.getDouble("users_score"),
-                            resultSet.getDouble("average_score")
-                    ));
-                }
-            }
-        }
-        return games;
-    }
 }

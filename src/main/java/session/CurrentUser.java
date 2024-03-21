@@ -22,7 +22,7 @@ public class CurrentUser {
 
     // В классе CurrentUser
     public void saveCurrentUser() {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("currentUser.ser"))) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("current_user.ser"))) {
             oos.writeObject(user);
         } catch (IOException e) {
             e.printStackTrace();
@@ -30,7 +30,7 @@ public class CurrentUser {
     }
 
     public void loadCurrentUser() {
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("currentUser.ser"))) {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("current_user.ser"))) {
             user = (User) ois.readObject();
         } catch (IOException | ClassNotFoundException e) {
             user = null; // В случае ошибки или если файл не найден, пользователь не восстанавливается
@@ -38,10 +38,10 @@ public class CurrentUser {
     }
 
     public void clearCurrentUser() throws IOException {
-        File file = new File("currentUser.ser");
+        File file = new File("current_user.ser");
         if (file.exists()) {
             if (!file.delete()) {
-                throw new IOException("Failed to delete currentUser.ser file!");
+                throw new IOException("Failed to delete serialization file!");
             }
         }
     }
