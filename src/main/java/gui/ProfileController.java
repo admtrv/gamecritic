@@ -1,7 +1,6 @@
 package gui;
 
 import database.*;
-import javafx.scene.shape.Line;
 import session.*;
 import users.*;
 import validation.*;
@@ -11,7 +10,7 @@ import javafx.scene.control.*;
 import session.CurrentUser;
 import java.io.IOException;
 import java.sql.SQLException;
-
+import javafx.scene.shape.Line;
 public class ProfileController implements FieldInterface{
     @FXML private TextField usernameField;
     @FXML private PasswordField CurrentPasswordField;

@@ -97,7 +97,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button layoutX="455.0" layoutY="43.0" mnemonicParsing="false" onAction="#signOut" prefHeight="15.0" prefWidth="74.0" style="-fx-background-color: #ffffff;" text="SIGN OUT" textFill="#aeaeae">
+            <Button layoutX="464.0" layoutY="43.0" mnemonicParsing="false" onAction="#signOut" prefHeight="15.0" prefWidth="74.0" style="-fx-background-color: #ffffff;" text="SIGN OUT" textFill="#aeaeae" underline="true">
                <font>
                   <Font name="ProximaNova-ExtraBold" size="12.0" />
                </font>
@@ -105,7 +105,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Line endX="377.20001220703125" layoutX="152.0" layoutY="65.0" startX="-100.0" strokeWidth="2.0" />
+            <Line endX="377.20001220703125" layoutX="152.0" layoutY="65.0" startX="-100.0" />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="614.0" layoutY="67.0" prefHeight="662.0" prefWidth="385.0" style="-fx-background-color: #f2f2f2;">
@@ -120,7 +120,7 @@
                      <Font name="ProximaNova-ExtraBold" size="20.0" />
                  </font>
              </Label>
-            <Line fx:id="additionalLine" endX="249.6666259765625" endY="-1.52587890625E-5" layoutX="115.0" layoutY="66.0" startX="-89.0" startY="-1.52587890625E-5" strokeWidth="2.0" />
+            <Line fx:id="additionalLine" endX="249.6666259765625" endY="-1.52587890625E-5" layoutX="115.0" layoutY="66.0" startX="-89.0" startY="-1.52587890625E-5" />
 
          </children></AnchorPane>
     </children>

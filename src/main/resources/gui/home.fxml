@@ -50,7 +50,7 @@
       </AnchorPane>
       <AnchorPane layoutY="67.0" prefHeight="333.0" prefWidth="1000.0">
          <children>
-            <Line endX="777.0" endY="-1.52587890625E-5" layoutX="161.0" layoutY="62.0" startX="-100.0" strokeWidth="2.0" />
+            <Line endX="777.0" endY="-1.52587890625E-5" layoutX="161.0" layoutY="62.0" startX="-100.0" />
             <Text layoutX="61.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New Releases">
                <font>
                   <Font name="ProximaNova-ExtraBold" size="20.0" />
@@ -62,7 +62,7 @@
       </AnchorPane>
       <AnchorPane layoutY="402.0" prefHeight="327.0" prefWidth="1000.0">
          <children>
-            <Line endX="777.0" endY="-1.52587890625E-5" layoutX="157.0" layoutY="43.0" startX="-91.60000610351562" startY="-3.0517578125E-5" strokeWidth="2.0" />
+            <Line endX="777.0" endY="-1.52587890625E-5" layoutX="157.0" layoutY="43.0" startX="-91.60000610351562" startY="-3.0517578125E-5" />
             <Text layoutX="64.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Best Games of All Time">
                <font>
                   <Font name="ProximaNova-ExtraBold" size="20.0" />

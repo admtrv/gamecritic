@@ -66,6 +66,7 @@ public class HomeController implements ColorInterface {
                     CurrentGame.getInstance().setGame(game);
                     SceneController.getInstance().switchScene("game_details.fxml");
                 } catch (IOException f) {
+                    System.err.println("Error switching scene!");
                     f.printStackTrace();
                 }
             });
