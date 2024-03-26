@@ -53,6 +53,11 @@
             <Image url="@../images/games/witcher%203.jpg" />
          </image>
       </ImageView>
+        <ImageView fx:id="awardView" fitHeight="46.0" fitWidth="87.0" layoutX="70.0" layoutY="444.0" preserveRatio="true">
+            <image>
+                <Image url="@../images/award.png" />
+            </image>
+        </ImageView>
       <Text layoutX="383.0" layoutY="186.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Genre:">
          <font>
             <Font name="ProximaNova-ExtraBold" size="16.0" />
@@ -125,7 +130,7 @@
             <Font name="ProximaNova-ExtraBold" size="18.0" />
          </font>
       </Label>
-      <Button layoutX="383.0" layoutY="448.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="555.0" style="-fx-background-color: #ffffff; -fx-border-color: #3d3d3d; -fx-border-radius: 3;" text="Add My Review">
+      <Button fx:id="reviewButton" layoutX="383.0" layoutY="448.0" mnemonicParsing="false" onAction="#switchToReviewScene" prefHeight="45.0" prefWidth="555.0" style="-fx-background-color: #ffffff; -fx-border-color: #3d3d3d; -fx-border-radius: 3;" text="Add My Review">
          <font>
             <Font name="Proxima Nova Regular" size="14.0" />
          </font>

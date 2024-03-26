@@ -1,18 +1,22 @@
 package gui;
 
-import java.io.IOException;
-
 import game.*;
+import review.Review;
 import session.*;
 import date.*;
+import users.*;
+import database.*;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.control.Button;
 import java.awt.Desktop;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.io.IOException;
+import java.sql.SQLException;
 
 public class GameDetailsController implements ColorInterface {
 
@@ -27,7 +31,12 @@ public class GameDetailsController implements ColorInterface {
     @FXML private Label criticsScoreLabel;
     @FXML private Label usersScoreLabel;
     @FXML private Label descriptionLabel;
+    @FXML private Button reviewButton;
+
+    @FXML private ImageView awardView;
     Game game = CurrentGame.getInstance().getGame();
+    User user = CurrentUser.getInstance().getUser();
+    Review review;
     @FXML
     public void initialize() {
         imageView.setImage(new Image(getClass().getResourceAsStream(game.getImagePath())));
@@ -45,6 +54,21 @@ public class GameDetailsController implements ColorInterface {
 
         usersScoreLabel.setText(Double.toString(game.getUsersScore()));
         usersScoreLabel.setStyle(getScoreColor(game.getUsersScore())  + "-fx-background-radius: 12;");
+
+        awardView.setVisible(game.isAward());
+
+        try {
+            review = DataBaseUtil.findReview(user.getId(), game.getId());
+
+            if (review != null) {
+                CurrentReview.getInstance().setReview(review);
+                reviewButton.setText("Edit My Review");
+            } else {
+                reviewButton.setText("Add My Review");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     private String getScoreColor(double score) {
@@ -53,7 +77,7 @@ public class GameDetailsController implements ColorInterface {
         } else if (score >= 5) {
             return "-fx-background-color:" + YellowColor;
         } else {
-            return "-fx-background-color:" + RedColor;
+            return "-fx-text-fill: white; -fx-background-color:" + RedColor;
         }
     }
 
@@ -76,13 +100,18 @@ public class GameDetailsController implements ColorInterface {
     }
     public void switchToYearsScene() throws IOException {
     }
+    public void switchToReviewScene() throws IOException {
+        SceneController.getInstance().switchScene("review.fxml");
+    }
     public void switchToProfileScene() throws IOException {
         CurrentGame.getInstance().resetGame();
+        CurrentReview.getInstance().resetReview();
         SceneController.getInstance().switchScene("profile.fxml");
     }
 
     public void switchToHomeScene() throws IOException {
         CurrentGame.getInstance().resetGame();
+        CurrentReview.getInstance().resetReview();
         SceneController.getInstance().switchScene("home.fxml");
     }
 }

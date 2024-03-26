@@ -1,5 +1,6 @@
 package database;
 
+import review.*;
 import users.*;
 import game.*;
 
@@ -27,7 +28,7 @@ public class DataBaseUtil {
         }
     }
 
-    //Проверяет, существует ли пользователь с заданным именем пользователя и паролем
+    //Проверяет, существует ли пользователь с заданным именем пользователя
     public static User findUser(String username) throws SQLException {
         User user = null;
         String sql = "SELECT * FROM users WHERE username = ?";
@@ -120,4 +121,25 @@ public class DataBaseUtil {
         return games;
     }
 
+    public static Review findReview(int userId, int gameId) throws SQLException {
+        String sql = "SELECT * FROM reviews WHERE user_id = ? AND game_id = ?";
+
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, userId);
+            preparedStatement.setInt(2, gameId);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return new Review(
+                        resultSet.getInt("id"),
+                        resultSet.getInt("game_id"),
+                        resultSet.getInt("user_id"),
+                        resultSet.getInt("score"),
+                        resultSet.getString("review_text")
+                );
+            }
+        }
+        return null;
+    }
 }

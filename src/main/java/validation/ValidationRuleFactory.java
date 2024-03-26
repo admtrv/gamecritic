@@ -8,6 +8,8 @@ public class ValidationRuleFactory {
             return new UsernameValidationRule();
         } else if ("password".equals(ruleName)) {
             return new PasswordValidationRule();
+        } else if ("review".equals(ruleName)){
+            return new ReviewValidationRule();
         } else {
             throw new RuntimeException("Unknown validation rule: " + ruleName);
         }

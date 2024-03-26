@@ -24,8 +24,8 @@ public class HomeController implements ColorInterface {
     @FXML private HBox TopGamesContainer;
     public void initialize() throws IOException {
         try {
-            latestGames = DataBaseUtil.getGames(5, "release_date");
-            topGames = DataBaseUtil.getGames(5, "average_score");
+            latestGames = DataBaseUtil.getGames(6, "release_date");
+            topGames = DataBaseUtil.getGames(6, "average_score");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -49,7 +49,7 @@ public class HomeController implements ColorInterface {
             titleLabel.setWrapText(true);
 
             Label scoreLabel = new Label(Double.toString(game.getAverageScore()));
-            scoreLabel.setFont(new Font("ProximaNova-ExtraBold", 14));
+            scoreLabel.setFont(new Font("ProximaNova-ExtraBold", 12));
             scoreLabel.setStyle(getScoreColor(game.getAverageScore()) + "-fx-background-radius: 8;");
             scoreLabel.setAlignment(Pos.CENTER);
             scoreLabel.setMinWidth(30);
@@ -59,7 +59,7 @@ public class HomeController implements ColorInterface {
             developerLabel.setFont(new Font("Proxima Nova Regular", 14));
 
             gameBox.getChildren().addAll(imageView, titleLabel, scoreLabel, developerLabel);
-            HBox.setMargin(gameBox, new Insets(0, 45, 0, 0));
+            HBox.setMargin(gameBox, new Insets(0, 7, 0, 0));
             gameBox.setCursor(Cursor.HAND);
             gameBox.setOnMouseClicked(e -> {
                 try {
@@ -80,7 +80,7 @@ public class HomeController implements ColorInterface {
         } else if (score >= 5) {
             return "-fx-background-color:" + YellowColor;
         } else {
-            return "-fx-background-color:" + RedColor;
+            return "-fx-text-fill: white; -fx-background-color:" + RedColor;
         }
     }
 
