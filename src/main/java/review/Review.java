@@ -6,13 +6,15 @@ public class Review {
     private int userId;
     private int score;
     private String reviewText;
+    private String publishDate;
 
-    public Review(int id, int gameId, int userId, int score, String reviewText) {
+    public Review(int id, int gameId, int userId, int score, String reviewText, String publishDate) {
         this.id = id;
         this.gameId = gameId;
         this.userId = userId;
         this.score = score;
         this.reviewText = reviewText;
+        this.publishDate = publishDate;
     }
 
     // Геттеры и сеттеры
@@ -56,4 +58,11 @@ public class Review {
         this.reviewText = reviewText;
     }
 
+    public String getPublishDate() {
+        return publishDate;
+    }
+
+    public void setPublishDate(String publishDate) {
+        this.publishDate = publishDate;
+    }
 }

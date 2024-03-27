@@ -1,5 +1,9 @@
 package game;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+
 public class Game {
     private int id;
     private String title;
@@ -28,7 +32,7 @@ public class Game {
         this.id = id;
         this.title = title;
         this.developer = developer;
-        this.releaseDate = releaseDate;
+        this.releaseDate = convertDate(releaseDate);
         this.platforms = platforms;
         this.genre = genre;
         this.award = award;
@@ -44,13 +48,11 @@ public class Game {
         this.averageScore = averageScore;
     }
 
-    // Агрегация оценок
-    /*
-    criticsScore = criticsCount == criticsSum / criticsCount;
-    usersScore = usersCount == usersSum / usersCount;
-    averageScore = (criticsSum + usersSum) / (criticsCount +  usersCount);
-    */
-
+    public static String convertDate(String date) {
+        LocalDate result = LocalDate.parse(date);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd, yyyy").withLocale(Locale.ENGLISH);;
+        return result.format(formatter).toUpperCase();
+    }
     // Геттеры и сеттеры
     public int getId() {
         return id;
@@ -116,4 +118,79 @@ public class Game {
         return averageScore;
     }
 
+    public int getCriticsSum() {
+        return criticsSum;
+    }
+
+    public int getUsersSum() {
+        return usersSum;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setDeveloper(String developer) {
+        this.developer = developer;
+    }
+
+    public void setReleaseDate(String releaseDate) {
+        this.releaseDate = releaseDate;
+    }
+
+    public void setPlatforms(String platforms) {
+        this.platforms = platforms;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    public void setAward(boolean award) {
+        this.award = award;
+    }
+
+    public void setStoreLink(String storeLink) {
+        this.storeLink = storeLink;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+    public void setCriticsCount(int criticsCount) {
+        this.criticsCount = criticsCount;
+    }
+
+    public void setUsersCount(int usersCount) {
+        this.usersCount = usersCount;
+    }
+
+    public void setCriticsSum(int criticsSum) {
+        this.criticsSum = criticsSum;
+    }
+
+    public void setUsersSum(int usersSum) {
+        this.usersSum = usersSum;
+    }
+
+    public void setCriticsScore(double criticsScore) {
+        this.criticsScore = criticsScore;
+    }
+
+    public void setUsersScore(double usersScore) {
+        this.usersScore = usersScore;
+    }
+
+    public void setAverageScore(double averageScore) {
+        this.averageScore = averageScore;
+    }
 }

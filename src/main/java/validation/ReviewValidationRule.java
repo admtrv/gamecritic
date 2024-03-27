@@ -5,7 +5,9 @@ public class ReviewValidationRule implements ValidationRule {
 
     @Override
     public boolean validate(String reviewText) {
-        if (reviewText == null) return false;
+        if (reviewText == null)
+            return false;
+
         return reviewText.length() >= MIN_REVIEW_LENGTH;
     }
 

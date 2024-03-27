@@ -27,7 +27,7 @@
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></Slider>
-            <Text fill="#565656" layoutX="137.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MY SCORE">
+            <Text layoutX="137.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MY SCORE">
                <font>
                   <Font name="ProximaNova-ExtraBold" size="18.0" />
                </font>
@@ -66,7 +66,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button layoutX="276.0" layoutY="14.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="225.0" style="-fx-background-color: #3b3b3b; -fx-border-radius: 3;" text="Post" textFill="WHITE">
+            <Button layoutX="276.0" layoutY="14.0" mnemonicParsing="false" onAction="#postReview" prefHeight="34.0" prefWidth="225.0" style="-fx-background-color: #3b3b3b; -fx-border-radius: 3;" text="Post" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

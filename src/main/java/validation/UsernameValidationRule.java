@@ -1,13 +1,14 @@
 package validation;
 
 public class UsernameValidationRule implements ValidationRule {
+    private static final int MIN_USERNAME_LENGTH = 3;
     @Override
     public boolean validate(String username) {
-        return username != null && username.length() >= 3;
+        return username != null && username.length() >= MIN_USERNAME_LENGTH;
     }
 
     @Override
     public String getErrorMessage() {
-        return "Username must be at least 3 characters long!";
+        return "Username must be at least " + MIN_USERNAME_LENGTH + " characters long!";
     }
 }

@@ -1,16 +1,21 @@
 package gui;
 
+import aggregation.*;
 import review.*;
 import session.*;
 import users.*;
 import game.*;
+import validation.*;
+import database.*;
 
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextArea;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.time.LocalDate;
 import javafx.fxml.FXML;
-public class ReviewController implements ColorInterface{
+public class ReviewController implements StyleInterface {
     @FXML private Label scoreLabel;
     @FXML private TextArea reviewTextArea;
     @FXML private Slider scoreSlider;
@@ -31,10 +36,12 @@ public class ReviewController implements ColorInterface{
             reviewTextArea.setText(review.getReviewText());
         } else {
             scoreLabel.setText("");
-            scoreLabel.setStyle("-fx-background-color: #ffffff;-fx-border-color: #3d3d3d;-fx-border-radius: 22;");
+            scoreLabel.setStyle(initialScoreStyle + "-fx-border-radius: 22;");
             scoreSlider.setValue(0);
             reviewTextArea.clear();
         }
+
+        reviewTextArea.setStyle(normalFieldStyle);
 
         titleLabel.setText("Write a review for " + game.getTitle());
 
@@ -66,15 +73,52 @@ public class ReviewController implements ColorInterface{
         });
     }
 
-    private String getScoreColor(double score) {
-        if (score >= 8) {
-            return "-fx-background-color:" + GreenColor;
-        } else if (score >= 5) {
-            return "-fx-background-color:" + YellowColor;
-        } else {
-            return "-fx-text-fill: white; -fx-background-color:" + RedColor;
+    public void postReview() {
+        if (scoreLabel.getText().isEmpty()){
+            System.err.println("Error: unselected score!");
+            return;
+        }
+
+        String reviewText = reviewTextArea.getText();
+        int score = (int) scoreSlider.getValue();
+
+        // Получение правил валидации
+        ValidationRule reviewRule = ValidationRuleFactory.getRule("review");
+        if (!reviewRule.validate(reviewText)) {
+            reviewTextArea.setStyle(errorFieldStyle);
+            System.out.println(reviewRule.getErrorMessage());
+            return;
+        }
+
+        if (!reviewRule.validate(reviewText)) {
+            System.out.println(reviewRule.getErrorMessage());
+            return;
+        }
+
+        try {
+            DataBaseUtil.addReview(game.getId(), user.getId(), score, reviewText, LocalDate.now().toString());
+            AggregateScore.updateScore(score);
+
+            if (user instanceof Critic && review == null){
+                double income = reviewText.length() * 0.1;
+                double newBalance = ((Critic) user).getBalance() + income;
+
+                if (DataBaseUtil.updateBalance(user.getId(), newBalance ))
+                {
+                    System.out.println("Сritics balance updated successfully!");
+                    ((Critic) user).setBalance(newBalance);
+                }
+            }
+
+
+            System.out.println("Review posted successfully!");
+            switchToGameDetailsScene();
+            // Обновляем игру и пользователя в базе данных
+        } catch (SQLException | IOException e) {
+            e.printStackTrace();
         }
     }
+
     public void switchToGameDetailsScene() throws IOException {
         SceneController.getInstance().switchScene("game_details.fxml");
     }

@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import javafx.scene.Cursor;
-public class HomeController implements ColorInterface {
+public class HomeController implements StyleInterface {
     private List<Game> latestGames;
     private List<Game> topGames;
     @FXML private HBox LatestGamesContainer;
@@ -48,7 +48,7 @@ public class HomeController implements ColorInterface {
             titleLabel.setFont(new Font("ProximaNova-ExtraBold", 14));
             titleLabel.setWrapText(true);
 
-            Label scoreLabel = new Label(Double.toString(game.getAverageScore()));
+            Label scoreLabel = new Label(String.format("%.1f",game.getAverageScore()));
             scoreLabel.setFont(new Font("ProximaNova-ExtraBold", 12));
             scoreLabel.setStyle(getScoreColor(game.getAverageScore()) + "-fx-background-radius: 8;");
             scoreLabel.setAlignment(Pos.CENTER);
@@ -71,16 +71,6 @@ public class HomeController implements ColorInterface {
                 }
             });
             gamesContainer.getChildren().add(gameBox);
-        }
-    }
-
-    private String getScoreColor(double score) {
-        if (score >= 8) {
-            return "-fx-background-color:" + GreenColor;
-        } else if (score >= 5) {
-            return "-fx-background-color:" + YellowColor;
-        } else {
-            return "-fx-text-fill: white; -fx-background-color:" + RedColor;
         }
     }
 

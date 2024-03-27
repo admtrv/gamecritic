@@ -1,9 +1,8 @@
 package gui;
 
 import game.*;
-import review.Review;
+import review.*;
 import session.*;
-import date.*;
 import users.*;
 import database.*;
 
@@ -18,7 +17,7 @@ import java.net.URISyntaxException;
 import java.io.IOException;
 import java.sql.SQLException;
 
-public class GameDetailsController implements ColorInterface {
+public class GameDetailsController implements StyleInterface {
 
     @FXML private ImageView imageView;
     @FXML private Label titleLabel;
@@ -44,21 +43,21 @@ public class GameDetailsController implements ColorInterface {
         genreLabel.setText(game.getGenre());
         developerLabel.setText(game.getDeveloper());
         platformsLabel.setText(game.getPlatforms());
-        releaseDateLabel.setText(DateConverter.convert(game.getReleaseDate()));
+        releaseDateLabel.setText(game.getReleaseDate());
         criticsCountLabel.setText("Based on " + game.getCriticsCount() + " Critic Reviews");
         usersCountLabel.setText("Based on " + game.getUsersCount() + " User Reviews");
         descriptionLabel.setText(game.getDescription());
 
-        criticsScoreLabel.setText(Double.toString(game.getCriticsScore()));
+        criticsScoreLabel.setText(String.format("%.1f",game.getCriticsScore()));
         criticsScoreLabel.setStyle(getScoreColor(game.getCriticsScore())  + "-fx-background-radius: 12;");
 
-        usersScoreLabel.setText(Double.toString(game.getUsersScore()));
+        usersScoreLabel.setText(String.format("%.1f",game.getUsersScore()));
         usersScoreLabel.setStyle(getScoreColor(game.getUsersScore())  + "-fx-background-radius: 12;");
 
         awardView.setVisible(game.isAward());
 
         try {
-            review = DataBaseUtil.findReview(user.getId(), game.getId());
+            review = DataBaseUtil.getReview(user.getId(), game.getId());
 
             if (review != null) {
                 CurrentReview.getInstance().setReview(review);
@@ -71,15 +70,6 @@ public class GameDetailsController implements ColorInterface {
         }
     }
 
-    private String getScoreColor(double score) {
-        if (score >= 8) {
-            return "-fx-background-color:" + GreenColor;
-        } else if (score >= 5) {
-            return "-fx-background-color:" + YellowColor;
-        } else {
-            return "-fx-text-fill: white; -fx-background-color:" + RedColor;
-        }
-    }
 
     @FXML
     private void openLink() {

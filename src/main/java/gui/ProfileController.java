@@ -30,7 +30,7 @@ public class ProfileController implements FieldInterface{
             balanceValueLabel.setVisible(true);
             balanceTextLabel.setVisible(true);
             additionalLine.setVisible(true);
-            balanceValueLabel.setText(critic.getBalance() + " $");
+            balanceValueLabel.setText(String.format("%.2f",critic.getBalance()) + " $");
         } else {
             balanceValueLabel.setVisible(false);
             balanceTextLabel.setVisible(false);

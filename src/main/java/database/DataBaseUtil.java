@@ -29,7 +29,7 @@ public class DataBaseUtil {
     }
 
     //Проверяет, существует ли пользователь с заданным именем пользователя
-    public static User findUser(String username) throws SQLException {
+    public static User getUser(String username) throws SQLException {
         User user = null;
         String sql = "SELECT * FROM users WHERE username = ?";
 
@@ -85,6 +85,18 @@ public class DataBaseUtil {
         }
     }
 
+    public static boolean updateBalance(int userId, double newBalance) throws SQLException {
+        String sql = "UPDATE users SET balance = ? WHERE id = ?";
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setDouble(1, newBalance);
+            preparedStatement.setInt(2, userId);
+            int affectedRows = preparedStatement.executeUpdate();
+            return affectedRows > 0;
+        }
+    }
+
+
     public static List<Game> getGames(int number, String attribute) throws SQLException {
         List<Game> games = new ArrayList<>();
         String sql = "SELECT * FROM games ORDER BY " + attribute + " DESC LIMIT ?";
@@ -121,7 +133,25 @@ public class DataBaseUtil {
         return games;
     }
 
-    public static Review findReview(int userId, int gameId) throws SQLException {
+    public static void updateGameScore(Game game) throws SQLException {
+        String sql = "UPDATE games SET critics_count = ?, users_count = ?, critics_sum = ?, users_sum = ?, "
+                + "critics_score = ?, users_score = ?, average_score = ? WHERE id = ?";
+
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, game.getCriticsCount());
+            preparedStatement.setInt(2, game.getUsersCount());
+            preparedStatement.setInt(3, game.getCriticsSum());
+            preparedStatement.setInt(4, game.getUsersSum());
+            preparedStatement.setDouble(5, game.getCriticsScore());
+            preparedStatement.setDouble(6, game.getUsersScore());
+            preparedStatement.setDouble(7, game.getAverageScore());
+            preparedStatement.setInt(8, game.getId());
+            preparedStatement.executeUpdate();
+        }
+    }
+
+    public static Review getReview(int userId, int gameId) throws SQLException {
         String sql = "SELECT * FROM reviews WHERE user_id = ? AND game_id = ?";
 
         try (Connection connection = getConnection();
@@ -136,10 +166,26 @@ public class DataBaseUtil {
                         resultSet.getInt("game_id"),
                         resultSet.getInt("user_id"),
                         resultSet.getInt("score"),
-                        resultSet.getString("review_text")
+                        resultSet.getString("review_text"),
+                        resultSet.getString("publish_date")
                 );
             }
         }
         return null;
+    }
+
+    public static void addReview(int gameId, int userId, int score, String reviewText, String publishDate) throws SQLException {
+        String sql = "INSERT INTO reviews (game_id, user_id, score, review_text, publish_date) VALUES (?, ?, ?, ?, ?) " +
+                "ON CONFLICT(user_id, game_id) DO UPDATE SET score = excluded.score, review_text = excluded.review_text, publish_date = excluded.publish_date";
+
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, gameId);
+            preparedStatement.setInt(2, userId);
+            preparedStatement.setInt(3, score);
+            preparedStatement.setString(4, reviewText);
+            preparedStatement.setString(5, publishDate);
+            preparedStatement.executeUpdate();
+        }
     }
 }

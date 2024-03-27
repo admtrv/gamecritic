@@ -27,7 +27,7 @@ public class LoginController implements FieldInterface {
         setPasswordNormalStyle();
 
         try {
-            User user = DataBaseUtil.findUser(username);
+            User user = DataBaseUtil.getUser(username);
             if (user != null) {
                 if (user.getPassword().equals(password)) {
                     System.out.println("User found successfully!");

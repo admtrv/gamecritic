@@ -94,7 +94,7 @@
             <Font name="Proxima Nova Regular" size="16.0" />
          </font>
       </Label>
-      <Label fx:id="releaseDateLabel" layoutX="504.0" layoutY="276.0" text="2015-05-19">
+      <Label fx:id="releaseDateLabel" layoutX="504.0" layoutY="275.0" text="2015-05-19">
          <font>
             <Font name="Proxima Nova Regular" size="16.0" />
          </font>
