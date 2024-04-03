@@ -89,6 +89,7 @@ public class GameDetailsController implements StyleInterface {
     public void switchToGamesScene() throws IOException {
     }
     public void switchToYearsScene() throws IOException {
+        SceneController.getInstance().switchScene("years.fxml");
     }
     public void switchToReviewScene() throws IOException {
         SceneController.getInstance().switchScene("review.fxml");

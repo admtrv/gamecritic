@@ -2,6 +2,7 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -40,7 +41,7 @@
             </Button>
             <ImageView fitHeight="37.0" fitWidth="48.0" layoutX="904.0" layoutY="15.0" onMouseClicked="#switchToProfileScene" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/user.png" />
+                  <Image url="@../images/icons/user.png" />
                </image>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -48,28 +49,36 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane layoutY="67.0" prefHeight="333.0" prefWidth="1000.0">
+      <AnchorPane layoutY="67.0" prefHeight="330.0" prefWidth="1000.0">
          <children>
-            <Line endX="777.0" endY="-1.52587890625E-5" layoutX="161.0" layoutY="62.0" startX="-100.0" />
-            <Text layoutX="61.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New Releases">
+            <Line endX="777.0" endY="-1.52587890625E-5" layoutX="157.0" layoutY="28.0" startX="-100.0" />
+            <Text layoutX="56.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New Releases">
                <font>
                   <Font name="ProximaNova-ExtraBold" size="20.0" />
                </font>
             </Text>
-            <HBox fx:id="LatestGamesContainer" layoutX="61.0" layoutY="74.0" prefHeight="220.0" prefWidth="120.0" spacing="10">
+            <ScrollPane layoutX="56.0" layoutY="33.0" pannable="true" prefHeight="295.0" prefWidth="880.0" style="-fx-background: #ffffff; -fx-border-color: #ffffff;" stylesheets="@scroll_pane.css">
+               <content>
+               <HBox fx:id="LatestGamesContainer" prefHeight="220.0" prefWidth="120.0" spacing="10" style="-fx-background-color: #ffffff;">
             </HBox>
+               </content>
+            </ScrollPane>
          </children>
       </AnchorPane>
-      <AnchorPane layoutY="402.0" prefHeight="327.0" prefWidth="1000.0">
+      <AnchorPane layoutY="397.0" prefHeight="330.0" prefWidth="1000.0">
          <children>
-            <Text layoutX="61.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Best Games of All Time">
+            <Text layoutX="56.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Best Games of All Time">
                <font>
                   <Font name="ProximaNova-ExtraBold" size="20.0" />
                </font>
             </Text>
-            <HBox fx:id="TopGamesContainer" layoutX="61.0" layoutY="52.0" prefHeight="220.0" prefWidth="120.0" spacing="10">
+            <Line endX="777.0" endY="-1.52587890625E-5" layoutX="156.0" layoutY="30.0" startX="-100.0" />
+            <ScrollPane layoutX="56.0" layoutY="36.0" pannable="true" prefHeight="295.0" prefWidth="880.0" style="-fx-background: #ffffff; -fx-border-color: #ffffff;" stylesheets="@scroll_pane.css">
+               <content>
+                  <HBox fx:id="TopGamesContainer" prefHeight="220.0" prefWidth="120.0" spacing="10" style="-fx-background-color: #ffffff;">
             </HBox>
-            <Line endX="777.0" endY="-1.52587890625E-5" layoutX="161.0" layoutY="40.0" startX="-100.0" />
+               </content>
+            </ScrollPane>
          </children>
       </AnchorPane>
    </children>

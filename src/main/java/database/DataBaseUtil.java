@@ -7,6 +7,7 @@ import game.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
 public class DataBaseUtil {
     private static final String URL = "jdbc:sqlite:src/main/resources/database.db";
 
@@ -133,6 +134,41 @@ public class DataBaseUtil {
         return games;
     }
 
+    // Overloading
+    public static List<Game> getGames(String year, String attribute) throws SQLException {
+        List<Game> games = new ArrayList<>();
+        String sql = "SELECT * FROM games WHERE strftime('%Y', release_date) = ? AND award = 1 ORDER BY " + attribute + " DESC";
+
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
+            preparedStatement.setString(1, year);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                games.add(new Game(
+                        resultSet.getInt("id"),
+                        resultSet.getString("title"),
+                        resultSet.getString("developer"),
+                        resultSet.getString("release_date"),
+                        resultSet.getString("platforms"),
+                        resultSet.getString("genre"),
+                        resultSet.getBoolean("award"),
+                        resultSet.getString("store_link"),
+                        resultSet.getString("description"),
+                        resultSet.getString("image_path"),
+                        resultSet.getInt("critics_count"),
+                        resultSet.getInt("users_count"),
+                        resultSet.getInt("critics_sum"),
+                        resultSet.getInt("users_sum"),
+                        resultSet.getDouble("critics_score"),
+                        resultSet.getDouble("users_score"),
+                        resultSet.getDouble("average_score")
+                ));
+            }
+        }
+        return games;
+    }
+
     public static void updateGameScore(Game game) throws SQLException {
         String sql = "UPDATE games SET critics_count = ?, users_count = ?, critics_sum = ?, users_sum = ?, "
                 + "critics_score = ?, users_score = ?, average_score = ? WHERE id = ?";
@@ -187,5 +223,38 @@ public class DataBaseUtil {
             preparedStatement.setString(5, publishDate);
             preparedStatement.executeUpdate();
         }
+    }
+
+    // Метод для получения списка игр за определенный год, сгруппированных по жанрам
+    public static void uploadGameAwardsByYear(String year) throws SQLException {
+        // Получаем лучшие игры за год и сразу назначаем им награды
+        String sql = "WITH ranked_games AS (" +
+                "SELECT *, RANK() OVER (PARTITION BY genre ORDER BY average_score DESC) AS rank " +
+                "FROM games WHERE strftime('%Y', release_date) = ?" +
+                ") " +
+                "UPDATE games SET award = true WHERE id IN (" +
+                "SELECT id FROM ranked_games WHERE rank = 1" +
+                ");";
+
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setString(1, year);
+        }
+    }
+
+    public static List<String> getYears() throws SQLException {
+        List<String> years = new ArrayList<>();
+        String sql = "SELECT DISTINCT strftime('%Y', release_date) AS year FROM games WHERE award = true ORDER BY year DESC;";
+
+        try (Connection conn = getConnection();
+             PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                String year = resultSet.getString("year");
+                years.add(year);
+            }
+        }
+        return years;
     }
 }

@@ -58,7 +58,7 @@ public class RegisterController implements FieldInterface{
         try {
             DataBaseUtil.addUser(username, password, userType);
             System.out.println("User registered successfully!");
-            switchToLoginScene(); // Переход к экрану входа после успешной регистрации
+            switchToLoginScene();
         } catch (SQLException | IOException e) {
             setUsernameErrorStyle();
             setPasswordErrorStyle();

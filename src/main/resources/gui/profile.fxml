@@ -42,7 +42,7 @@
                 </Button>
                 <ImageView fitHeight="37.0" fitWidth="48.0" layoutX="904.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../images/user.png" />
+                        <Image url="@../images/icons/user.png" />
                     </image>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -115,11 +115,18 @@
                   <Font name="ProximaNova-Light" size="36.0" />
                </font>
             </Label>
-             <Label fx:id="balanceTextLabel" layoutX="25.0" layoutY="39.0" text="Current Balance">
+             <Label fx:id="additionalTextLabel" layoutX="25.0" layoutY="39.0" text="Current Balance">
                  <font>
                      <Font name="ProximaNova-ExtraBold" size="20.0" />
                  </font>
              </Label>
+             <Button fx:id="generateAwardsButton" layoutX="25.0" layoutY="111.0" onAction="#handleGenerateAwards" prefHeight="30.0" prefWidth="340.0" style="-fx-background-color: #f2f2f2; -fx-border-radius: 3; -fx-border-color: #3d3d3d;" text="Generate Awards">
+               <font>
+                  <Font name="Proxima Nova Regular" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
             <Line fx:id="additionalLine" endX="249.6666259765625" endY="-1.52587890625E-5" layoutX="115.0" layoutY="66.0" startX="-89.0" startY="-1.52587890625E-5" />
 
          </children></AnchorPane>

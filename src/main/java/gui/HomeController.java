@@ -22,10 +22,10 @@ public class HomeController implements StyleInterface {
     private List<Game> topGames;
     @FXML private HBox LatestGamesContainer;
     @FXML private HBox TopGamesContainer;
-    public void initialize() throws IOException {
+    public void initialize(){
         try {
-            latestGames = DataBaseUtil.getGames(6, "release_date");
-            topGames = DataBaseUtil.getGames(6, "average_score");
+            latestGames = DataBaseUtil.getGames(15, "release_date");
+            topGames = DataBaseUtil.getGames(15, "average_score");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -36,7 +36,7 @@ public class HomeController implements StyleInterface {
         gamesContainer.getChildren().clear();
 
         for (Game game : games) {
-            VBox gameBox = new VBox(5);
+            VBox gameBox = new VBox(10);
             gameBox.setPadding(new Insets(10));
             gameBox.setStyle("-fx-background-color: " + BoxBackgroundColor + " -fx-background-radius: 10");
 
@@ -61,13 +61,13 @@ public class HomeController implements StyleInterface {
             gameBox.getChildren().addAll(imageView, titleLabel, scoreLabel, developerLabel);
             HBox.setMargin(gameBox, new Insets(0, 7, 0, 0));
             gameBox.setCursor(Cursor.HAND);
-            gameBox.setOnMouseClicked(e -> {
+            gameBox.setOnMouseClicked(event -> {
                 try {
                     CurrentGame.getInstance().setGame(game);
                     SceneController.getInstance().switchScene("game_details.fxml");
-                } catch (IOException f) {
+                } catch (IOException e) {
                     System.err.println("Error switching scene!");
-                    f.printStackTrace();
+                    e.printStackTrace();
                 }
             });
             gamesContainer.getChildren().add(gameBox);
@@ -77,6 +77,7 @@ public class HomeController implements StyleInterface {
     public void switchToGamesScene() throws IOException {
     }
     public void switchToYearsScene() throws IOException {
+        SceneController.getInstance().switchScene("years.fxml");
     }
     public void switchToProfileScene() throws IOException {
         SceneController.getInstance().switchScene("profile.fxml");

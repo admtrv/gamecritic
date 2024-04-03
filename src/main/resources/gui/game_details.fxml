@@ -40,7 +40,7 @@
                 </Button>
                 <ImageView fitHeight="37.0" fitWidth="48.0" layoutX="904.0" layoutY="15.0" onMouseClicked="#switchToProfileScene" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../images/user.png" />
+                        <Image url="@../images/icons/user.png" />
                     </image>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -55,7 +55,7 @@
       </ImageView>
         <ImageView fx:id="awardView" fitHeight="46.0" fitWidth="87.0" layoutX="70.0" layoutY="444.0" preserveRatio="true">
             <image>
-                <Image url="@../images/award.png" />
+                <Image url="@../images/icons/award.png" />
             </image>
         </ImageView>
       <Text layoutX="383.0" layoutY="186.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Genre:">

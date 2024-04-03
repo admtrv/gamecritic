@@ -20,10 +20,10 @@
                   <Font name="ProximaNova-ExtraBold" size="32.0" />
                </font>
             </Label>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff6874" height="10.0" layoutX="141.0" layoutY="80.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="141.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffbd3f" height="10.0" layoutX="282.0" layoutY="80.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="106.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#00ce7a" height="10.0" layoutX="388.0" layoutY="80.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="106.0" />
-            <Slider fx:id="scoreSlider" blockIncrement="1.0" focusTraversable="false" layoutX="132.0" layoutY="71.0" majorTickUnit="1.0" max="10.0" minorTickCount="0" prefHeight="24.0" prefWidth="370.0" showTickMarks="true" snapToTicks="true">
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff6874" height="8.0" layoutX="140.0" layoutY="74.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="145.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffbd3f" height="8.0" layoutX="285.0" layoutY="74.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="106.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#00ce7a" height="8.0" layoutX="391.0" layoutY="74.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="110.0" />
+            <Slider fx:id="scoreSlider" blockIncrement="1.0" focusTraversable="false" layoutX="135.0" layoutY="71.0" majorTickUnit="1.0" max="10.0" minorTickCount="0" prefHeight="24.0" prefWidth="370.0" showTickMarks="true" snapToTicks="true" stylesheets="@score_slider.css">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></Slider>

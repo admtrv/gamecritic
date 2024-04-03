@@ -4,8 +4,7 @@ import game.*;
 import review.*;
 import users.*;
 import session.*;
-
-import database.DataBaseUtil;
+import database.*;
 
 public class AggregateScore {
     public static void updateScore(int newScore) {

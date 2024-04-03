@@ -1,7 +1,6 @@
 package gui;
 
 import database.*;
-import session.*;
 import users.*;
 import validation.*;
 
@@ -17,9 +16,12 @@ public class ProfileController implements FieldInterface{
     @FXML private PasswordField NewPasswordField;
     @FXML private PasswordField ConfirmPasswordField;
 
-    @FXML private Label balanceTextLabel;
-    @FXML private Label balanceValueLabel;
+    @FXML private Label additionalTextLabel;
     @FXML private Line additionalLine;
+
+    @FXML private Label balanceValueLabel;
+
+    @FXML private Button generateAwardsButton;
 
     User user = CurrentUser.getInstance().getUser();
     @FXML
@@ -28,14 +30,30 @@ public class ProfileController implements FieldInterface{
         if (user instanceof Critic) {
             Critic critic = (Critic) user;
             balanceValueLabel.setVisible(true);
-            balanceTextLabel.setVisible(true);
-            additionalLine.setVisible(true);
             balanceValueLabel.setText(String.format("%.2f",critic.getBalance()) + " $");
-        } else {
+            additionalTextLabel.setVisible(true);
+            additionalTextLabel.setText("Current Balance");
+            additionalLine.setVisible(true);
+
+            generateAwardsButton.setVisible(false);
+
+        } else if (user instanceof Administrator){
+            additionalTextLabel.setVisible(true);
+            additionalTextLabel.setText("Administrator panel");
+            additionalLine.setVisible(true);
+            generateAwardsButton.setVisible(true);
+
             balanceValueLabel.setVisible(false);
-            balanceTextLabel.setVisible(false);
+
+        } else
+        {
+            balanceValueLabel.setVisible(false);
+            additionalTextLabel.setVisible(false);
             additionalLine.setVisible(false);
+            generateAwardsButton.setVisible(false);
         }
+
+
     }
 
     public void updateUsername() {
@@ -119,6 +137,17 @@ public class ProfileController implements FieldInterface{
     }
 
     @FXML
+    private void handleGenerateAwards() {
+        try {
+            ((Administrator)user).uploadGameAwardsThisYear();
+            System.out.println("Awards successfully generated!");
+        } catch (Exception e) {
+            System.err.println("Failed to generate awards!");
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
     public void setUsernameErrorStyle(){
         usernameField.setStyle(errorFieldStyle);
     }
@@ -145,6 +174,7 @@ public class ProfileController implements FieldInterface{
     public void switchToGamesScene() throws IOException {
     }
     public void switchToYearsScene() throws IOException {
+        SceneController.getInstance().switchScene("years.fxml");
     }
     public void switchToHomeScene() throws IOException {
         SceneController.getInstance().switchScene("home.fxml");
