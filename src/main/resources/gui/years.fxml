@@ -49,35 +49,35 @@
                 </ImageView>
             </children>
         </AnchorPane>
-      <AnchorPane layoutY="67.0" prefHeight="663.0" prefWidth="1000.0" style="-fx-background-color: #ffffff; -fx-border-color: #ffffff;">
-         <children>
-            <Line endX="777.0" endY="-1.52587890625E-5" layoutX="165.0" layoutY="281.0" startX="-100.0" />
-            <Text layoutX="64.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Years">
-               <font>
-                  <Font name="ProximaNova-ExtraBold" size="20.0" />
-               </font>
-            </Text>
-            <ScrollPane layoutX="65.0" layoutY="300.0" prefHeight="306.0" prefWidth="878.0" style="-fx-background: #ffffff; -fx-border-color: #ffffff;" stylesheets="@scroll_pane.css">
-               <content>
-                  <VBox fx:id="yearsContainer" prefHeight="60.0" prefWidth="830.0" />
-               </content>
-            </ScrollPane>
-            <Text layoutX="64.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GAME OF THE YEAR AWARD">
-               <font>
-                  <Font name="ProximaNova-ExtraBold" size="26.0" />
-               </font>
-            </Text>
-            <Text layoutX="65.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Game of the Year Award celebrates outstanding achievements in video games globally, highlighting the industry's best in creativity and technology. It gathers developers and players to promote gaming as a premier form of entertainment, aiming to acknowledge those who contribute positively to the community and highlight the voices shaping the future of gaming." wrappingWidth="521.9998779296875">
-               <font>
-                  <Font name="Proxima Nova Regular" size="18.0" />
-               </font>
-            </Text>
-            <ImageView fitHeight="213.0" fitWidth="328.0" layoutX="627.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/banners/award_quality.png" />
-               </image>
-            </ImageView>
-         </children>
-      </AnchorPane>
+      <ScrollPane hbarPolicy="NEVER" layoutY="71.0" prefHeight="650.0" prefWidth="996.0" stylesheets="@scroll_pane.css">
+         <content>
+            <AnchorPane prefHeight="648.0" prefWidth="1000.0" style="-fx-background-color: #ffffff; -fx-border-color: #ffffff;">
+               <children>
+                  <Line endX="781.0" layoutX="157.0" layoutY="194.0" startX="-100.0" />
+                  <Text layoutX="56.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Years">
+                     <font>
+                        <Font name="ProximaNova-ExtraBold" size="20.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="56.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Game of the Year Award">
+                     <font>
+                        <Font name="ProximaNova-ExtraBold" size="20.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="56.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Game of the Year Award celebrates outstanding achievements in video games globally, highlighting the industry's best in creativity and technology. It gathers developers and players to promote gaming as a premier form of entertainment, aiming to acknowledge those who contribute positively to the community and highlight the voices shaping the future of gaming." wrappingWidth="577.1998901367188">
+                     <font>
+                        <Font name="Proxima Nova Regular" size="14.0" />
+                     </font>
+                  </Text>
+                  <ImageView fitHeight="138.0" fitWidth="213.0" layoutX="688.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/banners/award_quality.png" />
+                     </image>
+                  </ImageView>
+                  <VBox fx:id="yearsContainer" layoutX="56.0" layoutY="206.0" prefHeight="60.0" prefWidth="830.0" />
+               </children>
+            </AnchorPane>
+         </content>
+      </ScrollPane>
     </children>
 </AnchorPane>

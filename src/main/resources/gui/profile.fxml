@@ -110,24 +110,24 @@
       </AnchorPane>
       <AnchorPane layoutX="614.0" layoutY="67.0" prefHeight="662.0" prefWidth="385.0" style="-fx-background-color: #f2f2f2;">
          <children>
-              <Label fx:id="balanceValueLabel" layoutX="25.0" layoutY="106.0" text="1000.0 $">
+              <Label fx:id="balanceValueLabel" layoutX="25.0" layoutY="106.0" prefHeight="40.0" prefWidth="302.0" text="1000.0 $">
                <font>
                   <Font name="ProximaNova-Light" size="36.0" />
                </font>
             </Label>
-             <Label fx:id="additionalTextLabel" layoutX="25.0" layoutY="39.0" text="Current Balance">
+             <Label fx:id="additionalTextLabel" layoutX="25.0" layoutY="39.0" prefHeight="22.0" prefWidth="302.0" text="Additional Label">
                  <font>
                      <Font name="ProximaNova-ExtraBold" size="20.0" />
                  </font>
              </Label>
-             <Button fx:id="generateAwardsButton" layoutX="25.0" layoutY="111.0" onAction="#handleGenerateAwards" prefHeight="30.0" prefWidth="340.0" style="-fx-background-color: #f2f2f2; -fx-border-radius: 3; -fx-border-color: #3d3d3d;" text="Generate Awards">
+             <Button fx:id="generateAwardsButton" layoutX="25.0" layoutY="111.0" onAction="#handleGenerateAwards" prefHeight="30.0" prefWidth="302.0" style="-fx-background-color: #f2f2f2; -fx-border-radius: 3; -fx-border-color: #3d3d3d;" text="Generate Awards">
                <font>
                   <Font name="Proxima Nova Regular" size="14.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></Button>
-            <Line fx:id="additionalLine" endX="249.6666259765625" endY="-1.52587890625E-5" layoutX="115.0" layoutY="66.0" startX="-89.0" startY="-1.52587890625E-5" />
+            <Line fx:id="additionalLine" endX="211.79998779296875" endY="-1.52587890625E-5" layoutX="115.0" layoutY="66.0" startX="-89.0" startY="-1.52587890625E-5" />
 
          </children></AnchorPane>
     </children>

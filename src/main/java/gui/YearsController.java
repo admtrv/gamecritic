@@ -1,5 +1,6 @@
 package gui;
 
+import javafx.geometry.Insets;
 import session.*;
 import database.*;
 
@@ -13,12 +14,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 public class YearsController implements StyleInterface{
-
-    @FXML
-    private VBox yearsContainer;
-
+    @FXML private VBox yearsContainer;
     List<String> years;
-    @FXML
     public void initialize() {
         try {
             years = DataBaseUtil.getYears();
@@ -33,9 +30,8 @@ public class YearsController implements StyleInterface{
         for (String year : years) {
             Button yearButton = new Button("Game of the Year " + year);
             yearButton.setStyle("-fx-background-color: " + BoxBackgroundColor + " -fx-background-radius: 10");
-            yearButton.setMinHeight(40);
-            yearButton.setMinWidth(600);
-            yearButton.setFont(new Font("ProximaNova-Regular", 16));
+            yearButton.setPadding(new Insets(10));
+            yearButton.setFont(new Font("ProximaNova-ExtraBold", 14));
             yearButton.setAlignment(Pos.CENTER_LEFT);
             yearButton.setCursor(Cursor.HAND);
             yearButton.setOnAction(event -> {

@@ -15,12 +15,9 @@ public class ProfileController implements FieldInterface{
     @FXML private PasswordField CurrentPasswordField;
     @FXML private PasswordField NewPasswordField;
     @FXML private PasswordField ConfirmPasswordField;
-
     @FXML private Label additionalTextLabel;
     @FXML private Line additionalLine;
-
     @FXML private Label balanceValueLabel;
-
     @FXML private Button generateAwardsButton;
 
     User user = CurrentUser.getInstance().getUser();
@@ -28,13 +25,11 @@ public class ProfileController implements FieldInterface{
     private void initialize() {
         usernameField.setText(user.getUsername());
         if (user instanceof Critic) {
-            Critic critic = (Critic) user;
             balanceValueLabel.setVisible(true);
-            balanceValueLabel.setText(String.format("%.2f",critic.getBalance()) + " $");
+            balanceValueLabel.setText(String.format("%.2f",((Critic)user).getBalance()) + " $");
             additionalTextLabel.setVisible(true);
             additionalTextLabel.setText("Current Balance");
             additionalLine.setVisible(true);
-
             generateAwardsButton.setVisible(false);
 
         } else if (user instanceof Administrator){
@@ -42,18 +37,14 @@ public class ProfileController implements FieldInterface{
             additionalTextLabel.setText("Administrator panel");
             additionalLine.setVisible(true);
             generateAwardsButton.setVisible(true);
-
             balanceValueLabel.setVisible(false);
 
-        } else
-        {
+        } else {
             balanceValueLabel.setVisible(false);
             additionalTextLabel.setVisible(false);
             additionalLine.setVisible(false);
             generateAwardsButton.setVisible(false);
         }
-
-
     }
 
     public void updateUsername() {

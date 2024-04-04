@@ -31,7 +31,6 @@ public class ReviewController implements StyleInterface {
         if (review != null) {
             scoreLabel.setText(Integer.toString(review.getScore()));
             scoreLabel.setStyle(getScoreColor(review.getScore())  + "-fx-background-radius: 22;");
-
             scoreSlider.setValue(review.getScore());
             reviewTextArea.setText(review.getReviewText());
         } else {
@@ -42,7 +41,6 @@ public class ReviewController implements StyleInterface {
         }
 
         reviewTextArea.setStyle(normalFieldStyle);
-
         titleLabel.setText("Write a review for " + game.getTitle());
 
         if(user instanceof Critic)
@@ -109,7 +107,6 @@ public class ReviewController implements StyleInterface {
                     ((Critic) user).setBalance(newBalance);
                 }
             }
-
 
             System.out.println("Review posted successfully!");
             switchToGameDetailsScene();

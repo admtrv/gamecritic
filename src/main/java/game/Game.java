@@ -70,10 +70,6 @@ public class Game {
         return releaseDate;
     }
 
-    //SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-    //String dateString = sdf.format(game.getReleaseDate()); // Для сохранения в БД
-    //Date date = sdf.parse("2024-01-01"); // Для чтения из строки
-
     public String getPlatforms() {
         return platforms;
     }

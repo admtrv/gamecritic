@@ -31,7 +31,6 @@ public class GameDetailsController implements StyleInterface {
     @FXML private Label usersScoreLabel;
     @FXML private Label descriptionLabel;
     @FXML private Button reviewButton;
-
     @FXML private ImageView awardView;
     Game game = CurrentGame.getInstance().getGame();
     User user = CurrentUser.getInstance().getUser();

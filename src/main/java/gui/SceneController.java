@@ -8,9 +8,7 @@ import java.io.IOException;
 
 // Singleton класс
 public class SceneController {
-
     private static SceneController instance;
-
     private Stage stage;
     private Scene scene;
     private Parent root;
