@@ -3,6 +3,7 @@ package gui;
 import database.*;
 import users.*;
 import validation.*;
+import profile_strategy.*;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -19,32 +20,21 @@ public class ProfileController implements FieldInterface{
     @FXML private Line additionalLine;
     @FXML private Label balanceValueLabel;
     @FXML private Button generateAwardsButton;
-
+    private ProfileStrategyInterface profileStrategy;
     User user = CurrentUser.getInstance().getUser();
     @FXML
     private void initialize() {
         usernameField.setText(user.getUsername());
+
         if (user instanceof Critic) {
-            balanceValueLabel.setVisible(true);
-            balanceValueLabel.setText(String.format("%.2f",((Critic)user).getBalance()) + " $");
-            additionalTextLabel.setVisible(true);
-            additionalTextLabel.setText("Current Balance");
-            additionalLine.setVisible(true);
-            generateAwardsButton.setVisible(false);
-
-        } else if (user instanceof Administrator){
-            additionalTextLabel.setVisible(true);
-            additionalTextLabel.setText("Administrator panel");
-            additionalLine.setVisible(true);
-            generateAwardsButton.setVisible(true);
-            balanceValueLabel.setVisible(false);
-
+            profileStrategy = new CriticStrategy();
+        } else if (user instanceof Administrator) {
+            profileStrategy = new AdministratorStrategy();
         } else {
-            balanceValueLabel.setVisible(false);
-            additionalTextLabel.setVisible(false);
-            additionalLine.setVisible(false);
-            generateAwardsButton.setVisible(false);
+            profileStrategy = new UserStrategy();
         }
+
+        profileStrategy.setInterface(balanceValueLabel, additionalTextLabel, additionalLine, generateAwardsButton);
     }
 
     public void updateUsername() {
