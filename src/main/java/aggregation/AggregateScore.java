@@ -14,7 +14,7 @@ public class AggregateScore {
         Review review = CurrentReview.getInstance().getReview();
 
         if (review != null) {
-            // Обновляем существующий отзыв
+            // Updating an existing review
             int oldScore = review.getScore();
             int scoreDifference = newScore - oldScore;
 
@@ -24,7 +24,7 @@ public class AggregateScore {
                 game.setUsersSum(game.getUsersSum() + scoreDifference);
             }
         } else {
-            // Добавляем новый отзыв
+            // Adding a new review
             if (user instanceof Critic) {
                 game.setCriticsSum(game.getCriticsSum() + newScore);
                 game.setCriticsCount(game.getCriticsCount() + 1);
@@ -34,15 +34,15 @@ public class AggregateScore {
             }
         }
 
-        // Рассчитать новые средние оценки
+        // Calculating new scores
         game.setCriticsScore(game.getCriticsCount() > 0 ? (double) game.getCriticsSum() / game.getCriticsCount() : 0);
         game.setUsersScore(game.getUsersCount() > 0 ? (double) game.getUsersSum() / game.getUsersCount() : 0);
         game.setAverageScore((game.getCriticsSum() + game.getUsersSum()) / (double) (game.getCriticsCount() + game.getUsersCount()));
 
-        // Обновить игру в текущей сессии
+        // Refresh the game in the current session
         CurrentGame.getInstance().setGame(game);
 
-        // Обновить игру в базе данных
+        // Refresh the game in the database
         try {
             DataBaseUtil.updateGameScore(game);
         } catch (Exception e) {

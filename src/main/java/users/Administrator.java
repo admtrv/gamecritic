@@ -10,10 +10,10 @@ public class Administrator extends User {
         super(id, username, password);
     }
 
-    // Методы специфичные для администратора
+    // Administrator-specific methods
     public void uploadGameAwardsThisYear() {
         try {
-            // Получаем текущий год
+            // Getting the current year
             String currentYear = String.valueOf(LocalDate.now().getYear());
             DataBaseUtil.uploadGameAwardsByYear(currentYear);
             System.out.println("Successful uploading awards!");

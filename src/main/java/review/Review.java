@@ -17,7 +17,7 @@ public class Review {
         this.publishDate = publishDate;
     }
 
-    // Геттеры и сеттеры
+    // Getters and setters
     public int getId() {
         return id;
     }

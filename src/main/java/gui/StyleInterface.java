@@ -1,17 +1,17 @@
 package gui;
 
 /*
-Интерфейс, который определяет набор константных строковых значений и методов.
-Эти константы представляют собой коды цветов, которые могут быть
-использованы в разных частях приложения для единообразия стилей.
+An interface that defines a set of constant string values and methods.
+These constants represent color codes that can be used in different
+parts of the application for consistency of styles.
 */
 
 public interface StyleInterface {
-    String GreenColor = "#00ce7a;"; // Зеленый
-    String YellowColor = "#ffbd3f;"; // Желтый
-    String RedColor = "#ff6874;"; // Красный
-    String FieldBorderColor = "#3d3d3d;"; // Цвет бортиков любого поля
-    String BoxBackgroundColor = "#f2f2f2;"; // Легкий серый, чтобы создать карточку игры, отделив ее от заднего плана
+    String GreenColor = "#00ce7a;"; // Green
+    String YellowColor = "#ffbd3f;"; // Yellow
+    String RedColor = "#ff6874;"; // Red
+    String FieldBorderColor = "#3d3d3d;"; // Color of borders of any field
+    String BoxBackgroundColor = "#f2f2f2;"; // Light gray to create a card, separating it from the background
     String errorFieldStyle = "-fx-background-color:  #ffffff; -fx-border-color:" + RedColor + " -fx-border-radius: 3";
     String normalFieldStyle = "-fx-background-color:  #ffffff; -fx-border-color:" + FieldBorderColor + " -fx-border-radius: 3";
     String initialScoreStyle = "-fx-background-color: #ffffff;-fx-border-color: #3d3d3d;";

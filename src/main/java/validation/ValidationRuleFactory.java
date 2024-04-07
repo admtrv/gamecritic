@@ -1,6 +1,6 @@
 package validation;
 
-// Паттерн Factory
+// Pattern Factory
 public class ValidationRuleFactory {
 
     public static ValidationRule getRule(String ruleName) {

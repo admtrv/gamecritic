@@ -11,12 +11,12 @@ import java.util.List;
 public class DataBaseUtil {
     private static final String URL = "jdbc:sqlite:src/main/resources/database.db";
 
-    //Устанавливает соединение с базой данных
+    // Setting up a connection to the database
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(URL);
     }
 
-    //Добавляет нового пользователя в базу данных
+    // Adding a new user to the database
     public static void addUser(String username, String password, String userType) throws SQLException {
         String sql = "INSERT INTO users(username, password, userType) VALUES(?,?,?)";
 
@@ -29,7 +29,7 @@ public class DataBaseUtil {
         }
     }
 
-    //Проверяет, существует ли пользователь с заданным именем пользователя
+    // Verifying whether a user with the given username exists
     public static User getUser(String username) throws SQLException {
         User user = null;
         String sql = "SELECT * FROM users WHERE username = ?";
@@ -62,7 +62,7 @@ public class DataBaseUtil {
         return user;
     }
 
-    // Обновление имени пользователя
+    // Updating the username
     public static boolean updateUsername(int userId, String newUsername) throws SQLException {
         String sql = "UPDATE users SET username = ? WHERE id = ?";
         try (Connection connection = getConnection();
@@ -74,7 +74,7 @@ public class DataBaseUtil {
         }
     }
 
-    // Обновление пароля пользователя
+    // Updating the password
     public static boolean updatePassword(int userId, String newPassword) throws SQLException {
         String sql = "UPDATE users SET password = ? WHERE id = ?";
         try (Connection connection = getConnection();
@@ -86,6 +86,7 @@ public class DataBaseUtil {
         }
     }
 
+    // Updating the balance of the critic
     public static boolean updateBalance(int userId, double newBalance) throws SQLException {
         String sql = "UPDATE users SET balance = ? WHERE id = ?";
         try (Connection connection = getConnection();
@@ -96,7 +97,6 @@ public class DataBaseUtil {
             return affectedRows > 0;
         }
     }
-
 
     public static List<Game> getGames(int number, String attribute) throws SQLException {
         List<Game> games = new ArrayList<>();
@@ -134,7 +134,7 @@ public class DataBaseUtil {
         return games;
     }
 
-    // Overloading
+    // Overloading of previous method
     public static List<Game> getGames(String year, String attribute) throws SQLException {
         List<Game> games = new ArrayList<>();
         String sql = "SELECT * FROM games WHERE strftime('%Y', release_date) = ? AND award = 1 ORDER BY " + attribute + " DESC";
@@ -225,9 +225,9 @@ public class DataBaseUtil {
         }
     }
 
-    // Метод для получения списка игр за определенный год, сгруппированных по жанрам
+    // Method for awarding games for a given year over all genres
     public static void uploadGameAwardsByYear(String year) throws SQLException {
-        // Получаем лучшие игры за год и сразу назначаем им награды
+        // Getting the best games of the year and giving them awards immediately
         String sql = "WITH ranked_games AS (" +
                 "SELECT *, RANK() OVER (PARTITION BY genre ORDER BY average_score DESC) AS rank " +
                 "FROM games WHERE strftime('%Y', release_date) = ?" +

@@ -42,7 +42,7 @@ public class ProfileController implements FieldInterface{
         setUsernameNormalStyle();
         ValidationRule usernameRule = ValidationRuleFactory.getRule("username");
 
-        if (!usernameRule.validate(newUsername)) { // Имя пользователя не прошло валидацию
+        if (!usernameRule.validate(newUsername)) { // Username failed validation
             setUsernameErrorStyle();
             System.out.println(usernameRule.getErrorMessage());
             return;
@@ -50,16 +50,16 @@ public class ProfileController implements FieldInterface{
 
         try {
             if (DataBaseUtil.updateUsername(user.getId(), newUsername)) {
-                user.setUsername(newUsername); // Обновляем информацию о пользователе в текущей сессии
-                CurrentUser.getInstance().logIn(user); // Обновляем пользователя в синглтоне
-                CurrentUser.getInstance().saveCurrentUser(); // Обновляем данные в файле сериализации
+                user.setUsername(newUsername); // Updating user information in the current session
+                CurrentUser.getInstance().logIn(user); // Updating user in singleton
+                CurrentUser.getInstance().saveCurrentUser(); // Updating data in the serialization file
                 System.out.println("Username successfully updated!");
             } else {
-                setUsernameErrorStyle(); // Операция в базе данных не удалась
+                setUsernameErrorStyle(); // Database operation failed
                 System.out.println("Failed to update username!");
             }
         } catch (SQLException e) {
-            setUsernameErrorStyle(); // Исключение SQL
+            setUsernameErrorStyle(); // SQL Exception
             System.err.println("SQL error updating username!");
             e.printStackTrace();
         }
@@ -72,7 +72,7 @@ public class ProfileController implements FieldInterface{
         setPasswordNormalStyle();
         ValidationRule passwordRule = ValidationRuleFactory.getRule("password");
 
-        if (!passwordRule.validate(newPassword)) { // Новый пароль не соответствует требованиям
+        if (!passwordRule.validate(newPassword)) { // Password does not meet the requirements
             setPasswordErrorStyle();
             System.out.println(passwordRule.getErrorMessage());
             return;
@@ -92,9 +92,9 @@ public class ProfileController implements FieldInterface{
 
         try {
             if (DataBaseUtil.updatePassword(user.getId(), newPassword)) {
-                user.setPassword(newPassword); // Обновляем пароль в текущей сессии
-                CurrentUser.getInstance().logIn(user); // Обновляем пользователя в синглтоне
-                CurrentUser.getInstance().saveCurrentUser(); // Обновляем данные в файле сериализации
+                user.setPassword(newPassword); // Update password in the current session
+                CurrentUser.getInstance().logIn(user); // Updating user in singleton
+                CurrentUser.getInstance().saveCurrentUser(); // Updating data in the serialization file
                 System.out.println("Password successfully updated!");
                 CurrentPasswordField.clear();
                 NewPasswordField.clear();
@@ -111,9 +111,9 @@ public class ProfileController implements FieldInterface{
     }
 
     public void signOut() throws IOException {
-        CurrentUser.getInstance().logOut(); // Очистка информации о текущем пользователе
-        CurrentUser.getInstance().clearCurrentUser(); // Удаление файла сериализации
-        SceneController.getInstance().switchScene("login.fxml"); // Переход на экран логина
+        CurrentUser.getInstance().logOut(); // Clearing information about the current user
+        CurrentUser.getInstance().clearCurrentUser(); // Deleting a serialization file
+        SceneController.getInstance().switchScene("login.fxml"); // Switching to the login screen
         System.out.println("User signed out!");
     }
 

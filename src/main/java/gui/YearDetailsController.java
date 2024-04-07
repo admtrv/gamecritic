@@ -45,12 +45,12 @@ public class YearDetailsController implements StyleInterface{
             Label nominationLabel = new Label(game.getGenre() + " of the Year");
             nominationLabel.setFont(new Font("ProximaNova-ExtraBold", 14));
 
-            // Контейнер для оценки и названия игры
+            // Container for score and name of the game
             HBox gameInfoContainer = new HBox(10);
 
             gameInfoContainer.setAlignment(Pos.CENTER_LEFT);
 
-            // Оценка игры
+            // Game score
             Label scoreLabel = new Label(String.valueOf((int) game.getAverageScore()));
             scoreLabel.setFont(new Font("ProximaNova-ExtraBold", 12));
             scoreLabel.setStyle(getScoreColor(game.getAverageScore()) + "-fx-background-radius: 8;");
@@ -58,14 +58,14 @@ public class YearDetailsController implements StyleInterface{
             scoreLabel.setMinWidth(30);
             scoreLabel.setMinHeight(30);
 
-            // Название игры
+            // Game title
             Label gameNameLabel = new Label(game.getTitle());
             gameNameLabel.setFont(new Font("ProximaNova-Regular", 12));
 
-            // Собираем оценку и название игры в контейнер
+            // Collecting the score and the name of the game into a container
             gameInfoContainer.getChildren().addAll(scoreLabel, gameNameLabel);
 
-            // Сборка всего в один VBox
+            // Build everything in one VBox
             gameBox.getChildren().addAll(nominationLabel, gameInfoContainer);
 
             VBox.setMargin(gameBox, new Insets(0, 0, 10, 0));

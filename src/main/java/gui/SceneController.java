@@ -6,7 +6,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
 
-// Singleton класс
+// Singleton class
 public class SceneController {
     private static SceneController instance;
     private Stage stage;

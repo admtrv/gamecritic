@@ -2,7 +2,7 @@ package session;
 
 import game.*;
 
-// Singleton класс
+// Singleton class
 public class CurrentGame {
     private static Game game;
     private static final CurrentGame instance = new CurrentGame();

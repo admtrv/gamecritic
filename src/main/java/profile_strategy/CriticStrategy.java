@@ -1,10 +1,11 @@
 package profile_strategy;
 
+import session.*;
+import users.*;
+
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.shape.Line;
-import session.CurrentUser;
-import users.Critic;
 
 public class CriticStrategy implements ProfileStrategyInterface {
     @Override

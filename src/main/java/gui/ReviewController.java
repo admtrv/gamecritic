@@ -24,7 +24,7 @@ public class ReviewController implements StyleInterface {
     Game game = CurrentGame.getInstance().getGame();
     User user = CurrentUser.getInstance().getUser();
     Review review = CurrentReview.getInstance().getReview();
-    private int CHARACTERS_MAX = 1000; // Для User
+    private int CHARACTERS_MAX = 1000; // For user
 
     @FXML
     public void initialize() {
@@ -44,7 +44,7 @@ public class ReviewController implements StyleInterface {
         titleLabel.setText("Write a review for " + game.getTitle());
 
         if(user instanceof Critic)
-            CHARACTERS_MAX = 5000; // Для Critic
+            CHARACTERS_MAX = 5000; // For critic
 
         if (review != null) {
             int initialCharactersRemaining = CHARACTERS_MAX - reviewTextArea.getText().length();
@@ -53,7 +53,7 @@ public class ReviewController implements StyleInterface {
             charactersLabel.setText(CHARACTERS_MAX + " Characters remaining");
         }
 
-        // Observer для лимита символов
+        // Observer for characters limit
         reviewTextArea.textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.length() > CHARACTERS_MAX) {
                 reviewTextArea.setText(newValue.substring(0, CHARACTERS_MAX));
@@ -64,7 +64,7 @@ public class ReviewController implements StyleInterface {
             }
         });
 
-        // Observer для оценки
+        // Observer for score
         scoreSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
             scoreLabel.setText(Integer.toString(newValue.intValue()));
             scoreLabel.setStyle(getScoreColor(newValue.intValue())  + "-fx-background-radius: 22;");
@@ -80,7 +80,7 @@ public class ReviewController implements StyleInterface {
         String reviewText = reviewTextArea.getText();
         int score = (int) scoreSlider.getValue();
 
-        // Получение правил валидации
+        // Getting validation rules
         ValidationRule reviewRule = ValidationRuleFactory.getRule("review");
         if (!reviewRule.validate(reviewText)) {
             reviewTextArea.setStyle(errorFieldStyle);
@@ -110,7 +110,6 @@ public class ReviewController implements StyleInterface {
 
             System.out.println("Review posted successfully!");
             switchToGameDetailsScene();
-            // Обновляем игру и пользователя в базе данных
         } catch (SQLException | IOException e) {
             e.printStackTrace();
         }

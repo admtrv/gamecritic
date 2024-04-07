@@ -18,12 +18,12 @@ public class AppController extends Application {
         primaryStage.setTitle("gamecritic");
         primaryStage.setResizable(false);
 
-        CurrentUser.getInstance().loadCurrentUser(); // Попытка загрузить данные текущего пользователя
+        CurrentUser.getInstance().loadCurrentUser(); // Trying to load data of the current user
         try {
             if (CurrentUser.getInstance().getUser() != null) {
-                sceneController.switchScene("home.fxml"); // Пользователь уже был в системе, перейти на домашний экран
+                sceneController.switchScene("home.fxml"); // The user was already logged in, going to the home screen
             } else {
-                sceneController.switchScene("login.fxml"); // Пользователь не вошел, показать экран входа
+                sceneController.switchScene("login.fxml"); // The user wasn't logged in, showing login screen
             }
         } catch (IOException e) {
             e.printStackTrace();

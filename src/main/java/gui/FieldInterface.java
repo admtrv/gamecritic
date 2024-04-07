@@ -3,9 +3,9 @@ package gui;
 import javafx.fxml.FXML;
 
 /*
-Интерфейс, который расширяет StyleInterface, наследуя его константы,
-и определяет  методы для установки стилей элементов полей
-для ввода данных в зависимости от состояния валидации данных.
+An interface that extends StyleInterface by inheriting
+its constants, and defines methods to set the styles
+of field elements depending on the state of data validation.
 */
 
 public interface FieldInterface extends StyleInterface {

@@ -12,7 +12,7 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    // Геттеры и сеттеры
+    // Getters and setters
     public String getUsername(){
         return username;
     }

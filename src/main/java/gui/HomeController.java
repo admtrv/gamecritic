@@ -41,7 +41,7 @@ public class HomeController implements StyleInterface {
             gameBox.setStyle("-fx-background-color: " + BoxBackgroundColor + " -fx-background-radius: 10");
 
             ImageView imageView = new ImageView(new Image(getClass().getResourceAsStream(game.getImagePath())));
-            imageView.setFitHeight(160); // Высота : Ширина = 15 : 10
+            imageView.setFitHeight(160); // Height : Width = 15 : 10
             imageView.setFitWidth(110);
 
             Label titleLabel = new Label(game.getTitle());

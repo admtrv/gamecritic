@@ -1,14 +1,14 @@
 package users;
 
 public class Critic extends User {
-    private double balance; // Баланс для начисления вознаграждений
+    private double balance; // Balance for benefit payments
 
     public Critic(int id, String username, String password, double balance) {
         super(id, username, password);
         this.balance = balance;
     }
 
-    // Геттеры и сеттеры
+    // Getters and setters
     public double getBalance() {
         return balance;
     }

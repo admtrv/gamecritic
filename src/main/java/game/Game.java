@@ -23,8 +23,6 @@ public class Game {
     private double usersScore;
     private double averageScore;
 
-
-    // Конструктор
     public Game(int id, String title, String developer, String releaseDate, String platforms,
                 String genre, boolean award, String storeLink, String description, String imagePath,
                 int criticsCount, int usersCount, int criticsSum, int usersSum,
@@ -53,7 +51,8 @@ public class Game {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd, yyyy").withLocale(Locale.ENGLISH);;
         return result.format(formatter).toUpperCase();
     }
-    // Геттеры и сеттеры
+
+    // Getters and setters
     public int getId() {
         return id;
     }

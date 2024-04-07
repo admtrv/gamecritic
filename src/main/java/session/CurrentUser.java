@@ -4,7 +4,7 @@ import users.*;
 
 import java.io.*;
 
-// Singleton класс
+// Singleton class
 public class CurrentUser {
     private static User user;
     private static final CurrentUser instance = new CurrentUser();
@@ -20,7 +20,7 @@ public class CurrentUser {
     }
     public void logOut(){user = null;}
 
-    // В классе CurrentUser
+    // Serialization of the current user
     public void saveCurrentUser() {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("current_user.ser"))) {
             oos.writeObject(user);
@@ -33,7 +33,7 @@ public class CurrentUser {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("current_user.ser"))) {
             user = (User) ois.readObject();
         } catch (IOException | ClassNotFoundException e) {
-            user = null; // В случае ошибки или если файл не найден, пользователь не восстанавливается
+            user = null; // In case of an error or if the file is not found, the user is not recovered
         }
     }
 

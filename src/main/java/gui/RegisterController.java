@@ -17,7 +17,7 @@ public class RegisterController implements FieldInterface{
     @FXML
     private void initialize() {
         Platform.runLater(() -> usernameField.requestFocus());
-        roleComboBox.getItems().addAll("User", "Critic", "Administrator"); // Cписок ролей
+        roleComboBox.getItems().addAll("User", "Critic", "Administrator"); // List of roles
     }
 
     @FXML
@@ -29,32 +29,32 @@ public class RegisterController implements FieldInterface{
         setUsernameNormalStyle();
         setPasswordNormalStyle();
 
-        // Получение правил валидации
+        // Getting validation rules
         ValidationRule usernameRule = ValidationRuleFactory.getRule("username");
         ValidationRule passwordRule = ValidationRuleFactory.getRule("password");
 
-        boolean isValid = true; // Флаг, отслеживающий валидность данных
+        boolean isValid = true; // Flag that monitors the validity of the data
 
-        // Валидация имени пользователя
+        // Username validation
         if (!usernameRule.validate(username)) {
             setUsernameErrorStyle();
             System.out.println(usernameRule.getErrorMessage());
-            isValid = false; // Обновление флага валидности
+            isValid = false; // Validity flag update
         }
 
-        // Валидация пароля
+        // Password validation
         if (!passwordRule.validate(password)) {
             setPasswordErrorStyle();
             System.out.println(passwordRule.getErrorMessage());
-            isValid = false; // Обновление флага валидности
+            isValid = false; // Validity flag update
         }
 
-        // Если данные не валидны, прерываем выполнение метода
+        // If the data is not valid, break the method execution
         if (!isValid) {
             return;
         }
 
-        // Попытка регистрации пользователя в базе данных
+        // Trying to register a user in the database
         try {
             DataBaseUtil.addUser(username, password, userType);
             System.out.println("User registered successfully!");
