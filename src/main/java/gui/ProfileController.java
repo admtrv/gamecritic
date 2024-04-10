@@ -1,8 +1,8 @@
 package gui;
 
-import database.*;
 import users.*;
-import validation.*;
+import utils.*;
+import validation_factory.*;
 import profile_strategy.*;
 
 import javafx.fxml.FXML;
@@ -42,7 +42,7 @@ public class ProfileController implements FieldInterface{
         setUsernameNormalStyle();
         ValidationRule usernameRule = ValidationRuleFactory.getRule("username");
 
-        if (!usernameRule.validate(newUsername)) { // Username failed validation
+        if (!usernameRule.validate(newUsername)) { // Username failed validation_factory
             setUsernameErrorStyle();
             System.out.println(usernameRule.getErrorMessage());
             return;

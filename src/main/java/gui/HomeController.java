@@ -1,8 +1,8 @@
 package gui;
 
-import database.*;
 import game.*;
 import session.*;
+import utils.*;
 
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import javafx.scene.Cursor;
+
 public class HomeController implements StyleInterface {
     private List<Game> latestGames;
     private List<Game> topGames;

@@ -1,8 +1,8 @@
 package gui;
 
-import database.*;
 import game.*;
 import session.*;
+import utils.*;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;

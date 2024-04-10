@@ -1,7 +1,7 @@
 package gui;
 
 import session.*;
-import font.*;
+import utils.*;
 
 import javafx.application.Application;
 import javafx.scene.image.Image;
@@ -12,7 +12,7 @@ public class AppController extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        FontLoader.loadFonts();
+        FontUtil.loadProjectFonts();
         SceneController sceneController = SceneController.getInstance();
         sceneController.setStage(primaryStage);
         Image WindowLogo = new Image(getClass().getResourceAsStream("/images/logos/logo_icon.png"));

@@ -1,4 +1,4 @@
-package review;
+package reviews;
 
 public class Review {
     private int id;

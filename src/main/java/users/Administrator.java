@@ -1,6 +1,6 @@
 package users;
 
-import database.*;
+import utils.*;
 
 import java.sql.SQLException;
 import java.time.LocalDate;

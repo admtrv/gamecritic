@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="443.0" prefWidth="535.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ReviewController">
+    <children>
+        <AnchorPane prefHeight="120.0" prefWidth="535.0">
+            <children>
+                <Label fx:id="scoreLabel" alignment="CENTER" layoutX="33.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="75.0" prefWidth="75.0" style="-fx-background-color: #00ce7a; -fx-background-radius: 22;" text="10">
+                    <font>
+                        <Font name="ProximaNova-ExtraBold" size="32.0" />
+                    </font>
+                </Label>
+                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff6874" height="8.0" layoutX="140.0" layoutY="74.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="145.0" />
+                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffbd3f" height="8.0" layoutX="285.0" layoutY="74.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="106.0" />
+                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#00ce7a" height="8.0" layoutX="391.0" layoutY="74.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="110.0" />
+                <Slider fx:id="scoreSlider" blockIncrement="1.0" focusTraversable="false" layoutX="135.0" layoutY="71.0" majorTickUnit="1.0" max="10.0" minorTickCount="0" prefHeight="24.0" prefWidth="370.0" showTickMarks="true" snapToTicks="true" stylesheets="@score_slider.css">
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor></Slider>
+                <Text layoutX="137.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MY SCORE">
+                    <font>
+                        <Font name="ProximaNova-ExtraBold" size="18.0" />
+                    </font>
+                </Text>
+                <Text layoutX="137.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Move slider to give a rating">
+                    <font>
+                        <Font name="Proxima Nova Regular" size="14.0" />
+                    </font>
+                </Text>
+                <Line endX="368.0" endY="7.62939453125E-6" layoutX="132.0" layoutY="114.0" startX="-98.4000244140625" startY="7.62939453125E-6" />
+            </children>
+        </AnchorPane>
+        <AnchorPane layoutY="125.0" prefHeight="242.0" prefWidth="535.0">
+            <children>
+                <TextArea fx:id="reviewTextArea" focusTraversable="false" layoutX="34.0" layoutY="37.0" prefHeight="172.0" prefWidth="466.0" promptText="Minimum 50 characters" style="-fx-background-color: #ffffff; -fx-border-color: #3d3d3d; -fx-border-radius: 3;" wrapText="true">
+                    <font>
+                        <Font name="Proxima Nova Regular" size="14.0" />
+                    </font>
+                </TextArea>
+                <Label fx:id="titleLabel" layoutX="34.0" layoutY="12.0" text="Write a reviews for The Witcher 3: Wild Hunt">
+                    <font>
+                        <Font name="Proxima Nova Regular" size="14.0" />
+                    </font>
+                </Label>
+                <Label fx:id="charactersLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="276.0" layoutY="214.0" prefHeight="18.0" prefWidth="226.0" text="1000 Characters remaining">
+                    <font>
+                        <Font name="Proxima Nova Regular" size="14.0" />
+                    </font>
+                </Label>
+            <TextArea fx:id="plusesTextArea" focusTraversable="false" layoutX="34.0" layoutY="249.0" prefHeight="82.0" prefWidth="466.0" promptText="Pluses" style="-fx-background-color: #ffffff; -fx-border-color: #3d3d3d; -fx-border-radius: 3;" wrapText="true">
+               <font>
+                  <Font name="Proxima Nova Regular" size="14.0" />
+               </font>
+            </TextArea>
+            <TextArea fx:id="minusesTextArea" focusTraversable="false" layoutX="34.0" layoutY="373.0" prefHeight="82.0" prefWidth="466.0" promptText="Minuses" style="-fx-background-color: #ffffff; -fx-border-color: #3d3d3d; -fx-border-radius: 3;" wrapText="true">
+               <font>
+                  <Font name="Proxima Nova Regular" size="14.0" />
+               </font>
+            </TextArea>
+            <Label fx:id="plusesCharactersLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="275.0" layoutY="337.0" prefHeight="18.0" prefWidth="226.0" text="500 Characters remaining">
+               <font>
+                  <Font name="Proxima Nova Regular" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="minusesCharactersLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="275.0" layoutY="461.0" prefHeight="18.0" prefWidth="226.0" text="500 Characters remaining">
+               <font>
+                  <Font name="Proxima Nova Regular" size="14.0" />
+               </font>
+            </Label>
+            </children>
+        </AnchorPane>
+        <AnchorPane layoutY="614.0" prefHeight="75.0" prefWidth="535.0">
+            <children>
+                <Button layoutX="34.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchToGameDetailsScene" prefHeight="34.0" prefWidth="225.0" style="-fx-background-color: #ffffff; -fx-border-color: #3d3d3d; -fx-border-radius: 3;" text="Cancel">
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </Button>
+                <Button layoutX="276.0" layoutY="14.0" mnemonicParsing="false" onAction="#postReview" prefHeight="34.0" prefWidth="225.0" style="-fx-background-color: #3b3b3b; -fx-border-radius: 3;" text="Post" textFill="WHITE">
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </Button>
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>

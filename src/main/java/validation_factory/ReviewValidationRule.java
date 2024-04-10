@@ -1,4 +1,4 @@
-package validation;
+package validation_factory;
 
 public class ReviewValidationRule implements ValidationRule {
     private static final int MIN_REVIEW_LENGTH = 50;

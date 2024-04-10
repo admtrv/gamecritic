@@ -1,10 +1,10 @@
 package gui;
 
 import game.*;
-import review.*;
+import reviews.*;
 import session.*;
 import users.*;
-import database.*;
+import utils.*;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -91,7 +91,13 @@ public class GameDetailsController implements StyleInterface {
         SceneController.getInstance().switchScene("years.fxml");
     }
     public void switchToReviewScene() throws IOException {
-        SceneController.getInstance().switchScene("review.fxml");
+        if (user instanceof Critic){
+            SceneController.getInstance().switchScene("detailed_review.fxml");
+        }
+        else{
+            SceneController.getInstance().switchScene("review.fxml");
+        }
+
     }
     public void switchToProfileScene() throws IOException {
         CurrentGame.getInstance().resetGame();

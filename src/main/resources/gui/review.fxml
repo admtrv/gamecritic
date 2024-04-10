@@ -42,12 +42,32 @@
       </AnchorPane>
       <AnchorPane layoutY="125.0" prefHeight="242.0" prefWidth="535.0">
          <children>
+            <TextArea fx:id="plusesTextArea" disable="true" focusTraversable="false" layoutX="34.0" layoutY="37.0" prefHeight="67.0" prefWidth="226.0" promptText="Minimum 50 characters" style="-fx-background-color: #ffffff; -fx-border-color: #3d3d3d; -fx-border-radius: 3;" text="Pluses" visible="false" wrapText="true">
+               <font>
+                  <Font name="Proxima Nova Regular" size="14.0" />
+               </font>
+            </TextArea>
+            <TextArea fx:id="minusesTextArea" disable="true" focusTraversable="false" layoutX="276.0" layoutY="37.0" prefHeight="67.0" prefWidth="226.0" promptText="Minimum 50 characters" style="-fx-background-color: #ffffff; -fx-border-color: #3d3d3d; -fx-border-radius: 3;" text="Minuses" visible="false" wrapText="true">
+               <font>
+                  <Font name="Proxima Nova Regular" size="14.0" />
+               </font>
+            </TextArea>
+            <Label fx:id="plusesCharactersLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" disable="true" layoutX="34.0" layoutY="85.0" prefHeight="18.0" prefWidth="110.0" text="Pluses Characters" visible="false">
+               <font>
+                  <Font name="Proxima Nova Regular" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="minusesCharactersLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" disable="true" layoutX="372.0" layoutY="85.0" prefHeight="18.0" prefWidth="127.0" text="Minuses Characters" visible="false">
+               <font>
+                  <Font name="Proxima Nova Regular" size="14.0" />
+               </font>
+            </Label>
             <TextArea fx:id="reviewTextArea" focusTraversable="false" layoutX="34.0" layoutY="37.0" prefHeight="172.0" prefWidth="466.0" promptText="Minimum 50 characters" style="-fx-background-color: #ffffff; -fx-border-color: #3d3d3d; -fx-border-radius: 3;" wrapText="true">
                <font>
                   <Font name="Proxima Nova Regular" size="14.0" />
                </font>
             </TextArea>
-            <Label fx:id="titleLabel" layoutX="34.0" layoutY="12.0" text="Write a review for The Witcher 3: Wild Hunt">
+            <Label fx:id="titleLabel" layoutX="34.0" layoutY="12.0" text="Write a reviews for The Witcher 3: Wild Hunt">
                <font>
                   <Font name="Proxima Nova Regular" size="14.0" />
                </font>

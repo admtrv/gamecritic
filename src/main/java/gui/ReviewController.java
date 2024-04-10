@@ -1,12 +1,12 @@
 package gui;
 
 import aggregation.*;
-import review.*;
+import reviews.*;
 import session.*;
 import users.*;
 import game.*;
-import validation.*;
-import database.*;
+import utils.*;
+import validation_factory.*;
 
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
@@ -21,10 +21,15 @@ public class ReviewController implements StyleInterface {
     @FXML private Slider scoreSlider;
     @FXML private Label titleLabel;
     @FXML private Label charactersLabel;
+    @FXML private TextArea plusesTextArea;
+    @FXML private Label plusesCharactersLabel;
+    @FXML private TextArea minusesTextArea;
+    @FXML private Label minusesCharactersLabel;
     Game game = CurrentGame.getInstance().getGame();
     User user = CurrentUser.getInstance().getUser();
     Review review = CurrentReview.getInstance().getReview();
     private int CHARACTERS_MAX = 1000; // For user
+    private int ADDITIONAL_CHARACTERS_MAX = 500;
 
     @FXML
     public void initialize() {
@@ -43,31 +48,52 @@ public class ReviewController implements StyleInterface {
         reviewTextArea.setStyle(normalFieldStyle);
         titleLabel.setText("Write a review for " + game.getTitle());
 
-        if(user instanceof Critic)
+        if(user instanceof Critic) {
             CHARACTERS_MAX = 5000; // For critic
-
-        if (review != null) {
-            int initialCharactersRemaining = CHARACTERS_MAX - reviewTextArea.getText().length();
-            charactersLabel.setText(initialCharactersRemaining + " Characters remaining");
+            plusesTextArea.setVisible(true);
+            minusesTextArea.setVisible(true);
+            DetailedReview detailedReview = (DetailedReview) review;
+            plusesTextArea.setText(detailedReview.getPluses());
+            minusesTextArea.setText(detailedReview.getMinuses());
         } else {
-            charactersLabel.setText(CHARACTERS_MAX + " Characters remaining");
+            plusesTextArea.setVisible(false);
+            minusesTextArea.setVisible(false);
         }
 
-        // Observer for characters limit
-        reviewTextArea.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue.length() > CHARACTERS_MAX) {
-                reviewTextArea.setText(newValue.substring(0, CHARACTERS_MAX));
-                charactersLabel.setText("0 Characters remaining");
-            } else {
-                int charactersRemaining = CHARACTERS_MAX - newValue.length();
-                charactersLabel.setText(charactersRemaining + " Characters remaining");
-            }
-        });
+        // Observer for Text Area
+        setupTextArea(reviewTextArea, charactersLabel, CHARACTERS_MAX);
+        if(user instanceof Critic) {
+            setupTextArea(plusesTextArea, plusesCharactersLabel, ADDITIONAL_CHARACTERS_MAX);
+            setupTextArea(minusesTextArea, minusesCharactersLabel, ADDITIONAL_CHARACTERS_MAX);
+        }
 
         // Observer for score
         scoreSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
             scoreLabel.setText(Integer.toString(newValue.intValue()));
             scoreLabel.setStyle(getScoreColor(newValue.intValue())  + "-fx-background-radius: 22;");
+        });
+    }
+
+    private void setupTextArea(TextArea textArea, Label charactersLabel, int maxCharacters) {
+        String text = textArea.getText();
+        if (text == null) text = "";
+
+        if (review != null) {
+            int initialCharactersRemaining = maxCharacters - text.length();
+            charactersLabel.setText(initialCharactersRemaining + " Characters remaining");
+        } else {
+            charactersLabel.setText(maxCharacters + " Characters remaining");
+        }
+
+        textArea.textProperty().addListener((observable, oldValue, newValue) -> {
+            newValue = newValue != null ? newValue : "";
+            if (newValue.length() > maxCharacters) {
+                textArea.setText(newValue.substring(0, maxCharacters));
+                charactersLabel.setText("0 Characters remaining");
+            } else {
+                int charactersRemaining = maxCharacters - newValue.length();
+                charactersLabel.setText(charactersRemaining + " Characters remaining");
+            }
         });
     }
 
@@ -80,33 +106,33 @@ public class ReviewController implements StyleInterface {
         String reviewText = reviewTextArea.getText();
         int score = (int) scoreSlider.getValue();
 
-        // Getting validation rules
-        ValidationRule reviewRule = ValidationRuleFactory.getRule("review");
+        String pluses = plusesTextArea.getText();
+        String minuses = minusesTextArea.getText();
+
+        // Getting validation_factory rules
+        ValidationRule reviewRule = ValidationRuleFactory.getRule("reviews");
         if (!reviewRule.validate(reviewText)) {
             reviewTextArea.setStyle(errorFieldStyle);
             System.out.println(reviewRule.getErrorMessage());
             return;
         }
 
-        if (!reviewRule.validate(reviewText)) {
-            System.out.println(reviewRule.getErrorMessage());
-            return;
-        }
-
         try {
-            DataBaseUtil.addReview(game.getId(), user.getId(), score, reviewText, LocalDate.now().toString());
-            AggregateScore.updateScore(score);
+            if (user instanceof Critic) {
+                // Adding a review with pluses and minuses for the critic
+                DataBaseUtil.addReview(game.getId(), user.getId(), score, reviewText, LocalDate.now().toString(), pluses, minuses);
 
-            if (user instanceof Critic && review == null){
-                double income = reviewText.length() * 0.1;
-                double newBalance = ((Critic) user).getBalance() + income;
-
-                if (DataBaseUtil.updateBalance(user.getId(), newBalance ))
-                {
-                    System.out.println("Сritics balance updated successfully!");
-                    ((Critic) user).setBalance(newBalance);
+                if (review == null && user instanceof Critic) {
+                    double income = reviewText.length() * 0.1;
+                    AggregateIncome.updateCriticBalance((Critic) user, income);
                 }
+
+            } else {
+                // Adding a review
+                DataBaseUtil.addReview(game.getId(), user.getId(), score, reviewText, LocalDate.now().toString(), "", "");
             }
+
+            AggregateScore.updateScore(score);
 
             System.out.println("Review posted successfully!");
             switchToGameDetailsScene();

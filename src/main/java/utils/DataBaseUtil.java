@@ -1,6 +1,7 @@
-package database;
+package utils;
 
-import review.*;
+import reviews.*;
+import session.CurrentUser;
 import users.*;
 import game.*;
 
@@ -188,6 +189,7 @@ public class DataBaseUtil {
     }
 
     public static Review getReview(int userId, int gameId) throws SQLException {
+        Review review = null;
         String sql = "SELECT * FROM reviews WHERE user_id = ? AND game_id = ?";
 
         try (Connection connection = getConnection();
@@ -197,22 +199,31 @@ public class DataBaseUtil {
 
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                return new Review(
-                        resultSet.getInt("id"),
-                        resultSet.getInt("game_id"),
-                        resultSet.getInt("user_id"),
-                        resultSet.getInt("score"),
-                        resultSet.getString("review_text"),
-                        resultSet.getString("publish_date")
-                );
+                int id = resultSet.getInt("id");
+                gameId = resultSet.getInt("game_id");
+                userId = resultSet.getInt("user_id");
+                int score = resultSet.getInt("score");
+                String reviewText = resultSet.getString("review_text");
+                String publishDate = resultSet.getString("publish_date");
+                String pluses = resultSet.getString("pluses");
+                String minuses = resultSet.getString("minuses");
+
+                if (CurrentUser.getInstance().getUser() instanceof Critic) {
+                    review = new DetailedReview(id,gameId,userId,score,reviewText,publishDate,pluses,minuses);
+                }
+                else{
+                    review = new Review(id,gameId,userId,score,reviewText,publishDate);
+                }
             }
         }
-        return null;
+        return review;
     }
 
-    public static void addReview(int gameId, int userId, int score, String reviewText, String publishDate) throws SQLException {
-        String sql = "INSERT INTO reviews (game_id, user_id, score, review_text, publish_date) VALUES (?, ?, ?, ?, ?) " +
-                "ON CONFLICT(user_id, game_id) DO UPDATE SET score = excluded.score, review_text = excluded.review_text, publish_date = excluded.publish_date";
+    public static void addReview(int gameId, int userId, int score, String reviewText, String publishDate, String pluses, String minuses) throws SQLException {
+        String sql = "INSERT INTO reviews (game_id, user_id, score, review_text, publish_date, pluses, minuses) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?) " +
+                "ON CONFLICT(user_id, game_id) DO UPDATE SET " +
+                "score = excluded.score, review_text = excluded.review_text, publish_date = excluded.publish_date, pluses = excluded.pluses, minuses = excluded.minuses";
 
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -221,9 +232,12 @@ public class DataBaseUtil {
             preparedStatement.setInt(3, score);
             preparedStatement.setString(4, reviewText);
             preparedStatement.setString(5, publishDate);
+            preparedStatement.setString(6, pluses);
+            preparedStatement.setString(7, minuses);
             preparedStatement.executeUpdate();
         }
     }
+
 
     // Method for awarding games for a given year over all genres
     public static void uploadGameAwardsByYear(String year) throws SQLException {

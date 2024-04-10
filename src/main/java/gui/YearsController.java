@@ -1,8 +1,7 @@
 package gui;
 
-import javafx.geometry.Insets;
 import session.*;
-import database.*;
+import utils.*;
 
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -10,6 +9,7 @@ import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.geometry.Insets;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;

@@ -1,10 +1,10 @@
 package aggregation;
 
 import game.*;
-import review.*;
+import reviews.*;
 import users.*;
 import session.*;
-import database.*;
+import utils.*;
 
 public class AggregateScore {
     public static void updateScore(int newScore) {

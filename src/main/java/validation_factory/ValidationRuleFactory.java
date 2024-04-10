@@ -1,4 +1,4 @@
-package validation;
+package validation_factory;
 
 // Pattern Factory
 public class ValidationRuleFactory {
@@ -8,10 +8,10 @@ public class ValidationRuleFactory {
             return new UsernameValidationRule();
         } else if ("password".equals(ruleName)) {
             return new PasswordValidationRule();
-        } else if ("review".equals(ruleName)){
+        } else if ("reviews".equals(ruleName)){
             return new ReviewValidationRule();
         } else {
-            throw new RuntimeException("Unknown validation rule: " + ruleName);
+            throw new RuntimeException("Unknown validation_factory rule: " + ruleName);
         }
     }
 }

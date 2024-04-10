@@ -1,4 +1,4 @@
-package validation;
+package validation_factory;
 
 public class PasswordValidationRule implements ValidationRule {
     private static final int MIN_PASSWORD_LENGTH = 6;

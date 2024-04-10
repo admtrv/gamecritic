@@ -1,7 +1,7 @@
 package gui;
 
-import database.*;
-import validation.*;
+import utils.*;
+import validation_factory.*;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -29,20 +29,20 @@ public class RegisterController implements FieldInterface{
         setUsernameNormalStyle();
         setPasswordNormalStyle();
 
-        // Getting validation rules
+        // Getting validation_factory rules
         ValidationRule usernameRule = ValidationRuleFactory.getRule("username");
         ValidationRule passwordRule = ValidationRuleFactory.getRule("password");
 
         boolean isValid = true; // Flag that monitors the validity of the data
 
-        // Username validation
+        // Username validation_factory
         if (!usernameRule.validate(username)) {
             setUsernameErrorStyle();
             System.out.println(usernameRule.getErrorMessage());
             isValid = false; // Validity flag update
         }
 
-        // Password validation
+        // Password validation_factory
         if (!passwordRule.validate(password)) {
             setPasswordErrorStyle();
             System.out.println(passwordRule.getErrorMessage());

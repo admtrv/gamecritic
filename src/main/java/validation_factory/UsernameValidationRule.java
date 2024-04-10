@@ -1,4 +1,4 @@
-package validation;
+package validation_factory;
 
 public class UsernameValidationRule implements ValidationRule {
     private static final int MIN_USERNAME_LENGTH = 3;

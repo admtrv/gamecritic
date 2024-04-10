@@ -1,6 +1,6 @@
 package session;
 
-import review.*;
+import reviews.*;
 
 public class CurrentReview {
     private static CurrentReview instance = new CurrentReview();

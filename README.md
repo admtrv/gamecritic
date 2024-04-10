@@ -1,7 +1,7 @@
 ![Logo](src/main/resources/images/logos/logo_horizontal_white.png)
 
 ## Introduction
-**GameCritic** is a video game review portal that gives players and critics from around
+**GameCritic** is a video game reviews portal that gives players and critics from around
 the world the opportunity to provide their opinions on the latest releases in the
 world of video games. This is a community where every vote counts, and on the
 basis of these votes an objective and comprehensive evaluation of the game is formed.
@@ -11,7 +11,7 @@ for a quality experience.
 
 ## Functionality
 
-1.	**User and Critic Evaluations:** Users and critics can rate and review new games, providing a complete view from both sides.
+1.	**User and Critic Evaluations:** Users and critics can rate and reviews new games, providing a complete view from both sides.
 2.	**User Ratings:** Registered users can rate games on a scale of 1 to 10 and leave reviews. 
 3.	**Critic Ratings:** Accredited game critics are able to write in-depth, professional reviews of newly released games and receive cash payments for doing this.
 4.	**Rating Aggregation:** The system aggregates rating data to form a convenient and easy-to-understand rating for each game.
@@ -74,11 +74,11 @@ If you click anywhere in the program on a certain game, the user will be taken t
 
 ## Review Screen
 
-When navigating to the review screen, if the review has not already been added, the user will be able to see the tools initialized to empty.
+When navigating to the reviews screen, if the reviews has not already been added, the user will be able to see the tools initialized to empty.
 
 ![image6](src/main/resources/images/github_source/image6.png)
 
-To add your own score just move the slider to the desired result, and to add a review you can simply write it in the text window. 
+To add your own score just move the slider to the desired result, and to add a reviews you can simply write it in the text window. 
 
 ![image7](src/main/resources/images/github_source/image7.png)
 
