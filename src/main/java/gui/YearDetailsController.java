@@ -21,12 +21,12 @@ public class YearDetailsController implements StyleInterface{
     private List<Game> games;
     String year = CurrentYear.getInstance().getYear();
     public void initialize(){
+        mainLabel.setText("Game of the Year " + year + " Awards");
         try {
            games = DataBaseUtil.getGames(year, "release_date");
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        mainLabel.setText("Game of the Year " + year + " Awards");
         displayGames(gamesContainer, games);
     }
 
@@ -52,7 +52,7 @@ public class YearDetailsController implements StyleInterface{
 
             // Game score
             Label scoreLabel = new Label(String.valueOf((int) game.getAverageScore()));
-            scoreLabel.setFont(new Font("ProximaNova-ExtraBold", 12));
+            scoreLabel.setFont(new Font("ProximaNova-ExtraBold", 14));
             scoreLabel.setStyle(getScoreColor(game.getAverageScore()) + "-fx-background-radius: 8;");
             scoreLabel.setAlignment(Pos.CENTER);
             scoreLabel.setMinWidth(30);

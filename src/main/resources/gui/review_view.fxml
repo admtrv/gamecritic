@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane hbarPolicy="NEVER" prefHeight="245.0" prefWidth="679.0" stylesheets="@scroll_pane.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ReviewViewController">
+   <content>
+      <AnchorPane prefHeight="242.0" prefWidth="678.0" style="-fx-background-color: #ffffff;">
+          <children>
+              <AnchorPane prefHeight="122.0" prefWidth="679.0">
+                  <children>
+                      <Label fx:id="scoreLabel" alignment="CENTER" layoutX="26.0" layoutY="18.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="75.0" prefWidth="75.0" style="-fx-background-color: #00ce7a; -fx-background-radius: 22;" text="10">
+                          <font>
+                              <Font name="ProximaNova-ExtraBold" size="32.0" />
+                          </font>
+                      </Label>
+                      <Line endX="528.0" endY="1.52587890625E-5" layoutX="119.0" layoutY="119.0" startX="-92.00001525878906" startY="1.52587890625E-5" />
+                  <Label fx:id="usernameLabel" layoutX="111.0" layoutY="42.0" prefHeight="26.0" prefWidth="370.0" text="nickname" wrapText="true">
+                     <font>
+                        <Font name="ProximaNova-ExtraBold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="gameLabel" contentDisplay="CENTER" graphicTextGap="1.0" layoutX="489.0" layoutY="17.0" lineSpacing="1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="76.0" prefWidth="136.0" text="Witcher 3 User Review" wrapText="true">
+                     <font>
+                        <Font name="Proxima Nova Regular" size="13.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="17.0" fitWidth="8.0" layoutX="637.0" layoutY="50.0" onMouseClicked="#switchToBackScene" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/icons/back_button.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+                  </children>
+              </AnchorPane>
+            <AnchorPane layoutY="120.0" prefHeight="122.0" prefWidth="679.0">
+               <children>
+                  <Label fx:id="reviewTextLabel" alignment="TOP_LEFT" layoutX="26.0" layoutY="11.0" maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="622.0" text="Probably my most favorite gaming experience ever. " textOverrun="CLIP" wrapText="true">
+                     <font>
+                        <Font name="Proxima Nova Regular" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+          </children>
+      </AnchorPane>
+   </content>
+</ScrollPane>

@@ -1,10 +1,13 @@
 package aggregation;
 
+import session.*;
 import utils.*;
 import users.*;
 
 public class AggregateIncome {
-    public static void updateCriticBalance(Critic critic, double income) {
+    public static void updateCriticBalance(int reviewLength) {
+        Critic critic = (Critic) CurrentUser.getInstance().getUser();
+        double income = reviewLength * 0.1;
         double newBalance = critic.getBalance() + income;
         try {
             if (DataBaseUtil.updateBalance(critic.getId(), newBalance)) {

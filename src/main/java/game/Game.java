@@ -1,8 +1,6 @@
 package game;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Locale;
+import utils.*;
 
 public class Game {
     private int id;
@@ -30,7 +28,7 @@ public class Game {
         this.id = id;
         this.title = title;
         this.developer = developer;
-        this.releaseDate = convertDate(releaseDate);
+        this.releaseDate = DateUtil.convertDate(releaseDate);
         this.platforms = platforms;
         this.genre = genre;
         this.award = award;
@@ -44,12 +42,6 @@ public class Game {
         this.criticsScore = criticsScore;
         this.usersScore = usersScore;
         this.averageScore = averageScore;
-    }
-
-    public static String convertDate(String date) {
-        LocalDate result = LocalDate.parse(date);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd, yyyy").withLocale(Locale.ENGLISH);;
-        return result.format(formatter).toUpperCase();
     }
 
     // Getters and setters

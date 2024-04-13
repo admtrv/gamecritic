@@ -1,7 +1,7 @@
 package utils;
 
 import reviews.*;
-import session.CurrentUser;
+import session.*;
 import users.*;
 import game.*;
 
@@ -19,7 +19,7 @@ public class DataBaseUtil {
 
     // Adding a new user to the database
     public static void addUser(String username, String password, String userType) throws SQLException {
-        String sql = "INSERT INTO users(username, password, userType) VALUES(?,?,?)";
+        String sql = "INSERT INTO users(username, password, user_type) VALUES(?,?,?)";
 
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -41,10 +41,42 @@ public class DataBaseUtil {
 
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                String userType = resultSet.getString("userType");
+                String userType = resultSet.getString("user_type");
                 int id = resultSet.getInt("id");
                 double balance = resultSet.getDouble("balance");
                 String password = resultSet.getString("password");
+
+                switch (userType) {
+                    case "User":
+                        user = new User(id, username, password);
+                        break;
+                    case "Critic":
+                        user = new Critic(id, username, password, balance);
+                        break;
+                    case "Administrator":
+                        user = new Administrator(id, username, password);
+                        break;
+                }
+            }
+        }
+
+        return user;
+    }
+
+    public static User getUser(int id) throws SQLException {
+        User user = null;
+        String sql = "SELECT * FROM users WHERE id = ?";
+
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, id);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                String userType = resultSet.getString("user_type");
+                String username = resultSet.getString("username");
+                String password = resultSet.getString("password");
+                double balance = resultSet.getDouble("balance");
 
                 switch (userType) {
                     case "User":
@@ -135,7 +167,7 @@ public class DataBaseUtil {
         return games;
     }
 
-    // Overloading of previous method
+    // Overloading of previous method to get by year
     public static List<Game> getGames(String year, String attribute) throws SQLException {
         List<Game> games = new ArrayList<>();
         String sql = "SELECT * FROM games WHERE strftime('%Y', release_date) = ? AND award = 1 ORDER BY " + attribute + " DESC";
@@ -144,6 +176,40 @@ public class DataBaseUtil {
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
             preparedStatement.setString(1, year);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                games.add(new Game(
+                        resultSet.getInt("id"),
+                        resultSet.getString("title"),
+                        resultSet.getString("developer"),
+                        resultSet.getString("release_date"),
+                        resultSet.getString("platforms"),
+                        resultSet.getString("genre"),
+                        resultSet.getBoolean("award"),
+                        resultSet.getString("store_link"),
+                        resultSet.getString("description"),
+                        resultSet.getString("image_path"),
+                        resultSet.getInt("critics_count"),
+                        resultSet.getInt("users_count"),
+                        resultSet.getInt("critics_sum"),
+                        resultSet.getInt("users_sum"),
+                        resultSet.getDouble("critics_score"),
+                        resultSet.getDouble("users_score"),
+                        resultSet.getDouble("average_score")
+                ));
+            }
+        }
+        return games;
+    }
+
+    // Overloading of previous method to get all games
+    public static List<Game> getGames() throws SQLException {
+        List<Game> games = new ArrayList<>();
+        String sql = "SELECT * FROM games";
+
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 games.add(new Game(
@@ -238,6 +304,58 @@ public class DataBaseUtil {
         }
     }
 
+    public static List<DetailedReview> getDetailedReviews(int gameId) throws SQLException {
+        List<DetailedReview> detailedReviews = new ArrayList<>();
+
+        String sql = "SELECT r.* FROM reviews r JOIN users u ON r.user_id = u.id WHERE u.user_type = 'Critic' AND r.game_id = ?";
+
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, gameId);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    DetailedReview review = new DetailedReview(
+                            resultSet.getInt("id"),
+                            resultSet.getInt("game_id"),
+                            resultSet.getInt("user_id"),
+                            resultSet.getInt("score"),
+                            resultSet.getString("review_text"),
+                            resultSet.getString("publish_date"),
+                            resultSet.getString("pluses"),
+                            resultSet.getString("minuses")
+                    );
+                    detailedReviews.add(review);
+                }
+            }
+        }
+        return detailedReviews;
+    }
+
+    public static List<Review> getReviews(int gameId) throws SQLException {
+        List<Review> reviews = new ArrayList<>();
+
+        String sql = "SELECT r.* FROM reviews r JOIN users u ON r.user_id = u.id WHERE u.user_type <> 'Critic' AND r.game_id = ?";
+
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, gameId);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    Review review = new Review(
+                            resultSet.getInt("id"),
+                            resultSet.getInt("game_id"),
+                            resultSet.getInt("user_id"),
+                            resultSet.getInt("score"),
+                            resultSet.getString("review_text"),
+                            resultSet.getString("publish_date")
+                    );
+                    reviews.add(review);
+                }
+            }
+        }
+        return reviews;
+    }
+
 
     // Method for awarding games for a given year over all genres
     public static void uploadGameAwardsByYear(String year) throws SQLException {
@@ -260,8 +378,8 @@ public class DataBaseUtil {
         List<String> years = new ArrayList<>();
         String sql = "SELECT DISTINCT strftime('%Y', release_date) AS year FROM games WHERE award = true ORDER BY year DESC;";
 
-        try (Connection conn = getConnection();
-             PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {

@@ -1,5 +1,7 @@
 package reviews;
 
+import utils.*;
+
 public class Review {
     private int id;
     private int gameId;
@@ -14,7 +16,7 @@ public class Review {
         this.userId = userId;
         this.score = score;
         this.reviewText = reviewText;
-        this.publishDate = publishDate;
+        this.publishDate = DateUtil.convertDate(publishDate);
     }
 
     // Getters and setters
