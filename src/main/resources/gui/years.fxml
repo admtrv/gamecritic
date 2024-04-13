@@ -13,32 +13,37 @@
 
 <AnchorPane prefHeight="730.0" prefWidth="1000.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.YearsController">
     <children>
-      <ScrollPane hbarPolicy="NEVER" layoutY="66.0" prefHeight="663.0" prefWidth="996.0" stylesheets="@scroll_pane.css">
+      <ScrollPane hbarPolicy="NEVER" layoutX="-4.0" layoutY="66.0" prefHeight="663.0" prefWidth="1002.0" stylesheets="@scroll_pane.css">
          <content>
-            <AnchorPane prefHeight="648.0" prefWidth="1000.0" style="-fx-background-color: #ffffff; -fx-border-color: #ffffff;">
+            <AnchorPane prefHeight="660.0" prefWidth="1000.0" style="-fx-background-color: #ffffff; -fx-border-color: #ffffff;">
                <children>
-                  <Line endX="781.0" layoutX="157.0" layoutY="199.0" startX="-100.0" />
-                  <Text layoutX="56.0" layoutY="193.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Years">
-                     <font>
-                        <Font name="ProximaNova-ExtraBold" size="20.0" />
-                     </font>
-                  </Text>
-                  <Text layoutX="56.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Game of the Year Award">
-                     <font>
-                        <Font name="ProximaNova-ExtraBold" size="20.0" />
-                     </font>
-                  </Text>
-                  <Text layoutX="56.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Game of the Year Award celebrates outstanding achievements in video games globally, highlighting the industry's best in creativity and technology. It gathers developers and players to promote gaming as a premier form of entertainment, aiming to acknowledge those who contribute positively to the community and highlight the voices shaping the future of gaming." wrappingWidth="577.1998901367188">
-                     <font>
-                        <Font name="Proxima Nova Regular" size="14.0" />
-                     </font>
-                  </Text>
-                  <ImageView fitHeight="138.0" fitWidth="213.0" layoutX="688.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="186.0" fitWidth="1002.0" layoutY="31.0" pickOnBounds="true">
                      <image>
-                        <Image url="@../images/banners/award_quality.png" />
+                        <Image url="@../images/banners/scores_background_wide.png" />
                      </image>
                   </ImageView>
-                  <VBox fx:id="yearsContainer" layoutX="56.0" layoutY="211.0" prefHeight="60.0" prefWidth="830.0" />
+                  <Line endX="781.0" layoutX="157.0" layoutY="266.0" startX="-100.0" />
+                  <Text layoutX="56.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Years">
+                     <font>
+                        <Font name="ProximaNova-ExtraBold" size="20.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="56.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Game of the Year">
+                     <font>
+                        <Font name="ProximaNova-ExtraBold" size="20.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="567.0" layoutY="74.0" lineSpacing="4.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Game of the Year Award celebrates outstanding achievements in video games globally, highlighting the industry's best in creativity and technology. It gathers developers and players to promote gaming as a premier form of entertainment, aiming to acknowledge those who contribute positively to the community and highlight the voices shaping the future of gaming." textAlignment="JUSTIFY" wrappingWidth="371.8664855957031">
+                     <font>
+                        <Font name="ProximaNova-ExtraBold" size="14.0" />
+                     </font>
+                  </Text>
+                  <ImageView fitHeight="67.0" fitWidth="104.0" layoutX="85.0" layoutY="76.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/icons/award.png" />
+                     </image>
+                  </ImageView>
+                  <VBox fx:id="yearsContainer" layoutX="56.0" layoutY="278.0" prefHeight="60.0" prefWidth="830.0" />
                </children>
             </AnchorPane>
          </content>

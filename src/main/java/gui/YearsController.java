@@ -31,7 +31,7 @@ public class YearsController implements StyleInterface{
             Button yearButton = new Button("Game of the Year " + year);
             yearButton.setStyle("-fx-background-color: " + BoxBackgroundColor + " -fx-background-radius: 10");
             yearButton.setPadding(new Insets(10));
-            yearButton.setFont(new Font("ProximaNova-ExtraBold", 14));
+            yearButton.setFont(new Font("ProximaNova-Regular", 14));
             yearButton.setAlignment(Pos.CENTER_LEFT);
             yearButton.setCursor(Cursor.HAND);
             yearButton.setOnAction(event -> {

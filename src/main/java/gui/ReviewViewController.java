@@ -38,10 +38,8 @@ public class ReviewViewController implements StyleInterface{
         // Title label
         if (reviewUser instanceof Critic) {
             gameLabel.setText(game.getTitle() + " Critic Review");
-        } else if (reviewUser instanceof User){
+        } else {
             gameLabel.setText(game.getTitle() + " User Review");
-        } else if (reviewUser instanceof Administrator){
-            gameLabel.setText(game.getTitle() + " Administrator Review");
         }
 
         // Review label
