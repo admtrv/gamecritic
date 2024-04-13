@@ -1,5 +1,6 @@
 package gui;
 
+import aggregation.AggregateFunds;
 import session.CurrentGame;
 import session.CurrentReview;
 import users.*;
@@ -22,6 +23,7 @@ public class ProfileController implements FieldInterface{
     @FXML private Line additionalLine;
     @FXML private Label balanceValueLabel;
     @FXML private Button generateAwardsButton;
+    @FXML private Button transferFundsButton;
     private ProfileStrategyInterface profileStrategy;
     User user = CurrentUser.getInstance().getUser();
     @FXML
@@ -36,7 +38,7 @@ public class ProfileController implements FieldInterface{
             profileStrategy = new UserStrategy();
         }
 
-        profileStrategy.setInterface(balanceValueLabel, additionalTextLabel, additionalLine, generateAwardsButton);
+        profileStrategy.setInterface(balanceValueLabel, additionalTextLabel, additionalLine, generateAwardsButton, transferFundsButton);
     }
 
     public void updateUsername() {
@@ -129,6 +131,25 @@ public class ProfileController implements FieldInterface{
             e.printStackTrace();
         }
     }
+
+    @FXML
+    private void handleTransferFunds() {
+        if (user instanceof Critic critic) {
+            if (critic.getBalance() > 0) {
+                boolean updateSuccessful = AggregateFunds.aggregateTransfer();
+
+                if (updateSuccessful) {
+                    balanceValueLabel.setText("0,00 $");
+                    AlertUtil.showAlert("Transfer Successful", "Funds transferred to your bank account!", Alert.AlertType.INFORMATION);
+                } else {
+                    AlertUtil.showAlert("Transfer Failed", "Sorry, something went wrong there. Try again!", Alert.AlertType.ERROR);
+                }
+            } else {
+                AlertUtil.showAlert("Transfer Failed", "Insufficient funds for transfer!", Alert.AlertType.ERROR);
+            }
+        }
+    }
+
 
     @FXML
     public void setUsernameErrorStyle(){

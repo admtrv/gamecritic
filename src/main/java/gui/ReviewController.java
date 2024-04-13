@@ -123,7 +123,7 @@ public class ReviewController implements StyleInterface {
                 DataBaseUtil.addReview(game.getId(), user.getId(), score, reviewText, LocalDate.now().toString(), pluses, minuses);
 
                 if (review == null && user instanceof Critic) {
-                    AggregateIncome.updateCriticBalance(reviewText.length());
+                    AggregateFunds.aggregateIncome(reviewText.length());
                 }
             } else {
                 // Adding a review

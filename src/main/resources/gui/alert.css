@@ -1,0 +1,13 @@
+.dialog-pane .content {
+    -fx-font-family: 'Proxima Nova Regular';
+    -fx-font-size: 14px;
+}
+
+.button {
+    -fx-font-family: 'Proxima Nova Regular';
+    -fx-font-size: 14px;
+    -fx-background-color: #3b3b3b;
+    -fx-background-radius: 3;
+    -fx-text-fill: #ffffff;
+    -fx-cursor: hand;
+}

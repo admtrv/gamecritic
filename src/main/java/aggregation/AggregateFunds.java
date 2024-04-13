@@ -4,8 +4,10 @@ import session.*;
 import utils.*;
 import users.*;
 
-public class AggregateIncome {
-    public static void updateCriticBalance(int reviewLength) {
+import java.sql.SQLException;
+
+public class AggregateFunds {
+    public static void aggregateIncome(int reviewLength) {
         Critic critic = (Critic) CurrentUser.getInstance().getUser();
         double income = reviewLength * 0.1;
         double newBalance = critic.getBalance() + income;
@@ -20,4 +22,20 @@ public class AggregateIncome {
             e.printStackTrace();
         }
     }
+
+    public static boolean aggregateTransfer() {
+        Critic critic = (Critic) CurrentUser.getInstance().getUser();
+        try {
+            boolean updateSuccessful = DataBaseUtil.updateBalance(critic.getId(), 0);
+            if (updateSuccessful) {
+                critic.setBalance(0);
+                CurrentUser.getInstance().saveCurrentUser();
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 }
