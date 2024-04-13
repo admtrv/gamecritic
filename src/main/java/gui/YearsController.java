@@ -47,9 +47,7 @@ public class YearsController implements StyleInterface{
         }
     }
     public void switchToGamesScene() throws IOException {
-
-    }
-    public void switchToYearsScene() throws IOException {
+        SceneController.getInstance().switchScene("games.fxml");
     }
     public void switchToHomeScene() throws IOException {
         SceneController.getInstance().switchScene("home.fxml");

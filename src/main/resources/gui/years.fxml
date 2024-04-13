@@ -61,7 +61,7 @@
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </Button>
-                <Button layoutX="384.0" layoutY="18.0" mnemonicParsing="false" onAction="#switchToYearsScene" prefHeight="31.0" prefWidth="64.0" style="-fx-background-color: #000000;" text="Years" textFill="WHITE">
+                <Button layoutX="384.0" layoutY="18.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="64.0" style="-fx-background-color: #000000;" text="Years" textFill="WHITE">
                     <font>
                         <Font name="ProximaNova-ExtraBold" size="16.0" />
                     </font>

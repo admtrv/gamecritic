@@ -1,5 +1,7 @@
 package gui;
 
+import session.CurrentGame;
+import session.CurrentReview;
 import users.*;
 import utils.*;
 import validation_factory.*;
@@ -153,6 +155,7 @@ public class ProfileController implements FieldInterface{
     }
 
     public void switchToGamesScene() throws IOException {
+        SceneController.getInstance().switchScene("games.fxml");
     }
     public void switchToYearsScene() throws IOException {
         SceneController.getInstance().switchScene("years.fxml");

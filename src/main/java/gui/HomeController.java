@@ -41,14 +41,17 @@ public class HomeController implements StyleInterface {
             gameBox.setPadding(new Insets(10));
             gameBox.setStyle("-fx-background-color: " + BoxBackgroundColor + " -fx-background-radius: 10");
 
+            // Image
             ImageView imageView = new ImageView(new Image(getClass().getResourceAsStream(game.getImagePath())));
             imageView.setFitHeight(160); // Height : Width = 15 : 10
             imageView.setFitWidth(110);
 
+            // Title
             Label titleLabel = new Label(game.getTitle());
             titleLabel.setFont(new Font("ProximaNova-ExtraBold", 14));
             titleLabel.setWrapText(true);
 
+            // Score
             Label scoreLabel = new Label(String.format("%.1f",game.getAverageScore()));
             scoreLabel.setFont(new Font("ProximaNova-ExtraBold", 12));
             scoreLabel.setStyle(getScoreColor(game.getAverageScore()) + "-fx-background-radius: 8;");
@@ -56,11 +59,15 @@ public class HomeController implements StyleInterface {
             scoreLabel.setMinWidth(30);
             scoreLabel.setMinHeight(30);
 
+            // Developer
             Label developerLabel = new Label(game.getDeveloper());
             developerLabel.setFont(new Font("Proxima Nova Regular", 14));
 
+            // Adding everything to container
             gameBox.getChildren().addAll(imageView, titleLabel, scoreLabel, developerLabel);
-            HBox.setMargin(gameBox, new Insets(0, 7, 0, 0));
+            gamesContainer.setMargin(gameBox, new Insets(0, 7, 0, 0));
+
+            // Adding action on click
             gameBox.setCursor(Cursor.HAND);
             gameBox.setOnMouseClicked(event -> {
                 try {
@@ -76,6 +83,7 @@ public class HomeController implements StyleInterface {
     }
 
     public void switchToGamesScene() throws IOException {
+        SceneController.getInstance().switchScene("games.fxml");
     }
     public void switchToYearsScene() throws IOException {
         SceneController.getInstance().switchScene("years.fxml");

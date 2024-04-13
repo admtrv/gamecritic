@@ -196,6 +196,9 @@ public class GameDetailsController implements StyleInterface {
     }
 
     public void switchToGamesScene() throws IOException {
+        CurrentGame.getInstance().resetGame();
+        CurrentReview.getInstance().resetReview();
+        SceneController.getInstance().switchScene("games.fxml");
     }
     public void switchToYearsScene() throws IOException {
         SceneController.getInstance().switchScene("years.fxml");

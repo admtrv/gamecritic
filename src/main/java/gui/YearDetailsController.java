@@ -85,6 +85,8 @@ public class YearDetailsController implements StyleInterface{
     }
 
     public void switchToGamesScene() throws IOException {
+        CurrentYear.getInstance().resetYear();
+        SceneController.getInstance().switchScene("games.fxml");
     }
     public void switchToYearsScene() throws IOException {
         CurrentYear.getInstance().resetYear();
