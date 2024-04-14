@@ -1,5 +1,6 @@
 package gui;
 
+import javafx.application.Platform;
 import utils.*;
 
 import javafx.fxml.FXML;
@@ -23,6 +24,10 @@ public class ProcessGameController {
 
     @FXML private ImageView imageView;
 
+    @FXML
+    private void initialize() {
+        Platform.runLater(() -> imagePathField.requestFocus());
+    }
     @FXML
     private void addImage() {
         FileChooser fileChooser = new FileChooser();

@@ -18,7 +18,7 @@
          <content>
             <AnchorPane prefHeight="660.0" prefWidth="999.0">
                <children>
-                  <ImageView fx:id="imageView" fitHeight="375.0" fitWidth="250.0" layoutX="58.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="imageView" fitHeight="375.0" fitWidth="250.0" layoutX="58.0" layoutY="42.0" pickOnBounds="true">
                      <image>
                         <Image url="@../images/games/witcher%203.jpg" />
                      </image>

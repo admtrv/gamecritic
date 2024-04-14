@@ -390,6 +390,7 @@ public class DataBaseUtil {
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, year);
+            preparedStatement.executeUpdate();
         }
     }
 

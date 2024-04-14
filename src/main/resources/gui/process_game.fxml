@@ -14,8 +14,10 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="757.0" prefWidth="666.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ProcessGameController">
     <children>
-            <ImageView fx:id="imageView" fitHeight="375.0" fitWidth="250.0" layoutX="34.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true">
-            </ImageView>
+            <ImageView fx:id="imageView" fitHeight="375.0" fitWidth="250.0" layoutX="34.0" layoutY="75.0" pickOnBounds="true">
+         <image>
+            <Image url="@../images/icons/empty_image.png" />
+         </image></ImageView>
       <TextField fx:id="titleField" layoutX="304.0" layoutY="145.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="326.0" style="-fx-background-color: #ffffff; -fx-border-color: #3d3d3d; -fx-border-radius: 3;">
          <font>
             <Font name="Proxima Nova Regular" size="14.0" />
@@ -47,7 +49,10 @@
             <Font name="Proxima Nova Regular" size="12.0" />
          </font>
       </Text>
-      <DatePicker fx:id="releaseDatePicker" layoutX="304.0" layoutY="253.0" prefHeight="30.0" prefWidth="326.0" style="-fx-background-color: #ffffff; -fx-border-color: #3d3d3d; -fx-border-radius: 3;" />
+      <DatePicker fx:id="releaseDatePicker" layoutX="304.0" layoutY="253.0" prefHeight="30.0" prefWidth="326.0" style="-fx-background-color: #ffffff; -fx-border-color: #3d3d3d; -fx-border-radius: 3;">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></DatePicker>
       <TextField fx:id="platformsField" layoutX="304.0" layoutY="307.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="326.0" style="-fx-background-color: #ffffff; -fx-border-color: #3d3d3d; -fx-border-radius: 3;">
          <font>
             <Font name="Proxima Nova Regular" size="14.0" />
@@ -88,13 +93,16 @@
             <Font name="Proxima Nova Regular" size="12.0" />
          </font>
       </Text>
-      <TextArea fx:id="descriptionArea" layoutX="36.0" layoutY="480.0" prefHeight="178.0" prefWidth="596.0" style="-fx-background-color: #ffffff; -fx-border-color: #3d3d3d; -fx-border-radius: 3;" />
+      <TextArea fx:id="descriptionArea" focusTraversable="false" layoutX="36.0" layoutY="480.0" prefHeight="178.0" prefWidth="596.0" style="-fx-background-color: #ffffff; -fx-border-color: #3d3d3d; -fx-border-radius: 3;" wrapText="true" />
       <Text layoutX="36.0" layoutY="475.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description">
          <font>
             <Font name="Proxima Nova Regular" size="12.0" />
          </font>
       </Text>
-      <Button layoutX="604.0" layoutY="91.0" mnemonicParsing="false" onAction="#addImage" prefHeight="30.0" prefWidth="26.0" style="-fx-background-color: #f2f2f2; -fx-border-color: #3d3d3d; -fx-border-radius: 3; -fx-background-radius: 3;" text="..." />
+      <Button layoutX="604.0" layoutY="91.0" mnemonicParsing="false" onAction="#addImage" prefHeight="30.0" prefWidth="26.0" style="-fx-background-color: #f2f2f2; -fx-border-color: #3d3d3d; -fx-border-radius: 3; -fx-background-radius: 3;" text="...">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
       <Button layoutX="36.0" layoutY="687.0" mnemonicParsing="false" onAction="#switchToProfileScene" prefHeight="34.0" prefWidth="280.0" style="-fx-background-color: #ffffff; -fx-border-color: #3d3d3d; -fx-border-radius: 3;" text="Cancel">
          <cursor>
             <Cursor fx:constant="HAND" />
