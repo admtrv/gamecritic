@@ -140,6 +140,6 @@ public class ReviewController implements StyleInterface {
     }
 
     public void switchToGameDetailsScene() throws IOException {
-        SceneController.getInstance().switchScene("game_details.fxml");
+        SceneController.getInstance().switchScene("game_view.fxml");
     }
 }

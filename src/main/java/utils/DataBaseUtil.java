@@ -131,6 +131,25 @@ public class DataBaseUtil {
         }
     }
 
+    public static boolean addGame(String title, String developer, String releaseDate, String platforms, String genre, String storeLink, String description, String imagePath) throws SQLException {
+        String sql = "INSERT INTO games (title, developer, release_date, platforms, genre, store_link, description, image_path) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setString(1, title);
+            preparedStatement.setString(2, developer);
+            preparedStatement.setString(3, releaseDate);
+            preparedStatement.setString(4, platforms);
+            preparedStatement.setString(5, genre);
+            preparedStatement.setString(6, storeLink);
+            preparedStatement.setString(7, description);
+            preparedStatement.setString(8, imagePath);
+
+            int affectedRows = preparedStatement.executeUpdate();
+            return affectedRows > 0;
+        }
+    }
+
     public static List<Game> getGames(int number, String attribute) throws SQLException {
         List<Game> games = new ArrayList<>();
         String sql = "SELECT * FROM games ORDER BY " + attribute + " DESC LIMIT ?";

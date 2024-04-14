@@ -1,8 +1,7 @@
 package gui;
 
-import aggregation.AggregateFunds;
-import session.CurrentGame;
-import session.CurrentReview;
+import aggregation.*;
+import session.*;
 import users.*;
 import utils.*;
 import validation_factory.*;
@@ -24,6 +23,7 @@ public class ProfileController implements FieldInterface{
     @FXML private Label balanceValueLabel;
     @FXML private Button generateAwardsButton;
     @FXML private Button transferFundsButton;
+    @FXML private Button addNewGameButton;
     private ProfileStrategyInterface profileStrategy;
     User user = CurrentUser.getInstance().getUser();
     @FXML
@@ -38,7 +38,7 @@ public class ProfileController implements FieldInterface{
             profileStrategy = new UserStrategy();
         }
 
-        profileStrategy.setInterface(balanceValueLabel, additionalTextLabel, additionalLine, generateAwardsButton, transferFundsButton);
+        profileStrategy.setInterface(balanceValueLabel, additionalTextLabel, additionalLine, generateAwardsButton, transferFundsButton, addNewGameButton);
     }
 
     public void updateUsername() {
@@ -141,14 +141,14 @@ public class ProfileController implements FieldInterface{
                 if (updateSuccessful) {
                     balanceValueLabel.setText("0,00 $");
                     AlertUtil.showAlert("Transfer Successful", "Funds transferred to your bank account!", Alert.AlertType.INFORMATION);
-                } else {
-                    AlertUtil.showAlert("Transfer Failed", "Sorry, something went wrong there. Try again!", Alert.AlertType.ERROR);
                 }
+
             } else {
                 AlertUtil.showAlert("Transfer Failed", "Insufficient funds for transfer!", Alert.AlertType.ERROR);
             }
         }
     }
+
 
 
     @FXML
@@ -175,6 +175,10 @@ public class ProfileController implements FieldInterface{
         ConfirmPasswordField.setStyle(normalFieldStyle);
     }
 
+
+    public void switchToProcessGameScene() throws IOException {
+        SceneController.getInstance().switchScene("process_game.fxml");
+    }
     public void switchToGamesScene() throws IOException {
         SceneController.getInstance().switchScene("games.fxml");
     }

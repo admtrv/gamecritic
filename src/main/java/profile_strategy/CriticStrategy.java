@@ -9,7 +9,7 @@ import javafx.scene.shape.Line;
 
 public class CriticStrategy implements ProfileStrategyInterface {
     @Override
-    public void setInterface(Label balanceValueLabel, Label additionalTextLabel, Line additionalLine, Button generateAwardsButton, Button transferFundsButton) {
+    public void setInterface(Label balanceValueLabel, Label additionalTextLabel, Line additionalLine, Button generateAwardsButton, Button transferFundsButton, Button addNewGameButton) {
         balanceValueLabel.setVisible(true);
         balanceValueLabel.setText(String.format("%.2f", ((Critic)CurrentUser.getInstance().getUser()).getBalance()) + " $");
         additionalTextLabel.setVisible(true);
@@ -17,5 +17,6 @@ public class CriticStrategy implements ProfileStrategyInterface {
         additionalLine.setVisible(true);
         generateAwardsButton.setVisible(false);
         transferFundsButton.setVisible(true);
+        addNewGameButton.setVisible(false);
     }
 }

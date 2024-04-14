@@ -64,6 +64,6 @@ public class ReviewViewController implements StyleInterface{
 
     public void switchToBackScene() throws IOException {
         CurrentReview.getInstance().resetReview();
-        SceneController.getInstance().switchScene("game_details.fxml");
+        SceneController.getInstance().switchScene("game_view.fxml");
     }
 }

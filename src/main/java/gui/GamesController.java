@@ -115,7 +115,7 @@ public class GamesController implements StyleInterface{
         gameBox.setOnMouseClicked(event -> {
             try {
                 CurrentGame.getInstance().setGame(game);
-                SceneController.getInstance().switchScene("game_details.fxml");
+                SceneController.getInstance().switchScene("game_view.fxml");
             } catch (IOException e) {
                 System.err.println("Error switching scene!");
                 e.printStackTrace();

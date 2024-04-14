@@ -6,5 +6,5 @@ import javafx.scene.shape.Line;
 
 // Pattern Strategy
 public interface ProfileStrategyInterface {
-    void setInterface(Label balanceValueLabel, Label additionalTextLabel, Line additionalLine, Button generateAwardsButton, Button transferFundsButton);
+    void setInterface(Label balanceValueLabel, Label additionalTextLabel, Line additionalLine, Button generateAwardsButton, Button transferFundsButton, Button addNewGameButton);
 }

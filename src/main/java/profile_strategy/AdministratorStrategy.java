@@ -6,12 +6,13 @@ import javafx.scene.shape.Line;
 
 public class AdministratorStrategy implements ProfileStrategyInterface {
     @Override
-    public void setInterface(Label balanceValueLabel, Label additionalTextLabel, Line additionalLine, Button generateAwardsButton, Button transferFundsButton) {
+    public void setInterface(Label balanceValueLabel, Label additionalTextLabel, Line additionalLine, Button generateAwardsButton, Button transferFundsButton, Button addNewGameButton) {
         additionalTextLabel.setVisible(true);
         additionalTextLabel.setText("Administrator panel");
         additionalLine.setVisible(true);
         generateAwardsButton.setVisible(true);
         balanceValueLabel.setVisible(false);
         transferFundsButton.setVisible(false);
+        addNewGameButton.setVisible(true);
     }
 }

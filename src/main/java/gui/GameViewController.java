@@ -26,7 +26,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-public class GameDetailsController implements StyleInterface {
+public class GameViewController implements StyleInterface {
 
     @FXML private ImageView imageView;
     @FXML private Label titleLabel;

@@ -136,6 +136,14 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
+            <Button fx:id="addNewGameButton" layoutX="25.0" layoutY="169.0" onAction="#switchToProcessGameScene" prefHeight="30.0" prefWidth="302.0" style="-fx-background-color: #f2f2f2; -fx-border-radius: 3; -fx-border-color: #3d3d3d;" text="Add New Game">
+               <font>
+                  <Font name="Proxima Nova Regular" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
 
          </children></AnchorPane>
     </children>
