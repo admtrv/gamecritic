@@ -66,16 +66,17 @@ public class ProcessGameController {
 
         boolean isSaved = DataBaseUtil.addGame(title, developer, releaseDate, platforms, genre, storeLink, description, formatImagePath(imagePath));
 
-        if (isSaved) {
-            AlertUtil.showAlert("Upload Successful", "Game saved successfully!", Alert.AlertType.INFORMATION);
-            try {
+        try {
+            if (isSaved) {
+                AlertUtil.showAlert("Upload Successful", "Game saved successfully!", Alert.AlertType.INFORMATION);
                 switchToProfileScene();
-            } catch (IOException e) {
-                e.printStackTrace();
+            } else {
+                AlertUtil.showAlert("Upload Failed", "Failed to save the game.", Alert.AlertType.ERROR);
             }
-        } else {
-            AlertUtil.showAlert("Upload Failed", "Failed to save the game.", Alert.AlertType.ERROR);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
     }
 
     private String formatImagePath(String imagePath) {
