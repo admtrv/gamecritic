@@ -1,6 +1,7 @@
 package gui;
 
 import aggregation.*;
+import javafx.scene.control.Alert;
 import reviews.*;
 import session.*;
 import users.*;
@@ -99,6 +100,7 @@ public class ReviewController implements StyleInterface {
 
     public void postReview() {
         if (scoreLabel.getText().isEmpty()){
+            AlertUtil.showAlert("Unselected Score", "Sorry, you didn't evaluate the game. Please try again.", Alert.AlertType.ERROR);
             System.err.println("Error: unselected score!");
             return;
         }
@@ -113,6 +115,7 @@ public class ReviewController implements StyleInterface {
         ValidationRule reviewRule = ValidationRuleFactory.getRule("reviews");
         if (!reviewRule.validate(reviewText)) {
             reviewTextArea.setStyle(errorFieldStyle);
+            AlertUtil.showAlert("Invalid Text", reviewRule.getErrorMessage(), Alert.AlertType.ERROR);
             System.out.println(reviewRule.getErrorMessage());
             return;
         }
@@ -131,7 +134,7 @@ public class ReviewController implements StyleInterface {
             }
 
             AggregateScore.updateScore(score);
-
+            AlertUtil.showAlert("Posting Successful", "Your review posted successfully!", Alert.AlertType.INFORMATION);
             System.out.println("Review posted successfully!");
             switchToGameDetailsScene();
         } catch (SQLException | IOException e) {

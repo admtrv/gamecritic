@@ -14,6 +14,6 @@ public class PasswordValidationRule implements ValidationRule {
 
     @Override
     public String getErrorMessage() {
-        return "Password must be at least " + MIN_PASSWORD_LENGTH + " characters and contain at least "+ MIN_DIGITS_COUNT + " digits!";
+        return "Password must be at least " + MIN_PASSWORD_LENGTH + " characters and contain at least "+ MIN_DIGITS_COUNT + " digits.";
     }
 }

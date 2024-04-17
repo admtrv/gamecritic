@@ -9,6 +9,6 @@ public class UsernameValidationRule implements ValidationRule {
 
     @Override
     public String getErrorMessage() {
-        return "Username must be at least " + MIN_USERNAME_LENGTH + " characters long!";
+        return "Username must be at least " + MIN_USERNAME_LENGTH + " characters long.";
     }
 }

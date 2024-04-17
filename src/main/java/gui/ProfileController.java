@@ -48,6 +48,7 @@ public class ProfileController implements FieldInterface{
 
         if (!usernameRule.validate(newUsername)) { // Username failed validation_factory
             setUsernameErrorStyle();
+            AlertUtil.showAlert("Invalid Username", usernameRule.getErrorMessage(), Alert.AlertType.ERROR);
             System.out.println(usernameRule.getErrorMessage());
             return;
         }
@@ -57,9 +58,11 @@ public class ProfileController implements FieldInterface{
                 user.setUsername(newUsername); // Updating user information in the current session
                 CurrentUser.getInstance().logIn(user); // Updating user in singleton
                 CurrentUser.getInstance().saveCurrentUser(); // Updating data in the serialization file
+                AlertUtil.showAlert("Update Successful", "Username successfully updated!", Alert.AlertType.INFORMATION);
                 System.out.println("Username successfully updated!");
             } else {
                 setUsernameErrorStyle(); // Database operation failed
+                AlertUtil.showAlert("Update Failed", "Sorry, there was an error while updating username. Please try again.", Alert.AlertType.ERROR);
                 System.out.println("Failed to update username!");
             }
         } catch (SQLException e) {
@@ -78,18 +81,21 @@ public class ProfileController implements FieldInterface{
 
         if (!passwordRule.validate(newPassword)) { // Password does not meet the requirements
             setPasswordErrorStyle();
+            AlertUtil.showAlert("Invalid Password", passwordRule.getErrorMessage(), Alert.AlertType.ERROR);
             System.out.println(passwordRule.getErrorMessage());
             return;
         }
 
         if (!newPassword.equals(confirmPassword)) {
             setPasswordErrorStyle();
+            AlertUtil.showAlert("Invalid Password", "Sorry, new passwords don't match!", Alert.AlertType.ERROR);
             System.out.println("The new passwords do not match!");
             return;
         }
 
         if (!user.getPassword().equals(currentPassword)) {
             setPasswordErrorStyle();
+            AlertUtil.showAlert("Invalid Password", "Sorry, password don't match current password!", Alert.AlertType.ERROR);
             System.out.println("The current password do not match original password!");
             return;
         }
@@ -99,12 +105,14 @@ public class ProfileController implements FieldInterface{
                 user.setPassword(newPassword); // Update password in the current session
                 CurrentUser.getInstance().logIn(user); // Updating user in singleton
                 CurrentUser.getInstance().saveCurrentUser(); // Updating data in the serialization file
+                AlertUtil.showAlert("Update Successful", "Password successfully updated!", Alert.AlertType.INFORMATION);
                 System.out.println("Password successfully updated!");
                 CurrentPasswordField.clear();
                 NewPasswordField.clear();
                 ConfirmPasswordField.clear();
             } else {
                 setPasswordErrorStyle();
+                AlertUtil.showAlert("Update Failed", "Sorry, there was an error while updating password. Please try again.", Alert.AlertType.ERROR);
                 System.out.println("Failed to update password!");
             }
         } catch (SQLException e) {
@@ -125,8 +133,10 @@ public class ProfileController implements FieldInterface{
     private void handleGenerateAwards() {
         try {
             ((Administrator)user).uploadGameAwardsThisYear();
+            AlertUtil.showAlert("Generation Successful", "Awards successfully generated!", Alert.AlertType.INFORMATION);
             System.out.println("Awards successfully generated!");
         } catch (Exception e) {
+            AlertUtil.showAlert("Generation Failed", "Sorry, there was an error while generating awards. Please try again.", Alert.AlertType.ERROR);
             System.err.println("Failed to generate awards!");
             e.printStackTrace();
         }
@@ -144,7 +154,7 @@ public class ProfileController implements FieldInterface{
                 }
 
             } else {
-                AlertUtil.showAlert("Transfer Failed", "Insufficient funds for transfer!", Alert.AlertType.ERROR);
+                AlertUtil.showAlert("Transfer Failed", "Sorry, insufficient funds for transfer.", Alert.AlertType.ERROR);
             }
         }
     }

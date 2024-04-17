@@ -38,6 +38,7 @@ public class RegisterController implements FieldInterface{
         // Username validation_factory
         if (!usernameRule.validate(username)) {
             setUsernameErrorStyle();
+            AlertUtil.showAlert("Invalid Username", usernameRule.getErrorMessage(), Alert.AlertType.ERROR);
             System.out.println(usernameRule.getErrorMessage());
             isValid = false; // Validity flag update
         }
@@ -45,6 +46,7 @@ public class RegisterController implements FieldInterface{
         // Password validation_factory
         if (!passwordRule.validate(password)) {
             setPasswordErrorStyle();
+            AlertUtil.showAlert("Invalid Password", passwordRule.getErrorMessage(), Alert.AlertType.ERROR);
             System.out.println(passwordRule.getErrorMessage());
             isValid = false; // Validity flag update
         }
@@ -57,11 +59,13 @@ public class RegisterController implements FieldInterface{
         // Trying to register a user in the database
         try {
             DataBaseUtil.addUser(username, password, userType);
+            AlertUtil.showAlert("Registration Successful", "Your account registered successfully!", Alert.AlertType.INFORMATION);
             System.out.println("User registered successfully!");
             switchToLoginScene();
         } catch (SQLException | IOException e) {
             setUsernameErrorStyle();
-            setPasswordErrorStyle();
+            // setPasswordErrorStyle();
+            AlertUtil.showAlert("Entry Failed", "Sorry, account with that nickname already exists. Please try again.", Alert.AlertType.ERROR);
             System.err.println("Error updating data!");
             e.printStackTrace();
         }

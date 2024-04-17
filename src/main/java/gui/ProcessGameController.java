@@ -60,7 +60,7 @@ public class ProcessGameController {
         String imagePath = imagePathField.getText();
 
         if (!imagePath.contains("/images/games/")) {
-            AlertUtil.showAlert("Invalid Image Path", "The image must be located in project directory at '/images/games/*your image*'!", Alert.AlertType.ERROR);
+            AlertUtil.showAlert("Invalid Image Path", "Image must be located in project directory at '/images/games/*your image*'!", Alert.AlertType.ERROR);
             return;
         }
 
@@ -68,10 +68,10 @@ public class ProcessGameController {
 
         try {
             if (isSaved) {
-                AlertUtil.showAlert("Upload Successful", "Game saved successfully!", Alert.AlertType.INFORMATION);
+                AlertUtil.showAlert("Upload Successful", "New game saved successfully!", Alert.AlertType.INFORMATION);
                 switchToProfileScene();
             } else {
-                AlertUtil.showAlert("Upload Failed", "Failed to save the game.", Alert.AlertType.ERROR);
+                AlertUtil.showAlert("Upload Failed", "Sorry, there was an error while saving new game. Please try again.", Alert.AlertType.ERROR);
             }
         } catch (IOException e) {
             e.printStackTrace();

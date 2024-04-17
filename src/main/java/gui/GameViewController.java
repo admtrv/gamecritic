@@ -210,7 +210,6 @@ public class GameViewController implements StyleInterface {
         else{
             SceneController.getInstance().switchScene("review.fxml");
         }
-
     }
     public void switchToProfileScene() throws IOException {
         CurrentGame.getInstance().resetGame();

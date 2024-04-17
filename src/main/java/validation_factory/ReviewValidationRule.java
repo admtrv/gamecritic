@@ -13,6 +13,6 @@ public class ReviewValidationRule implements ValidationRule {
 
     @Override
     public String getErrorMessage() {
-        return "Review must be at least " + MIN_REVIEW_LENGTH + " characters long!";
+        return "Review must be at least " + MIN_REVIEW_LENGTH + " characters long.";
     }
 }
