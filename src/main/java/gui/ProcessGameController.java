@@ -1,12 +1,9 @@
 package gui;
 
-import javafx.application.Platform;
-import logger_decorator.FileLogger;
-import logger_decorator.Logger;
-import logger_decorator.LoggerLevel;
-import logger_decorator.TimeLogger;
+import logger_decorator.*;
 import utils.*;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -25,7 +22,6 @@ public class ProcessGameController {
     @FXML private TextField storeLinkField;
     @FXML private TextArea descriptionArea;
     @FXML private TextField imagePathField;
-
     @FXML private ImageView imageView;
 
     private static Logger logger = new TimeLogger(new FileLogger());
@@ -44,10 +40,10 @@ public class ProcessGameController {
         File selectedFile = fileChooser.showOpenDialog(null);
         if (selectedFile != null) {
             String imagePath = selectedFile.toURI().toString();
-            imagePathField.setText(imagePath);
+            Image gameImage = new Image(imagePath);
 
             // Loading and displaying an image
-            Image gameImage = new Image(imagePath);
+            imagePathField.setText(imagePath);
             imageView.setImage(gameImage);
         }
     }
@@ -65,8 +61,10 @@ public class ProcessGameController {
         String imagePath = imagePathField.getText();
 
         if (!imagePath.contains("/images/games/")) {
+
             AlertUtil.showAlert("Invalid Image Path", "Image must be located in project directory at '/images/games/*your image*'!", Alert.AlertType.ERROR);
             logger.log("Invalid attempt for image path", LoggerLevel.ERROR);
+            System.err.println("Invalid Image Path!");
             return;
         }
 
@@ -74,15 +72,23 @@ public class ProcessGameController {
 
         try {
             if (isSaved) {
+
                 AlertUtil.showAlert("Upload Successful", "New game saved successfully!", Alert.AlertType.INFORMATION);
                 logger.log("Loaded new game: [" + title + "]", LoggerLevel.INFO);
+                System.out.println("Upload Successful!");
+
                 switchToProfileScene();
             } else {
-                logger.log("Problem loading new game: [" + title + "]", LoggerLevel.DEBUG);
+
                 AlertUtil.showAlert("Upload Failed", "Sorry, there was an error while saving new game. Please try again.", Alert.AlertType.ERROR);
+                logger.log("Problem loading new game: [" + title + "]", LoggerLevel.DEBUG);
+                System.err.println("Upload Failed!");
             }
         } catch (IOException e) {
+
+            AlertUtil.showAlert("Upload Failed", "Sorry, there was an error while saving new game. Please try again.", Alert.AlertType.ERROR);
             logger.log("Problem loading new game: [" + title + "]", LoggerLevel.DEBUG);
+            System.err.println("Upload Failed!");
             e.printStackTrace();
         }
 

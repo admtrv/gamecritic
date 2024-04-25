@@ -10,9 +10,13 @@ public class AdministratorStrategy implements ProfileStrategyInterface {
         additionalTextLabel.setVisible(true);
         additionalTextLabel.setText("Administrator panel");
         additionalLine.setVisible(true);
+
         generateAwardsButton.setVisible(true);
+
         balanceValueLabel.setVisible(false);
+
         transferFundsButton.setVisible(false);
+
         addNewGameButton.setVisible(true);
     }
 }

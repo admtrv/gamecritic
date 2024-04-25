@@ -16,8 +16,10 @@ public class Administrator extends User {
             // Getting the current year
             String currentYear = String.valueOf(LocalDate.now().getYear());
             DataBaseUtil.uploadGameAwardsByYear(currentYear);
+
             System.out.println("Successful uploading awards!");
         } catch (SQLException e) {
+
             System.err.println("Error uploading awards!");
             e.printStackTrace();
         }

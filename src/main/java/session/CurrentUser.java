@@ -7,9 +7,12 @@ import java.io.*;
 // Singleton class
 public class CurrentUser {
     private static User user;
-    private static final CurrentUser instance = new CurrentUser();
-    private CurrentUser() {}
+    private static CurrentUser instance;
+    private CurrentUser() { }
     public static CurrentUser getInstance() {
+        if (instance == null) {
+            instance = new CurrentUser();
+        }
         return instance;
     }
     public User getUser() {
@@ -19,6 +22,7 @@ public class CurrentUser {
         user = newUser;
     }
     public void logOut(){user = null;}
+
 
     // Serialization of the current user
     public void saveCurrentUser() {

@@ -44,12 +44,14 @@ public class AggregateScore {
 
         // Refresh the game in the current session
         CurrentGame.getInstance().setGame(game);
-
         // Refresh the game in the database
         try {
-            logger.log("Game score recalculated: [" + game.getTitle() + "]", LoggerLevel.INFO);
             DataBaseUtil.updateGameScore(game);
+
+            logger.log("Game score recalculated: [" + game.getTitle() + "]", LoggerLevel.INFO);
+            System.out.println("Game score recalculated successfully!");
         } catch (Exception e) {
+
             logger.log("Problem recalculating game score: [" + game.getTitle() + "]", LoggerLevel.DEBUG);
             System.err.println("Error updating game!");
             e.printStackTrace();

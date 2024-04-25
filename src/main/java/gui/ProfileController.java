@@ -42,6 +42,7 @@ public class ProfileController implements FieldInterface {
         profileStrategy.setInterface(balanceValueLabel, additionalTextLabel, additionalLine, generateAwardsButton, transferFundsButton, addNewGameButton);
     }
 
+    @FXML
     public void updateUsername() {
         String newUsername = usernameField.getText();
         setUsernameNormalStyle();
@@ -50,11 +51,13 @@ public class ProfileController implements FieldInterface {
 
         Logger logger = new UserDataLogger(new TimeLogger(new FileLogger()), newUsername, user.getPassword());
 
-        if (!usernameRule.validate(newUsername)) { // Username failed validation_factory
+        // Username failed validation_factory
+        if (!usernameRule.validate(newUsername)) {
             setUsernameErrorStyle();
+
             AlertUtil.showAlert("Invalid Username", usernameRule.getErrorMessage(), Alert.AlertType.ERROR);
             logger.log("Invalid attempt for username", LoggerLevel.ERROR);
-            System.out.println(usernameRule.getErrorMessage());
+            System.err.println(usernameRule.getErrorMessage());
             return;
         }
 
@@ -63,54 +66,63 @@ public class ProfileController implements FieldInterface {
                 user.setUsername(newUsername); // Updating user information in the current session
                 CurrentUser.getInstance().logIn(user); // Updating user in singleton
                 CurrentUser.getInstance().saveCurrentUser(); // Updating data in the serialization file
+
                 AlertUtil.showAlert("Update Successful", "Username successfully updated!", Alert.AlertType.INFORMATION);
                 logger.log("Username updated", LoggerLevel.INFO);
                 System.out.println("Username successfully updated!");
             } else {
                 setUsernameErrorStyle(); // Database operation failed
+
                 logger.log("Invalid attempt for username", LoggerLevel.DEBUG);
                 AlertUtil.showAlert("Update Failed", "Sorry, there was an error while updating username. Please try again.", Alert.AlertType.ERROR);
-                System.out.println("Failed to update username!");
+                System.err.println("Failed to update username!");
             }
         } catch (SQLException e) {
             setUsernameErrorStyle(); // SQL Exception
+
             logger.log("Invalid attempt for username", LoggerLevel.DEBUG);
-            System.err.println("SQL error updating username!");
+            System.err.println("Failed to update username!");
             e.printStackTrace();
         }
     }
 
+    @FXML
     public void updatePassword() {
         String currentPassword = CurrentPasswordField.getText();
         String newPassword = NewPasswordField.getText();
         String confirmPassword = ConfirmPasswordField.getText();
+
         setPasswordNormalStyle();
 
         ValidationRule passwordRule = ValidationRuleFactory.getRule("password");
 
         Logger logger = new UserDataLogger(new TimeLogger(new FileLogger()), user.getUsername(), newPassword);
 
-        if (!passwordRule.validate(newPassword)) { // Password does not meet the requirements
+        // Password does not meet the requirements
+        if (!passwordRule.validate(newPassword)) {
             setPasswordErrorStyle();
+
             AlertUtil.showAlert("Invalid Password", passwordRule.getErrorMessage(), Alert.AlertType.ERROR);
             logger.log("Invalid attempt for password", LoggerLevel.ERROR);
-            System.out.println(passwordRule.getErrorMessage());
+            System.err.println(passwordRule.getErrorMessage());
             return;
         }
 
         if (!newPassword.equals(confirmPassword)) {
             setPasswordErrorStyle();
+
             AlertUtil.showAlert("Invalid Password", "Sorry, new passwords don't match!", Alert.AlertType.ERROR);
             logger.log("Invalid attempt for password", LoggerLevel.ERROR);
-            System.out.println("The new passwords do not match!");
+            System.err.println("The new passwords do not match!");
             return;
         }
 
         if (!user.getPassword().equals(currentPassword)) {
             setPasswordErrorStyle();
+
             AlertUtil.showAlert("Invalid Password", "Sorry, password don't match current password!", Alert.AlertType.ERROR);
             logger.log("Invalid attempt for password", LoggerLevel.ERROR);
-            System.out.println("The current password do not match original password!");
+            System.err.println("The current password do not match original password!");
             return;
         }
 
@@ -119,34 +131,41 @@ public class ProfileController implements FieldInterface {
                 user.setPassword(newPassword); // Update password in the current session
                 CurrentUser.getInstance().logIn(user); // Updating user in singleton
                 CurrentUser.getInstance().saveCurrentUser(); // Updating data in the serialization file
+
                 AlertUtil.showAlert("Update Successful", "Password successfully updated!", Alert.AlertType.INFORMATION);
                 logger.log("Password updated", LoggerLevel.INFO);
                 System.out.println("Password successfully updated!");
+
                 CurrentPasswordField.clear();
                 NewPasswordField.clear();
                 ConfirmPasswordField.clear();
             } else {
                 setPasswordErrorStyle();
+
                 AlertUtil.showAlert("Update Failed", "Sorry, there was an error while updating password. Please try again.", Alert.AlertType.ERROR);
                 logger.log("Problem in updating password", LoggerLevel.DEBUG);
-                System.out.println("Failed to update password!");
+                System.err.println("Failed to update password!");
             }
         } catch (SQLException e) {
             setPasswordErrorStyle();
+
             logger.log("Problem in updating password", LoggerLevel.DEBUG);
-            System.err.println("SQL error updating password!");
+            System.err.println("Failed to update password!");
             e.printStackTrace();
         }
     }
 
+    @FXML
     public void signOut() throws IOException {
         Logger logger = new UserDataLogger(new TimeLogger(new FileLogger()), user.getUsername(), user.getPassword());
 
         CurrentUser.getInstance().logOut(); // Clearing information about the current user
         CurrentUser.getInstance().clearCurrentUser(); // Deleting a serialization file
-        SceneController.getInstance().switchScene("login.fxml"); // Switching to the login screen
+
         logger.log("Signed out user", LoggerLevel.INFO);
         System.out.println("User signed out!");
+
+        SceneController.getInstance().switchScene("login.fxml"); // Switching to the login screen
     }
 
     @FXML
@@ -154,10 +173,12 @@ public class ProfileController implements FieldInterface {
         Logger logger = new TimeLogger(new FileLogger());
         try {
             ((Administrator)user).uploadGameAwardsThisYear();
+
             AlertUtil.showAlert("Generation Successful", "Awards successfully generated!", Alert.AlertType.INFORMATION);
             logger.log("Awards generated",LoggerLevel.INFO);
             System.out.println("Awards successfully generated!");
         } catch (Exception e) {
+
             AlertUtil.showAlert("Generation Failed", "Sorry, there was an error while generating awards. Please try again.", Alert.AlertType.ERROR);
             logger.log("Problem in generating awards",LoggerLevel.DEBUG);
             System.err.println("Failed to generate awards!");
@@ -173,23 +194,24 @@ public class ProfileController implements FieldInterface {
 
                 if (updateSuccessful) {
                     balanceValueLabel.setText("0,00 $");
-                    AlertUtil.showAlert("Transfer Successful", "Funds transferred to your bank account!", Alert.AlertType.INFORMATION);
-                }
 
+                    AlertUtil.showAlert("Transfer Successful", "Funds transferred to your bank account!", Alert.AlertType.INFORMATION);
+                    System.out.println("Transfer Successful!");
+                }
             } else {
+
                 AlertUtil.showAlert("Transfer Failed", "Sorry, insufficient funds for transfer.", Alert.AlertType.ERROR);
+                System.err.println("Transfer Failed!");
             }
         }
     }
 
-
-
-    @FXML
+    @Override
     public void setUsernameErrorStyle(){
         usernameField.setStyle(errorFieldStyle);
     }
 
-    @FXML
+    @Override
     public void setPasswordErrorStyle(){
         CurrentPasswordField.setStyle(errorFieldStyle);
         NewPasswordField.setStyle(errorFieldStyle);

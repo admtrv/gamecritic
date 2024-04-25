@@ -21,16 +21,20 @@ public class YearDetailsController implements StyleInterface {
     @FXML private VBox gamesContainer;
     private List<Game> games;
     String year = CurrentYear.getInstance().getYear();
+    @FXML
     public void initialize(){
         mainLabel.setText("Game of the Year " + year + " Awards");
+
         try {
            games = DataBaseUtil.getGames(year, "release_date");
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         displayGames(gamesContainer, games);
     }
 
+    @FXML
     private void displayGames(VBox gamesContainer, List<Game> games) {
         gamesContainer.setSpacing(15);
         gamesContainer.setAlignment(Pos.TOP_CENTER);
@@ -38,17 +42,18 @@ public class YearDetailsController implements StyleInterface {
 
         for (Game game : games) {
             VBox gameBox = new VBox(10);
+            VBox.setMargin(gameBox, new Insets(0, 0, 10, 0));
             gameBox.setPadding(new Insets(10));
             gameBox.setAlignment(Pos.CENTER_LEFT);
             gameBox.setCursor(Cursor.HAND);
             gameBox.setStyle("-fx-background-color: " + BoxBackgroundColor + " -fx-background-radius: 10");
 
+            // Nomination
             Label nominationLabel = new Label(game.getGenre() + " of the Year");
             nominationLabel.setFont(new Font("ProximaNova-ExtraBold", 14));
 
             // Container for score and name of the game
             HBox gameInfoContainer = new HBox(10);
-
             gameInfoContainer.setAlignment(Pos.CENTER_LEFT);
 
             // Game score
@@ -69,14 +74,11 @@ public class YearDetailsController implements StyleInterface {
             // Build everything in one VBox
             gameBox.getChildren().addAll(nominationLabel, gameInfoContainer);
 
-            VBox.setMargin(gameBox, new Insets(0, 0, 10, 0));
-
             gameBox.setOnMouseClicked(event -> {
                 try {
                     CurrentGame.getInstance().setGame(game);
                     SceneController.getInstance().switchScene("game_view.fxml");
                 } catch (IOException e) {
-                    System.err.println("Error switching scene!");
                     e.printStackTrace();
                 }
             });

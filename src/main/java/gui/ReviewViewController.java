@@ -13,13 +13,13 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 public class ReviewViewController implements StyleInterface {
-    private Game game = CurrentGame.getInstance().getGame();
-    private Review review = CurrentReview.getInstance().getReview();
-
     @FXML private Label scoreLabel;
     @FXML private Label gameLabel;
     @FXML private Label usernameLabel;
     @FXML private Label reviewTextLabel;
+
+    private Game game = CurrentGame.getInstance().getGame();
+    private Review review = CurrentReview.getInstance().getReview();
 
     @FXML
     public void initialize() {

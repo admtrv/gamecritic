@@ -2,9 +2,12 @@ package session;
 
 public class CurrentYear {
     private String year;
-    private static final CurrentYear instance = new CurrentYear();
-    private CurrentYear() {}
+    private static CurrentYear instance;
+    private CurrentYear() { }
     public static CurrentYear getInstance() {
+        if (instance == null) {
+            instance = new CurrentYear();
+        }
         return instance;
     }
 

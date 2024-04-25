@@ -14,7 +14,7 @@ public interface StyleInterface {
     String BoxBackgroundColor = "#f2f2f2;"; // Light gray to create a card, separating it from the background
     String errorFieldStyle = "-fx-background-color:  #ffffff; -fx-border-color:" + RedColor + " -fx-border-radius: 3";
     String normalFieldStyle = "-fx-background-color:  #ffffff; -fx-border-color:" + FieldBorderColor + " -fx-border-radius: 3";
-    String initialScoreStyle = "-fx-background-color: #ffffff;-fx-border-color: #3d3d3d;";
+    String initialScoreStyle = "-fx-background-color: #ffffff; -fx-border-color: #3d3d3d;";
     default String getScoreColor(double score) {
         if (score >= 8) {
             return "-fx-background-color:" + GreenColor;

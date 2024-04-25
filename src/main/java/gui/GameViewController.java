@@ -2,10 +2,7 @@ package gui;
 
 import game.*;
 import gui_interfaces.*;
-import logger_decorator.FileLogger;
-import logger_decorator.Logger;
-import logger_decorator.LoggerLevel;
-import logger_decorator.TimeLogger;
+import logger_decorator.*;
 import reviews.*;
 import session.*;
 import users.*;
@@ -80,9 +77,11 @@ public class GameViewController implements StyleInterface {
         developerLabel.setText(game.getDeveloper());
         platformsLabel.setText(game.getPlatforms());
         releaseDateLabel.setText(game.getReleaseDate());
+        descriptionLabel.setText(game.getDescription());
+        awardView.setVisible(game.isAward());
+
         criticsCountLabel.setText("Based on " + game.getCriticsCount() + " Critic Reviews");
         usersCountLabel.setText("Based on " + game.getUsersCount() + " User Reviews");
-        descriptionLabel.setText(game.getDescription());
 
         criticsScoreLabel.setText(String.format("%.1f",game.getCriticsScore()));
         criticsScoreLabel.setStyle(getScoreColor(game.getCriticsScore())  + "-fx-background-radius: 12;");
@@ -90,17 +89,17 @@ public class GameViewController implements StyleInterface {
         usersScoreLabel.setText(String.format("%.1f",game.getUsersScore()));
         usersScoreLabel.setStyle(getScoreColor(game.getUsersScore())  + "-fx-background-radius: 12;");
 
-        awardView.setVisible(game.isAward());
-
         updateMyReviewStatus();
     }
 
+    @FXML
     private void updateMyReviewStatus() {
         try {
             review = DataBaseUtil.getReview(user.getId(), game.getId());
 
             if (review != null) {
                 CurrentReview.getInstance().setReview(review);
+
                 reviewButton.setText("Edit My Review");
             } else {
                 reviewButton.setText("Add My Review");
@@ -115,17 +114,21 @@ public class GameViewController implements StyleInterface {
             try {
                 Desktop desktop = Desktop.getDesktop();
                 if (desktop.isSupported(Desktop.Action.BROWSE)) {
-                    logger.log("Opened web link", LoggerLevel.INFO);
                     desktop.browse(new URI(game.getStoreLink()));
+
+                    logger.log("Opened web link", LoggerLevel.INFO);
+                    System.out.println("Opened web link.");
                 }
             } catch (IOException | URISyntaxException e) {
-                System.err.println("Error browsing link!");
+
                 logger.log("Problem to open web link", LoggerLevel.DEBUG);
+                System.err.println("Error browsing link!");
                 e.printStackTrace();
             }
         }
     }
 
+    @FXML
     private void displayReviews(VBox reviewsContainer, List<? extends Review> reviews) {
         reviewsContainer.getChildren().clear();
 
@@ -170,7 +173,7 @@ public class GameViewController implements StyleInterface {
             // Placing elements in the headerBox
             headerBox.getChildren().addAll(scoreLabel, usernameLabel, dateLabel);
 
-            // Текст отзыва в центре
+            // Review text in the center
             Label reviewTextLabel = new Label(review.getReviewText());
             reviewTextLabel.setFont(new Font("ProximaNova-Regular", 14));
             reviewTextLabel.setWrapText(true);
@@ -197,6 +200,7 @@ public class GameViewController implements StyleInterface {
         }
     }
 
+    @FXML
     public void scroll() {
         double targetY = detailedReviewsContainer.getBoundsInParent().getMinY();
 

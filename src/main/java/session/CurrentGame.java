@@ -5,9 +5,12 @@ import game.*;
 // Singleton class
 public class CurrentGame {
     private static Game game;
-    private static final CurrentGame instance = new CurrentGame();
-    private CurrentGame() {}
+    private static CurrentGame instance;
+    private CurrentGame() { }
     public static CurrentGame getInstance() {
+        if (instance == null) {
+            instance = new CurrentGame();
+        }
         return instance;
     }
     public Game getGame() {

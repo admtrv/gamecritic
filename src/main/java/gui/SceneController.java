@@ -8,10 +8,10 @@ import java.io.IOException;
 
 // Singleton class
 public class SceneController {
-    private static SceneController instance;
     private Stage stage;
     private Scene scene;
     private Parent root;
+    private static SceneController instance;
 
     private SceneController() { }
 

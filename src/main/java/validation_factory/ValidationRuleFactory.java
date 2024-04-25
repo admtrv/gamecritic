@@ -11,7 +11,7 @@ public class ValidationRuleFactory {
         } else if ("reviews".equals(ruleName)){
             return new ReviewValidationRule();
         } else {
-            throw new RuntimeException("Unknown validation_factory rule: " + ruleName);
+            throw new RuntimeException("Unknown validation factory rule: " + ruleName);
         }
     }
 }

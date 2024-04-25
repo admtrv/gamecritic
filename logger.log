@@ -3,3 +3,62 @@
 2024-04-25 17:29:44 [INFO] Launched app
 2024-04-25 17:29:44 [INFO] User loaded from serialization file
 2024-04-25 17:30:04 [INFO] Awards generated
+2024-04-25 20:52:24 [INFO] User loaded from serialization file
+2024-04-25 20:52:28 [INFO] Launched app
+2024-04-25 21:02:54 [INFO] Launched app
+2024-04-25 21:02:56 [INFO] User loaded from serialization file
+2024-04-25 21:33:52 [INFO] Launched app
+2024-04-25 21:33:54 [INFO] User loaded from serialization file
+2024-04-25 21:33:58 [INFO] Signed out user: Username[admtrv] Password[admtrv123] 
+2024-04-25 21:34:06 [ERROR] Invalid attempt for username: Username[a] Password[b] 
+2024-04-25 21:34:12 [ERROR] Invalid attempt for password: Username[aaa] Password[b] 
+2024-04-25 21:53:57 [INFO] Launched app
+2024-04-25 21:53:58 [INFO] User not loaded from serialization file
+2024-04-25 21:54:42 [INFO] Found user: Username[admtrv] Password[admtrv123] 
+2024-04-25 22:06:17 [INFO] Launched app
+2024-04-25 22:06:19 [INFO] User loaded from serialization file
+2024-04-25 22:06:26 [INFO] Game score recalculated: [The Last of Us Part II]
+2024-04-25 22:06:27 [INFO] Posted review for game: [The Last of Us Part II]
+2024-04-25 22:06:31 [INFO] Game score recalculated: [The Last of Us Part II]
+2024-04-25 22:06:32 [INFO] Posted review for game: [The Last of Us Part II]
+2024-04-25 22:09:18 [INFO] Launched app
+2024-04-25 22:09:20 [INFO] User loaded from serialization file
+2024-04-25 22:09:36 [INFO] Game score recalculated: [The Last of Us Part II]
+2024-04-25 22:09:37 [INFO] Posted review for game: [The Last of Us Part II]
+2024-04-25 22:09:41 [INFO] Game score recalculated: [The Last of Us Part II]
+2024-04-25 22:09:44 [INFO] Posted review for game: [The Last of Us Part II]
+2024-04-26 00:46:04 [INFO] Launched app
+2024-04-26 00:46:05 [INFO] User loaded from serialization file
+2024-04-26 00:49:57 [INFO] Launched app
+2024-04-26 00:49:58 [INFO] User loaded from serialization file
+2024-04-26 00:50:00 [INFO] Application closed
+2024-04-26 00:50:56 [INFO] Launched app
+2024-04-26 00:50:58 [INFO] User loaded from serialization file
+2024-04-26 00:51:01 [INFO] Application closed
+2024-04-26 00:54:24 [INFO] Launched app
+2024-04-26 00:54:26 [INFO] User loaded from serialization file
+2024-04-26 00:54:29 [INFO] Signed out user: Username[admtrv] Password[admtrv123] 
+2024-04-26 00:54:36 [ERROR] Invalid attempt for username: Username[a] Password[a] 
+2024-04-26 00:54:41 [ERROR] Invalid attempt for username: Username[ab] Password[a] 
+2024-04-26 00:54:47 [ERROR] Invalid attempt for password: Username[ab3] Password[a] 
+2024-04-26 00:54:59 [ERROR] Invalid attempt for role: Username[ab332] Password[aasdas32] 
+2024-04-26 00:55:37 [ERROR] Invalid attempt for role: Username[ab332] Password[aasdas32] 
+2024-04-26 00:56:02 [ERROR] Invalid attempt for role: Username[ab332] Password[aasdas32] 
+2024-04-26 00:57:10 [INFO] Launched app
+2024-04-26 00:57:10 [INFO] User not loaded from serialization file
+2024-04-26 00:57:18 [ERROR] Invalid attempt for role: Username[fdafsdfsadf] Password[dfafasfasd324] 
+2024-04-26 00:57:21 [INFO] Application closed
+2024-04-26 00:59:22 [INFO] Launched app
+2024-04-26 00:59:22 [INFO] User not loaded from serialization file
+2024-04-26 00:59:29 [ERROR] Invalid attempt for role: Username[asdasdasdas] Password[asdasdasd123] 
+2024-04-26 00:59:32 [INFO] Application closed
+2024-04-26 01:00:15 [INFO] Launched app
+2024-04-26 01:00:15 [INFO] User not loaded from serialization file
+2024-04-26 01:00:24 [INFO] Application closed
+2024-04-26 01:01:31 [INFO] Launched app
+2024-04-26 01:01:32 [INFO] User not loaded from serialization file
+2024-04-26 01:01:51 [INFO] Found user: Username[admtrv] Password[admtrv123] 
+2024-04-26 01:02:15 [INFO] Application closed
+2024-04-26 01:02:20 [INFO] Launched app
+2024-04-26 01:02:22 [INFO] User loaded from serialization file
+2024-04-26 01:03:10 [INFO] Application closed

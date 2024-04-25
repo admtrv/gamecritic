@@ -22,8 +22,10 @@ import javafx.scene.Cursor;
 public class HomeController implements StyleInterface {
     private List<Game> latestGames;
     private List<Game> topGames;
+
     @FXML private HBox LatestGamesContainer;
     @FXML private HBox TopGamesContainer;
+    @FXML
     public void initialize(){
         try {
             latestGames = DataBaseUtil.getGames(15, "release_date");
@@ -34,6 +36,7 @@ public class HomeController implements StyleInterface {
         displayGames(LatestGamesContainer, latestGames);
         displayGames(TopGamesContainer, topGames);
     }
+    @FXML
     private void displayGames(HBox gamesContainer, List<Game> games) {
         gamesContainer.getChildren().clear();
 
@@ -75,7 +78,6 @@ public class HomeController implements StyleInterface {
                     CurrentGame.getInstance().setGame(game);
                     SceneController.getInstance().switchScene("game_view.fxml");
                 } catch (IOException e) {
-                    System.err.println("Error switching scene!");
                     e.printStackTrace();
                 }
             });

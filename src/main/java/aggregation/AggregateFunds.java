@@ -15,17 +15,22 @@ public class AggregateFunds {
 
         double income = reviewLength * 0.1;
         double newBalance = critic.getBalance() + income;
+
         try {
             if (DataBaseUtil.updateBalance(critic.getId(), newBalance)) {
-                System.out.println("Сritics balance updated successfully!");
-                logger.log("Updated user balance", LoggerLevel.INFO);
                 critic.setBalance(newBalance);
+
+                logger.log("Updated user balance", LoggerLevel.INFO);
+                System.out.println("Сritics balance updated successfully!");
             } else {
+
                 logger.log("Problem updating user balance", LoggerLevel.DEBUG);
-                System.err.println("Failed to update critic's balance.");
+                System.err.println("Failed to update critic's balance!");
             }
         } catch (Exception e) {
+
             logger.log("Problem updating user balance", LoggerLevel.DEBUG);
+            System.err.println("Failed to update critic's balance!");
             e.printStackTrace();
         }
     }
@@ -34,16 +39,26 @@ public class AggregateFunds {
         Critic critic = (Critic) CurrentUser.getInstance().getUser();
 
         Logger logger = new UserDataLogger(new TimeLogger(new FileLogger()), critic.getUsername(), critic.getPassword());
+
         try {
             boolean updateSuccessful = DataBaseUtil.updateBalance(critic.getId(), 0);
+
             if (updateSuccessful) {
                 critic.setBalance(0);
                 CurrentUser.getInstance().saveCurrentUser();
+
                 logger.log("Updated user balance", LoggerLevel.INFO);
+                System.out.println("Сritics balance updated successfully!");
                 return true;
+            } else {
+
+                logger.log("Problem updating user balance", LoggerLevel.DEBUG);
+                System.err.println("Failed to update critic's balance.");
             }
         } catch (SQLException e) {
+
             logger.log("Problem updating user balance", LoggerLevel.DEBUG);
+            System.err.println("Failed to update critic's balance.");
             e.printStackTrace();
         }
         return false;

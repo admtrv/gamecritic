@@ -14,8 +14,7 @@ public class AlertUtil {
         alert.setHeaderText(null);
 
         Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
-        Image WindowLogo = new Image(AlertUtil.class.getResourceAsStream("/images/logos/logo_icon.png"));
-        stage.getIcons().add(WindowLogo);
+        stage.getIcons().add(new Image(AlertUtil.class.getResourceAsStream("/images/logos/logo_icon.png")));
 
         alert.getDialogPane().getStylesheets().add(AlertUtil.class.getResource("/gui/alert.css").toExternalForm());
 

@@ -40,11 +40,13 @@ public class ReviewController implements StyleInterface {
             scoreLabel.setText(Integer.toString(review.getScore()));
             scoreLabel.setStyle(getScoreColor(review.getScore())  + "-fx-background-radius: 22;");
             scoreSlider.setValue(review.getScore());
+
             reviewTextArea.setText(review.getReviewText());
         } else {
             scoreLabel.setText("");
             scoreLabel.setStyle(initialScoreStyle + "-fx-border-radius: 22;");
             scoreSlider.setValue(0);
+
             reviewTextArea.clear();
         }
 
@@ -52,11 +54,14 @@ public class ReviewController implements StyleInterface {
         titleLabel.setText("Write a review for " + game.getTitle());
 
         if(user instanceof Critic) {
-            CHARACTERS_MAX = 5000; // For critic
-            plusesTextArea.setVisible(true);
-            minusesTextArea.setVisible(true);
             DetailedReview detailedReview = (DetailedReview) review;
+
+            CHARACTERS_MAX = 5000; // For critic
+
+            plusesTextArea.setVisible(true);
             plusesTextArea.setText(detailedReview.getPluses());
+
+            minusesTextArea.setVisible(true);
             minusesTextArea.setText(detailedReview.getMinuses());
         } else {
             plusesTextArea.setVisible(false);
@@ -65,7 +70,7 @@ public class ReviewController implements StyleInterface {
 
         // Observer for Text Area
         setupTextArea(reviewTextArea, charactersLabel, CHARACTERS_MAX);
-        if(user instanceof Critic) {
+        if (user instanceof Critic) {
             setupTextArea(plusesTextArea, plusesCharactersLabel, ADDITIONAL_CHARACTERS_MAX);
             setupTextArea(minusesTextArea, minusesCharactersLabel, ADDITIONAL_CHARACTERS_MAX);
         }
@@ -77,9 +82,12 @@ public class ReviewController implements StyleInterface {
         });
     }
 
+    @FXML
     private void setupTextArea(TextArea textArea, Label charactersLabel, int maxCharacters) {
         String text = textArea.getText();
-        if (text == null) text = "";
+
+        if (text == null)
+            text = "";
 
         if (review != null) {
             int initialCharactersRemaining = maxCharacters - text.length();
@@ -100,12 +108,16 @@ public class ReviewController implements StyleInterface {
         });
     }
 
+    @FXML
     public void postReview() {
         Logger logger = new TimeLogger(new FileLogger());
+
         if (scoreLabel.getText().isEmpty()){
+
             AlertUtil.showAlert("Unselected Score", "Sorry, you didn't evaluate the game. Please try again.", Alert.AlertType.ERROR);
             logger.log("Invalid score for game: [" + game.getTitle() + "]", LoggerLevel.ERROR);
             System.err.println("Error: unselected score!");
+
             return;
         }
 
@@ -117,11 +129,14 @@ public class ReviewController implements StyleInterface {
 
         // Getting validation_factory rules
         ValidationRule reviewRule = ValidationRuleFactory.getRule("reviews");
+
         if (!reviewRule.validate(reviewText)) {
             reviewTextArea.setStyle(errorFieldStyle);
+
             AlertUtil.showAlert("Invalid Text", reviewRule.getErrorMessage(), Alert.AlertType.ERROR);
             logger.log("Invalid text for game: [" + game.getTitle() + "]", LoggerLevel.ERROR);
-            System.out.println(reviewRule.getErrorMessage());
+            System.err.println(reviewRule.getErrorMessage());
+
             return;
         }
 
@@ -130,21 +145,27 @@ public class ReviewController implements StyleInterface {
                 // Adding a review with pluses and minuses for the critic
                 DataBaseUtil.addReview(game.getId(), user.getId(), score, reviewText, LocalDate.now().toString(), pluses, minuses);
 
+                // If it is first review for this game, adding income
                 if (review == null && user instanceof Critic) {
                     AggregateFunds.aggregateIncome(reviewText.length());
                 }
             } else {
-                // Adding a review
+                // Adding a usual review for the user
                 DataBaseUtil.addReview(game.getId(), user.getId(), score, reviewText, LocalDate.now().toString(), "", "");
             }
 
             AggregateScore.updateScore(score);
+
             AlertUtil.showAlert("Posting Successful", "Your review posted successfully!", Alert.AlertType.INFORMATION);
             logger.log("Posted review for game: [" + game.getTitle() + "]", LoggerLevel.INFO);
             System.out.println("Review posted successfully!");
+
             switchToGameDetailsScene();
         } catch (SQLException | IOException e) {
+
+            AlertUtil.showAlert("Error posting", "Sorry, there is an error while posting review!", Alert.AlertType.INFORMATION);
             logger.log("Problem posting review for game: [" + game.getTitle() + "]", LoggerLevel.INFO);
+            System.err.println("Error posting review!");
             e.printStackTrace();
         }
     }

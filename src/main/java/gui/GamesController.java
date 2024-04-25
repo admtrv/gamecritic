@@ -24,6 +24,7 @@ public class GamesController implements StyleInterface {
     private GridPane gamesGrid;
     private List<Game> allGames;
 
+    @FXML
     public void initialize(){
         try {
             allGames = DataBaseUtil.getGames();
@@ -33,6 +34,7 @@ public class GamesController implements StyleInterface {
         displayGames();
     }
 
+    @FXML
     private void displayGames() {
         gamesGrid.getChildren().clear();
         gamesGrid.setHgap(30);
@@ -43,8 +45,8 @@ public class GamesController implements StyleInterface {
 
         for (Game game : allGames) {
             HBox gameCard = createGameCard(game);
-
             gamesGrid.add(gameCard, column, row);
+
             column+=1;
             if (column == 3) { // 3 columns in row
                 column = 0;
@@ -53,6 +55,7 @@ public class GamesController implements StyleInterface {
         }
     }
 
+    @FXML
     private HBox createGameCard(Game game) {
         HBox gameBox = new HBox(10);
         gameBox.setPadding(new Insets(10));
@@ -118,7 +121,6 @@ public class GamesController implements StyleInterface {
                 CurrentGame.getInstance().setGame(game);
                 SceneController.getInstance().switchScene("game_view.fxml");
             } catch (IOException e) {
-                System.err.println("Error switching scene!");
                 e.printStackTrace();
             }
         });

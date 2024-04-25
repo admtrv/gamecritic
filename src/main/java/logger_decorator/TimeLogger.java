@@ -2,9 +2,6 @@ package logger_decorator;
 
 import utils.*;
 
-import java.time.LocalDateTime;
-
-
 public class TimeLogger extends LoggerDecorator {
     public TimeLogger(Logger logger) {
         super(logger);

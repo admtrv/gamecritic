@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.io.IOException;
 
 public class LoginController implements FieldInterface {
+
     @FXML private TextField usernameField;
     @FXML private PasswordField passwordField;
     @FXML
@@ -32,32 +33,40 @@ public class LoginController implements FieldInterface {
 
         try {
             User user = DataBaseUtil.getUser(username);
+
             if (user != null) {
                 if (user.getPassword().equals(password)) {
-                    // AlertUtil.showAlert("Entry Successful", "Your account found successfully!", Alert.AlertType.INFORMATION);
-                    System.out.println("User found successfully!");
-                    logger.log("Found user", LoggerLevel.INFO);
+
                     CurrentUser.getInstance().logIn(user);
                     CurrentUser.getInstance().saveCurrentUser();
+
+                    logger.log("Found user", LoggerLevel.INFO);
+                    System.out.println("User found successfully!");
+
                     switchToHomeScene();
                 } else {
                     setPasswordErrorStyle();
+
                     AlertUtil.showAlert("Invalid Password", "Sorry, the password you entered is incorrect. Please try again.", Alert.AlertType.ERROR);
                     logger.log("Invalid attempt for password", LoggerLevel.ERROR);
-                    System.out.println("Password does not match!");
+                    System.err.println("Password does not match!");
                 }
             } else {
                 setUsernameErrorStyle();
+
                 AlertUtil.showAlert("Invalid Username", "Sorry, we can't find an account with this username. Please try again.", Alert.AlertType.ERROR);
                 logger.log("Invalid attempt for username", LoggerLevel.ERROR);
-                System.out.println("There is no user with that username!");
+                System.err.println("There is no user with that username!");
             }
         } catch (SQLException e) {
+
             AlertUtil.showAlert("Entry Failed", "Sorry, there was an error while searching your account. Please try again.", Alert.AlertType.ERROR);
             logger.log("Problem in finding user", LoggerLevel.DEBUG);
             System.err.println("Error finding user!");
             e.printStackTrace();
         } catch (IOException e) {
+
+            AlertUtil.showAlert("Entry Failed", "Sorry, there was an error while searching your account. Please try again.", Alert.AlertType.ERROR);
             logger.log("Problem in finding user", LoggerLevel.DEBUG);
             System.err.println("Error switching scene!");
             e.printStackTrace();
