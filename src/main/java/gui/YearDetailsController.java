@@ -1,6 +1,7 @@
 package gui;
 
 import game.*;
+import gui_interfaces.*;
 import session.*;
 import utils.*;
 
@@ -15,7 +16,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import java.sql.SQLException;
 import java.util.List;
-public class YearDetailsController implements StyleInterface{
+public class YearDetailsController implements StyleInterface {
     @FXML private Label mainLabel = new Label();
     @FXML private VBox gamesContainer;
     private List<Game> games;

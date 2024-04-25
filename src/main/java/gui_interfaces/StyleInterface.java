@@ -1,4 +1,4 @@
-package gui;
+package gui_interfaces;
 
 /*
 An interface that defines a set of constant string values and methods.

@@ -1,19 +1,19 @@
 package gui;
 
+import gui_interfaces.*;
 import utils.*;
 import validation_factory.*;
-
+import logger_decorator.*;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import java.sql.SQLException;
 import java.io.IOException;
 
-public class RegisterController implements FieldInterface{
+public class RegisterController implements FieldInterface {
     @FXML private TextField usernameField;
     @FXML private PasswordField passwordField;
     @FXML private ComboBox<String> roleComboBox;
-
     @FXML
     private void initialize() {
         Platform.runLater(() -> usernameField.requestFocus());
@@ -29,24 +29,28 @@ public class RegisterController implements FieldInterface{
         setUsernameNormalStyle();
         setPasswordNormalStyle();
 
-        // Getting validation_factory rules
+        // Getting validation factory rules
         ValidationRule usernameRule = ValidationRuleFactory.getRule("username");
         ValidationRule passwordRule = ValidationRuleFactory.getRule("password");
 
+        Logger logger = new UserDataLogger(new TimeLogger(new FileLogger()), username, password);
+
         boolean isValid = true; // Flag that monitors the validity of the data
 
-        // Username validation_factory
+        // Username validation factory
         if (!usernameRule.validate(username)) {
             setUsernameErrorStyle();
             AlertUtil.showAlert("Invalid Username", usernameRule.getErrorMessage(), Alert.AlertType.ERROR);
+            logger.log("Invalid attempt for username", LoggerLevel.ERROR);
             System.out.println(usernameRule.getErrorMessage());
             isValid = false; // Validity flag update
         }
 
-        // Password validation_factory
+        // Password validation factory
         if (!passwordRule.validate(password)) {
             setPasswordErrorStyle();
             AlertUtil.showAlert("Invalid Password", passwordRule.getErrorMessage(), Alert.AlertType.ERROR);
+            logger.log("Invalid attempt for password", LoggerLevel.ERROR);
             System.out.println(passwordRule.getErrorMessage());
             isValid = false; // Validity flag update
         }
@@ -60,12 +64,14 @@ public class RegisterController implements FieldInterface{
         try {
             DataBaseUtil.addUser(username, password, userType);
             AlertUtil.showAlert("Registration Successful", "Your account registered successfully!", Alert.AlertType.INFORMATION);
+            logger.log("Registered user", LoggerLevel.INFO);
             System.out.println("User registered successfully!");
             switchToLoginScene();
         } catch (SQLException | IOException e) {
             setUsernameErrorStyle();
             // setPasswordErrorStyle();
             AlertUtil.showAlert("Entry Failed", "Sorry, account with that nickname already exists. Please try again.", Alert.AlertType.ERROR);
+            logger.log("Problem in registering user", LoggerLevel.DEBUG);
             System.err.println("Error updating data!");
             e.printStackTrace();
         }

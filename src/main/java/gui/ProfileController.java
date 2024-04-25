@@ -1,7 +1,8 @@
 package gui;
 
 import aggregation.*;
-import session.*;
+import gui_interfaces.*;
+import logger_decorator.*;
 import users.*;
 import utils.*;
 import validation_factory.*;
@@ -13,7 +14,7 @@ import session.CurrentUser;
 import java.io.IOException;
 import java.sql.SQLException;
 import javafx.scene.shape.Line;
-public class ProfileController implements FieldInterface{
+public class ProfileController implements FieldInterface {
     @FXML private TextField usernameField;
     @FXML private PasswordField CurrentPasswordField;
     @FXML private PasswordField NewPasswordField;
@@ -44,11 +45,15 @@ public class ProfileController implements FieldInterface{
     public void updateUsername() {
         String newUsername = usernameField.getText();
         setUsernameNormalStyle();
+
         ValidationRule usernameRule = ValidationRuleFactory.getRule("username");
+
+        Logger logger = new UserDataLogger(new TimeLogger(new FileLogger()), newUsername, user.getPassword());
 
         if (!usernameRule.validate(newUsername)) { // Username failed validation_factory
             setUsernameErrorStyle();
             AlertUtil.showAlert("Invalid Username", usernameRule.getErrorMessage(), Alert.AlertType.ERROR);
+            logger.log("Invalid attempt for username", LoggerLevel.ERROR);
             System.out.println(usernameRule.getErrorMessage());
             return;
         }
@@ -59,14 +64,17 @@ public class ProfileController implements FieldInterface{
                 CurrentUser.getInstance().logIn(user); // Updating user in singleton
                 CurrentUser.getInstance().saveCurrentUser(); // Updating data in the serialization file
                 AlertUtil.showAlert("Update Successful", "Username successfully updated!", Alert.AlertType.INFORMATION);
+                logger.log("Username updated", LoggerLevel.INFO);
                 System.out.println("Username successfully updated!");
             } else {
                 setUsernameErrorStyle(); // Database operation failed
+                logger.log("Invalid attempt for username", LoggerLevel.DEBUG);
                 AlertUtil.showAlert("Update Failed", "Sorry, there was an error while updating username. Please try again.", Alert.AlertType.ERROR);
                 System.out.println("Failed to update username!");
             }
         } catch (SQLException e) {
             setUsernameErrorStyle(); // SQL Exception
+            logger.log("Invalid attempt for username", LoggerLevel.DEBUG);
             System.err.println("SQL error updating username!");
             e.printStackTrace();
         }
@@ -77,11 +85,15 @@ public class ProfileController implements FieldInterface{
         String newPassword = NewPasswordField.getText();
         String confirmPassword = ConfirmPasswordField.getText();
         setPasswordNormalStyle();
+
         ValidationRule passwordRule = ValidationRuleFactory.getRule("password");
+
+        Logger logger = new UserDataLogger(new TimeLogger(new FileLogger()), user.getUsername(), newPassword);
 
         if (!passwordRule.validate(newPassword)) { // Password does not meet the requirements
             setPasswordErrorStyle();
             AlertUtil.showAlert("Invalid Password", passwordRule.getErrorMessage(), Alert.AlertType.ERROR);
+            logger.log("Invalid attempt for password", LoggerLevel.ERROR);
             System.out.println(passwordRule.getErrorMessage());
             return;
         }
@@ -89,6 +101,7 @@ public class ProfileController implements FieldInterface{
         if (!newPassword.equals(confirmPassword)) {
             setPasswordErrorStyle();
             AlertUtil.showAlert("Invalid Password", "Sorry, new passwords don't match!", Alert.AlertType.ERROR);
+            logger.log("Invalid attempt for password", LoggerLevel.ERROR);
             System.out.println("The new passwords do not match!");
             return;
         }
@@ -96,6 +109,7 @@ public class ProfileController implements FieldInterface{
         if (!user.getPassword().equals(currentPassword)) {
             setPasswordErrorStyle();
             AlertUtil.showAlert("Invalid Password", "Sorry, password don't match current password!", Alert.AlertType.ERROR);
+            logger.log("Invalid attempt for password", LoggerLevel.ERROR);
             System.out.println("The current password do not match original password!");
             return;
         }
@@ -106,6 +120,7 @@ public class ProfileController implements FieldInterface{
                 CurrentUser.getInstance().logIn(user); // Updating user in singleton
                 CurrentUser.getInstance().saveCurrentUser(); // Updating data in the serialization file
                 AlertUtil.showAlert("Update Successful", "Password successfully updated!", Alert.AlertType.INFORMATION);
+                logger.log("Password updated", LoggerLevel.INFO);
                 System.out.println("Password successfully updated!");
                 CurrentPasswordField.clear();
                 NewPasswordField.clear();
@@ -113,30 +128,38 @@ public class ProfileController implements FieldInterface{
             } else {
                 setPasswordErrorStyle();
                 AlertUtil.showAlert("Update Failed", "Sorry, there was an error while updating password. Please try again.", Alert.AlertType.ERROR);
+                logger.log("Problem in updating password", LoggerLevel.DEBUG);
                 System.out.println("Failed to update password!");
             }
         } catch (SQLException e) {
             setPasswordErrorStyle();
+            logger.log("Problem in updating password", LoggerLevel.DEBUG);
             System.err.println("SQL error updating password!");
             e.printStackTrace();
         }
     }
 
     public void signOut() throws IOException {
+        Logger logger = new UserDataLogger(new TimeLogger(new FileLogger()), user.getUsername(), user.getPassword());
+
         CurrentUser.getInstance().logOut(); // Clearing information about the current user
         CurrentUser.getInstance().clearCurrentUser(); // Deleting a serialization file
         SceneController.getInstance().switchScene("login.fxml"); // Switching to the login screen
+        logger.log("Signed out user", LoggerLevel.INFO);
         System.out.println("User signed out!");
     }
 
     @FXML
     private void handleGenerateAwards() {
+        Logger logger = new TimeLogger(new FileLogger());
         try {
             ((Administrator)user).uploadGameAwardsThisYear();
             AlertUtil.showAlert("Generation Successful", "Awards successfully generated!", Alert.AlertType.INFORMATION);
+            logger.log("Awards generated",LoggerLevel.INFO);
             System.out.println("Awards successfully generated!");
         } catch (Exception e) {
             AlertUtil.showAlert("Generation Failed", "Sorry, there was an error while generating awards. Please try again.", Alert.AlertType.ERROR);
+            logger.log("Problem in generating awards",LoggerLevel.DEBUG);
             System.err.println("Failed to generate awards!");
             e.printStackTrace();
         }

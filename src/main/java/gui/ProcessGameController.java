@@ -1,6 +1,10 @@
 package gui;
 
 import javafx.application.Platform;
+import logger_decorator.FileLogger;
+import logger_decorator.Logger;
+import logger_decorator.LoggerLevel;
+import logger_decorator.TimeLogger;
 import utils.*;
 
 import javafx.fxml.FXML;
@@ -24,6 +28,7 @@ public class ProcessGameController {
 
     @FXML private ImageView imageView;
 
+    private static Logger logger = new TimeLogger(new FileLogger());
     @FXML
     private void initialize() {
         Platform.runLater(() -> imagePathField.requestFocus());
@@ -61,6 +66,7 @@ public class ProcessGameController {
 
         if (!imagePath.contains("/images/games/")) {
             AlertUtil.showAlert("Invalid Image Path", "Image must be located in project directory at '/images/games/*your image*'!", Alert.AlertType.ERROR);
+            logger.log("Invalid attempt for image path", LoggerLevel.ERROR);
             return;
         }
 
@@ -69,11 +75,14 @@ public class ProcessGameController {
         try {
             if (isSaved) {
                 AlertUtil.showAlert("Upload Successful", "New game saved successfully!", Alert.AlertType.INFORMATION);
+                logger.log("Loaded new game: [" + title + "]", LoggerLevel.INFO);
                 switchToProfileScene();
             } else {
+                logger.log("Problem loading new game: [" + title + "]", LoggerLevel.DEBUG);
                 AlertUtil.showAlert("Upload Failed", "Sorry, there was an error while saving new game. Please try again.", Alert.AlertType.ERROR);
             }
         } catch (IOException e) {
+            logger.log("Problem loading new game: [" + title + "]", LoggerLevel.DEBUG);
             e.printStackTrace();
         }
 

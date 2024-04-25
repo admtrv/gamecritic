@@ -5,9 +5,12 @@ import reviews.*;
 import users.*;
 import session.*;
 import utils.*;
+import logger_decorator.*;
 
 public class AggregateScore {
     public static void updateScore(int newScore) {
+
+        Logger logger = new TimeLogger(new FileLogger());
 
         Game game = CurrentGame.getInstance().getGame();
         User user = CurrentUser.getInstance().getUser();
@@ -44,8 +47,10 @@ public class AggregateScore {
 
         // Refresh the game in the database
         try {
+            logger.log("Game score recalculated: [" + game.getTitle() + "]", LoggerLevel.INFO);
             DataBaseUtil.updateGameScore(game);
         } catch (Exception e) {
+            logger.log("Problem recalculating game score: [" + game.getTitle() + "]", LoggerLevel.DEBUG);
             System.err.println("Error updating game!");
             e.printStackTrace();
         }

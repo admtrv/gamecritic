@@ -1,6 +1,7 @@
 package gui;
 
 import game.*;
+import gui_interfaces.*;
 import session.*;
 import utils.*;
 

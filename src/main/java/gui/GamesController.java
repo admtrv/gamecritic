@@ -1,6 +1,7 @@
 package gui;
 
 import game.*;
+import gui_interfaces.*;
 import session.*;
 import utils.*;
 
@@ -17,7 +18,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-public class GamesController implements StyleInterface{
+public class GamesController implements StyleInterface {
 
     @FXML
     private GridPane gamesGrid;

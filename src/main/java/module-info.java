@@ -7,4 +7,6 @@ module com.example.gamecritic {
 
     opens gui to javafx.fxml;
     exports gui;
+    exports gui_interfaces;
+    opens gui_interfaces to javafx.fxml;
 }

@@ -1,6 +1,7 @@
 package gui;
 
 import game.*;
+import gui_interfaces.*;
 import reviews.*;
 import session.*;
 import users.*;
@@ -11,7 +12,7 @@ import javafx.scene.control.Label;
 import java.io.IOException;
 import java.sql.SQLException;
 
-public class ReviewViewController implements StyleInterface{
+public class ReviewViewController implements StyleInterface {
     private Game game = CurrentGame.getInstance().getGame();
     private Review review = CurrentReview.getInstance().getReview();
 

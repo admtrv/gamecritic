@@ -1,5 +1,6 @@
 package gui;
 
+import gui_interfaces.*;
 import session.*;
 import utils.*;
 
@@ -13,7 +14,7 @@ import javafx.geometry.Insets;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-public class YearsController implements StyleInterface{
+public class YearsController implements StyleInterface {
     @FXML private VBox yearsContainer;
     List<String> years;
     public void initialize() {

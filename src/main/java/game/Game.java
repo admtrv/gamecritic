@@ -113,45 +113,6 @@ public class Game {
         return usersSum;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setDeveloper(String developer) {
-        this.developer = developer;
-    }
-
-    public void setReleaseDate(String releaseDate) {
-        this.releaseDate = releaseDate;
-    }
-
-    public void setPlatforms(String platforms) {
-        this.platforms = platforms;
-    }
-
-    public void setGenre(String genre) {
-        this.genre = genre;
-    }
-
-    public void setAward(boolean award) {
-        this.award = award;
-    }
-
-    public void setStoreLink(String storeLink) {
-        this.storeLink = storeLink;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
-    }
 
     public void setCriticsCount(int criticsCount) {
         this.criticsCount = criticsCount;

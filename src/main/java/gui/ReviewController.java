@@ -1,7 +1,8 @@
 package gui;
 
 import aggregation.*;
-import javafx.scene.control.Alert;
+import gui_interfaces.*;
+import logger_decorator.*;
 import reviews.*;
 import session.*;
 import users.*;
@@ -9,6 +10,7 @@ import game.*;
 import utils.*;
 import validation_factory.*;
 
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextArea;
@@ -99,8 +101,10 @@ public class ReviewController implements StyleInterface {
     }
 
     public void postReview() {
+        Logger logger = new TimeLogger(new FileLogger());
         if (scoreLabel.getText().isEmpty()){
             AlertUtil.showAlert("Unselected Score", "Sorry, you didn't evaluate the game. Please try again.", Alert.AlertType.ERROR);
+            logger.log("Invalid score for game: [" + game.getTitle() + "]", LoggerLevel.ERROR);
             System.err.println("Error: unselected score!");
             return;
         }
@@ -116,6 +120,7 @@ public class ReviewController implements StyleInterface {
         if (!reviewRule.validate(reviewText)) {
             reviewTextArea.setStyle(errorFieldStyle);
             AlertUtil.showAlert("Invalid Text", reviewRule.getErrorMessage(), Alert.AlertType.ERROR);
+            logger.log("Invalid text for game: [" + game.getTitle() + "]", LoggerLevel.ERROR);
             System.out.println(reviewRule.getErrorMessage());
             return;
         }
@@ -135,9 +140,11 @@ public class ReviewController implements StyleInterface {
 
             AggregateScore.updateScore(score);
             AlertUtil.showAlert("Posting Successful", "Your review posted successfully!", Alert.AlertType.INFORMATION);
+            logger.log("Posted review for game: [" + game.getTitle() + "]", LoggerLevel.INFO);
             System.out.println("Review posted successfully!");
             switchToGameDetailsScene();
         } catch (SQLException | IOException e) {
+            logger.log("Problem posting review for game: [" + game.getTitle() + "]", LoggerLevel.INFO);
             e.printStackTrace();
         }
     }

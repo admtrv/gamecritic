@@ -1,6 +1,11 @@
 package gui;
 
 import game.*;
+import gui_interfaces.*;
+import logger_decorator.FileLogger;
+import logger_decorator.Logger;
+import logger_decorator.LoggerLevel;
+import logger_decorator.TimeLogger;
 import reviews.*;
 import session.*;
 import users.*;
@@ -50,6 +55,7 @@ public class GameViewController implements StyleInterface {
     User user = CurrentUser.getInstance().getUser();
     Review review;
 
+    private static Logger logger = new TimeLogger(new FileLogger());
 
     @FXML
     public void initialize() {
@@ -109,10 +115,12 @@ public class GameViewController implements StyleInterface {
             try {
                 Desktop desktop = Desktop.getDesktop();
                 if (desktop.isSupported(Desktop.Action.BROWSE)) {
+                    logger.log("Opened web link", LoggerLevel.INFO);
                     desktop.browse(new URI(game.getStoreLink()));
                 }
             } catch (IOException | URISyntaxException e) {
                 System.err.println("Error browsing link!");
+                logger.log("Problem to open web link", LoggerLevel.DEBUG);
                 e.printStackTrace();
             }
         }
