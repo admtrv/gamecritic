@@ -28,7 +28,12 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-public class GameViewController implements StyleInterface {
+/**
+ * Controller for game view screen, displaying detailed information
+ * about selected game. This controller also handles reviews display
+ * and user interactions with editing or adding reviews.
+ */
+public class GameViewController implements StyleInterface, ToolBarInterface {
 
     @FXML private ImageView imageView;
     @FXML private Label titleLabel;
@@ -54,6 +59,10 @@ public class GameViewController implements StyleInterface {
 
     private static Logger logger = new TimeLogger(new FileLogger());
 
+    /**
+     * Initializes reviews data and gui components when controller is loaded. This
+     * method attempts to get all reviews from database and then displays them.
+     */
     @FXML
     public void initialize() {
         dispalayDetails();
@@ -69,6 +78,10 @@ public class GameViewController implements StyleInterface {
         }
     }
 
+    /**
+     * Method that fills elements, that already prepared on scene, with details of selected game.
+     * It also dynamically displays current scores from users and critics.
+     */
     @FXML
     private void dispalayDetails(){
         imageView.setImage(new Image(getClass().getResourceAsStream(game.getImagePath())));
@@ -92,6 +105,10 @@ public class GameViewController implements StyleInterface {
         updateMyReviewStatus();
     }
 
+    /**
+     * Updates status of the review based on whether the current user has already submitted a review.
+     * The button text changes dynamically to either 'Edit My Review' or 'Add My Review' depending on user's review status.
+     */
     @FXML
     private void updateMyReviewStatus() {
         try {
@@ -108,6 +125,11 @@ public class GameViewController implements StyleInterface {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Opens link to the online store page for purchasing the game. This
+     * method attached to clicking on prepared button on the scene.
+     */
     @FXML
     private void openLink() {
         if (game != null && game.getStoreLink() != null && !game.getStoreLink().isEmpty()) {
@@ -128,6 +150,13 @@ public class GameViewController implements StyleInterface {
         }
     }
 
+    /**
+     * Creates, styles, and filled panel with review cards for each review provided. Each
+     * review is visually represented as a separate card, which styled based on the review's score.
+     *
+     * @param reviewsContainer container that will be dynamically filled with review cards
+     * @param reviews list of reviews to display, that used in filling
+     */
     @FXML
     private void displayReviews(VBox reviewsContainer, List<? extends Review> reviews) {
         reviewsContainer.getChildren().clear();
@@ -200,6 +229,10 @@ public class GameViewController implements StyleInterface {
         }
     }
 
+    /**
+     * Scrolls view to the reviews section upon button click. This method calculates vertical
+     * position of the reviews container and adjusts scroll pane vertical value.
+     */
     @FXML
     public void scroll() {
         double targetY = detailedReviewsContainer.getBoundsInParent().getMinY();
@@ -207,14 +240,7 @@ public class GameViewController implements StyleInterface {
         scrollPane.setVvalue(targetY);
     }
 
-    public void switchToGamesScene() throws IOException {
-        CurrentGame.getInstance().resetGame();
-        CurrentReview.getInstance().resetReview();
-        SceneController.getInstance().switchScene("games.fxml");
-    }
-    public void switchToYearsScene() throws IOException {
-        SceneController.getInstance().switchScene("years.fxml");
-    }
+    @FXML
     public void switchToReviewScene() throws IOException {
         if (user instanceof Critic){
             SceneController.getInstance().switchScene("detailed_review.fxml");
@@ -223,12 +249,23 @@ public class GameViewController implements StyleInterface {
             SceneController.getInstance().switchScene("review.fxml");
         }
     }
+    @Override
+    public void switchToGamesScene() throws IOException {
+        CurrentGame.getInstance().resetGame();
+        CurrentReview.getInstance().resetReview();
+        SceneController.getInstance().switchScene("games.fxml");
+    }
+    @Override
+    public void switchToYearsScene() throws IOException {
+        SceneController.getInstance().switchScene("years.fxml");
+    }
+    @Override
     public void switchToProfileScene() throws IOException {
         CurrentGame.getInstance().resetGame();
         CurrentReview.getInstance().resetReview();
         SceneController.getInstance().switchScene("profile.fxml");
     }
-
+    @Override
     public void switchToHomeScene() throws IOException {
         CurrentGame.getInstance().resetGame();
         CurrentReview.getInstance().resetReview();

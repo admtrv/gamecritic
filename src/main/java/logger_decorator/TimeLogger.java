@@ -2,19 +2,32 @@ package logger_decorator;
 
 import utils.*;
 
+/**
+ * Decorator for loggers that adds a timestamp before each log entry.
+ */
 public class TimeLogger extends LoggerDecorator {
+
+    /**
+     * Construct that wraps around an existing logger.
+     * @param logger logger to wrap
+     */
     public TimeLogger(Logger logger) {
         super(logger);
     }
 
+    /**
+     * Logs message at the specified logging level with a timestamp.
+     * @param message log message to be written to the file
+     * @param level logging level to use
+     */
     @Override
     public void log(String message, LoggerLevel level) {
-        // Формирование временной метки
+        // Create timestamp
         String timestamp = DateUtil.loggerDate();
-        // Добавление уровня логирования к сообщению
+        // Format  message with the level and timestamp
         String logEntry = timestamp + " [" + level + "] " + message;
 
-        // Вызов метода log базового логгера с новым форматированным сообщением
+        // Delegate to wrapped logger
         wrappedLogger.log(logEntry, level);
     }
 }

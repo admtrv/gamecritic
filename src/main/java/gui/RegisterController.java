@@ -10,16 +10,30 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import java.sql.SQLException;
 import java.io.IOException;
+
+/**
+ * Controller class responsible for handling registration of new users.
+ * It validates user data such as username, password, and role before attempting
+ * to register user in the database. It also manages gui states based on validation results.
+ */
 public class RegisterController implements FieldInterface {
     @FXML private TextField usernameField;
     @FXML private PasswordField passwordField;
     @FXML private ComboBox<String> roleComboBox;
+
+    /**
+     * Initializes the controller, setting up initial gui states and loading roles into the combo box.
+     * Administrator role cannot be selected, as it is distributed in individual order.
+     */
     @FXML
     private void initialize() {
         Platform.runLater(() -> usernameField.requestFocus());
         roleComboBox.getItems().addAll("User", "Critic"/*, "Administrator"*/); // List of roles
     }
 
+    /**
+     * Handles registration process. Validates user input and registers him if data is valid.
+     */
     @FXML
     private void register() {
         String username = usernameField.getText();

@@ -9,15 +9,30 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Utility class for managing all database interactions within the application.
+ * This class contains methods to handle database operations for users, games, and reviews,
+ * as well as specific utility functions for managing game awards and critics balances.
+ */
 public class DataBaseUtil {
     private static final String URL = "jdbc:sqlite:src/main/resources/database.db";
 
-    // Setting up a connection to the database
+    /**
+     * Setting up connection to the database.
+     * @return connection object to the database
+     * @throws SQLException if database error occurs
+     */
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(URL);
     }
 
-    // Adding a new user to the database
+    /**
+     * Adds new user to the database.
+     * @param username users username
+     * @param password users password
+     * @param userType type of user (User, Critic, Administrator)
+     * @throws SQLException if database error occurs
+     */
     public static void addUser(String username, String password, String userType) throws SQLException {
         String sql = "INSERT INTO users(username, password, user_type) VALUES(?,?,?)";
 
@@ -30,7 +45,12 @@ public class DataBaseUtil {
         }
     }
 
-    // Verifying whether a user with the given username exists
+    /**
+     * Verifying whether user with given username exists.
+     * @param username username of user to verify
+     * @return user object containing the users data
+     * @throws SQLException if database error occurs
+     */
     public static User getUser(String username) throws SQLException {
         User user = null;
         String sql = "SELECT * FROM users WHERE username = ?";
@@ -63,6 +83,12 @@ public class DataBaseUtil {
         return user;
     }
 
+    /**
+     * Verifying whether user with given username exists.
+     * @param id id of user to verify
+     * @return user object containing the users data
+     * @throws SQLException if database error occurs
+     */
     public static User getUser(int id) throws SQLException {
         User user = null;
         String sql = "SELECT * FROM users WHERE id = ?";
@@ -95,7 +121,13 @@ public class DataBaseUtil {
         return user;
     }
 
-    // Updating the username
+    /**
+     * Updates users username in the database.
+     * @param userId id of user whose username is to be updated
+     * @param newUsername new username to update
+     * @return true if update was successful, false otherwise
+     * @throws SQLException if database error occurs
+     */
     public static boolean updateUsername(int userId, String newUsername) throws SQLException {
         String sql = "UPDATE users SET username = ? WHERE id = ?";
         try (Connection connection = getConnection();
@@ -107,7 +139,14 @@ public class DataBaseUtil {
         }
     }
 
-    // Updating the password
+    /**
+     * Updates users password in the database.
+     *
+     * @param userId id of user whose password is to be updated
+     * @param newPassword new password to update
+     * @return true if update was successful, false otherwise
+     * @throws SQLException if database error occurs
+     */
     public static boolean updatePassword(int userId, String newPassword) throws SQLException {
         String sql = "UPDATE users SET password = ? WHERE id = ?";
         try (Connection connection = getConnection();
@@ -119,7 +158,13 @@ public class DataBaseUtil {
         }
     }
 
-    // Updating the balance of the critic
+    /**
+     * Updates balance in the database, if user is {@link Critic}
+     * @param userId id of user whose balance is to be updated
+     * @param newBalance new balance to update
+     * @return true if update was successful, false otherwise
+     * @throws SQLException if database error occurs
+     */
     public static boolean updateBalance(int userId, double newBalance) throws SQLException {
         String sql = "UPDATE users SET balance = ? WHERE id = ?";
         try (Connection connection = getConnection();
@@ -131,6 +176,19 @@ public class DataBaseUtil {
         }
     }
 
+    /**
+     * Adds new game to the database.
+     * @param title title of game
+     * @param developer developer of game
+     * @param releaseDate release date of game
+     * @param platforms platforms on which game is available
+     * @param genre genre of game
+     * @param storeLink link to store where game can be purchased
+     * @param description description of game
+     * @param imagePath path to cover image of game
+     * @return true if game was successfully added, false otherwise
+     * @throws SQLException if database error occurs
+     */
     public static boolean addGame(String title, String developer, String releaseDate, String platforms, String genre, String storeLink, String description, String imagePath) throws SQLException {
         String sql = "INSERT INTO games (title, developer, release_date, platforms, genre, store_link, description, image_path) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
@@ -150,6 +208,13 @@ public class DataBaseUtil {
         }
     }
 
+    /**
+     * Retrieves list of games from the database based on specified sorting attribute and limited by number.
+     * @param number maximum number of games to retrieve
+     * @param attribute  attribute by which games need to be sorted (e.g. release_date)
+     * @return list of game objects
+     * @throws SQLException if database error occurs
+     */
     public static List<Game> getGames(int number, String attribute) throws SQLException {
         List<Game> games = new ArrayList<>();
         String sql = "SELECT * FROM games ORDER BY " + attribute + " DESC LIMIT ?";
@@ -186,7 +251,13 @@ public class DataBaseUtil {
         return games;
     }
 
-    // Overloading of previous method to get by year
+    /**
+     * Retrieves a list of games from the database for a specified year, ordered by specified attribute.
+     * @param year year for which games are being queried
+     * @param attribute attribute by which games need to be sorted (e.g. release_date)
+     * @return list of game objects
+     * @throws SQLException if database error occurs
+     */
     public static List<Game> getGames(String year, String attribute) throws SQLException {
         List<Game> games = new ArrayList<>();
         String sql = "SELECT * FROM games WHERE strftime('%Y', release_date) = ? AND award = 1 ORDER BY " + attribute + " DESC";
@@ -221,7 +292,11 @@ public class DataBaseUtil {
         return games;
     }
 
-    // Overloading of previous method to get all games
+    /**
+     * Retrieves a list of all games from the database.
+     * @return list of game objects
+     * @throws SQLException if database error occurs
+     */
     public static List<Game> getGames() throws SQLException {
         List<Game> games = new ArrayList<>();
         String sql = "SELECT * FROM games";
@@ -255,6 +330,11 @@ public class DataBaseUtil {
         return games;
     }
 
+    /**
+     * Updates game score in the database.
+     * @param game game object containing updated scores
+     * @throws SQLException if database error occurs
+     */
     public static void updateGameScore(Game game) throws SQLException {
         String sql = "UPDATE games SET critics_count = ?, users_count = ?, critics_sum = ?, users_sum = ?, "
                 + "critics_score = ?, users_score = ?, average_score = ? WHERE id = ?";
@@ -273,6 +353,13 @@ public class DataBaseUtil {
         }
     }
 
+    /**
+     * Retrieves a review for specified game and user from the database.
+     * @param userId user id for whom review is being fetched
+     * @param gameId game id for which review is being fetched
+     * @return review object, either basic {@link Review} or {@link DetailedReview} if user is {@link Critic}
+     * @throws SQLException if database error occurs
+     */
     public static Review getReview(int userId, int gameId) throws SQLException {
         Review review = null;
         String sql = "SELECT * FROM reviews WHERE user_id = ? AND game_id = ?";
@@ -304,6 +391,17 @@ public class DataBaseUtil {
         return review;
     }
 
+    /**
+     * Adds or updates review in the database. It updates the review if there is existing entry for the same user and game.
+     * @param gameId id of game being reviewed
+     * @param userId id of user writing review
+     * @param score score given in review
+     * @param reviewText text of review
+     * @param publishDate date when review is published
+     * @param pluses positive aspects of game (only for {@link DetailedReview})
+     * @param minuses negative aspects of game ({@link DetailedReview})
+     * @throws SQLException if database error occurs
+     */
     public static void addReview(int gameId, int userId, int score, String reviewText, String publishDate, String pluses, String minuses) throws SQLException {
         String sql = "INSERT INTO reviews (game_id, user_id, score, review_text, publish_date, pluses, minuses) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?) " +
@@ -323,6 +421,12 @@ public class DataBaseUtil {
         }
     }
 
+    /**
+     * Retrieves list of detailed reviews for specified game id.
+     * @param gameId game id for which detailed reviews are to be fetched
+     * @return list of detailed review objects
+     * @throws SQLException if database error occurs
+     */
     public static List<DetailedReview> getDetailedReviews(int gameId) throws SQLException {
         List<DetailedReview> detailedReviews = new ArrayList<>();
 
@@ -350,6 +454,12 @@ public class DataBaseUtil {
         return detailedReviews;
     }
 
+    /**
+     * Retrieves list of reviews for specified game id.
+     * @param gameId game id for which reviews are to be fetched
+     * @return list of review objects
+     * @throws SQLException if database error occurs
+     */
     public static List<Review> getReviews(int gameId) throws SQLException {
         List<Review> reviews = new ArrayList<>();
 
@@ -376,7 +486,12 @@ public class DataBaseUtil {
     }
 
 
-    // Method for awarding games for a given year over all genres
+    /**
+     * Awards best games of specified year based on their genre. Method updates games awards status
+     * to true for those that rank highest in their genre based on average score for given year.
+     * @param year year for which awards are to be calculated and assigned
+     * @throws SQLException if database error occurs
+     */
     public static void uploadGameAwardsByYear(String year) throws SQLException {
         // Getting the best games of the year and giving them awards immediately
         String sql = "WITH ranked_games AS (" +
@@ -394,6 +509,12 @@ public class DataBaseUtil {
         }
     }
 
+    /**
+     * Retrieves list of years for which games have been awarded. This method
+     * is used for displaying historical awards data.
+     * @return list of years when games have received awards
+     * @throws SQLException if database error occurs
+     */
     public static List<String> getYears() throws SQLException {
         List<String> years = new ArrayList<>();
         String sql = "SELECT DISTINCT strftime('%Y', release_date) AS year FROM games WHERE award = true ORDER BY year DESC;";

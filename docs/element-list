@@ -1,0 +1,12 @@
+module:gamecritic
+aggregation
+game
+gui
+gui_interfaces
+logger_decorator
+profile_strategy
+reviews
+session
+users
+utils
+validation_factory

@@ -12,15 +12,29 @@ import javafx.scene.control.*;
 import java.sql.SQLException;
 import java.io.IOException;
 
+/**
+ * Controller for managing user login process. It processes user authentication
+ * using credentials stored in the database and directs the user to the home
+ * screen after a successful login. It provides visual feedback for invalid inputs.
+ */
 public class LoginController implements FieldInterface {
 
     @FXML private TextField usernameField;
     @FXML private PasswordField passwordField;
+
+    /**
+     * Initializes controller by setting initial focus to the username input field.
+     */
     @FXML
     private void initialize() {
         Platform.runLater(() -> usernameField.requestFocus());
     }
 
+    /**
+     * Handles the sign-in action triggered by the user. It verifies the user credentials
+     * through the database, logs the user into the session, and transitions to home
+     * screen if successful.
+     */
     @FXML
     private void signIn() {
         String username = usernameField.getText();

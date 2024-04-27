@@ -1,6 +1,7 @@
 package gui;
 
 import logger_decorator.*;
+import users.Administrator;
 import utils.*;
 
 import javafx.application.Platform;
@@ -13,6 +14,13 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
+
+/**
+ * Controller for managing game information in application. Allows
+ * {@link Administrator} to add new games or edit existing ones by specifying
+ * game details through a gui form. It handles image selection,
+ * data validation, and submission of game details to the database.
+ */
 public class ProcessGameController {
     @FXML private TextField titleField;
     @FXML private TextField developerField;
@@ -25,10 +33,19 @@ public class ProcessGameController {
     @FXML private ImageView imageView;
 
     private static Logger logger = new TimeLogger(new FileLogger());
+
+    /**
+     * Initializes the controller by focusing on the image path field.
+     */
     @FXML
     private void initialize() {
         Platform.runLater(() -> imagePathField.requestFocus());
     }
+
+    /**
+     * Opens a file chooser to allow select image file for the game.
+     * Updates image view and image path field with the selected file.
+     */
     @FXML
     private void addImage() {
         FileChooser fileChooser = new FileChooser();
@@ -48,7 +65,12 @@ public class ProcessGameController {
         }
     }
 
-
+    /**
+     * Collects data from fields, validates image path, and attempts
+     * to save new game information to the database. Provides user feedback
+     * on success or failure of data submission.
+     * @throws SQLException if there is an issue with database access
+     */
     @FXML
     private void saveGame() throws SQLException {
         String title = titleField.getText();
@@ -94,6 +116,11 @@ public class ProcessGameController {
 
     }
 
+    /**
+     * Formats the full image path to relative path suitable for storage in the database.
+     * @param imagePath full path to the image file
+     * @return formatted relative path
+     */
     private String formatImagePath(String imagePath) {
         // Extract the image name from the full path
         String imageName = new File(imagePath).getName();

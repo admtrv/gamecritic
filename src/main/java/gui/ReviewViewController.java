@@ -12,6 +12,9 @@ import javafx.scene.control.Label;
 import java.io.IOException;
 import java.sql.SQLException;
 
+/**
+ * Controller class responsible for displaying detailed view of review.
+ */
 public class ReviewViewController implements StyleInterface {
     @FXML private Label scoreLabel;
     @FXML private Label gameLabel;
@@ -21,6 +24,10 @@ public class ReviewViewController implements StyleInterface {
     private Game game = CurrentGame.getInstance().getGame();
     private Review review = CurrentReview.getInstance().getReview();
 
+    /**
+     * Initializes review view by setting up the labels with review data.
+     * It finds out user who wrote review from the database and formats gui based on type of user.
+     */
     @FXML
     public void initialize() {
         // Score label

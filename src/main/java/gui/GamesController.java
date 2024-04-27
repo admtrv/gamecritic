@@ -18,12 +18,22 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-public class GamesController implements StyleInterface {
+/**
+ * Controller handles dynamic creation of game cards based on data got from
+ * database and manages layout configurations for displaying these cards
+ * within a grid. Each game card displays detailed information about the
+ * game including title, release date, description, and score.
+ */
+public class GamesController implements StyleInterface, ToolBarInterface {
 
     @FXML
     private GridPane gamesGrid;
     private List<Game> allGames;
 
+    /**
+     * Initializes games data and gui components when controller is loaded. This
+     * method attempts to get all games from database and then displays them.
+     */
     @FXML
     public void initialize(){
         try {
@@ -34,6 +44,12 @@ public class GamesController implements StyleInterface {
         displayGames();
     }
 
+    /**
+     * Method organizes the layout of game cards within the grid.
+     * Fills {@code gamesGrid} with game cards. Each game from list
+     * {@code allGames} is represented by a card. Dynamically
+     * adjusts number of columns based on number of games.
+     */
     @FXML
     private void displayGames() {
         gamesGrid.getChildren().clear();
@@ -55,6 +71,12 @@ public class GamesController implements StyleInterface {
         }
     }
 
+    /**
+     * Creates one game card, that containing details such as image, title,
+     * release date, description, score, and developer.
+     * @param game game data to fill card
+     * @return styled card containing all components
+     */
     @FXML
     private HBox createGameCard(Game game) {
         HBox gameBox = new HBox(10);
@@ -128,12 +150,19 @@ public class GamesController implements StyleInterface {
         return gameBox;
     }
 
+    @Override
+    public void switchToGamesScene() throws IOException {
+
+    }
+    @Override
     public void switchToYearsScene() throws IOException {
         SceneController.getInstance().switchScene("years.fxml");
     }
+    @Override
     public void switchToProfileScene() throws IOException {
         SceneController.getInstance().switchScene("profile.fxml");
     }
+    @Override
     public void switchToHomeScene() throws IOException {
         SceneController.getInstance().switchScene("home.fxml");
     }

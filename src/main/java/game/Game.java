@@ -2,6 +2,10 @@ package game;
 
 import utils.*;
 
+/**
+ * Represents game within the application, encapsulating all details relevant to
+ * single game entry, acts as a data model for handling game information.
+ */
 public class Game {
     private int id;
     private String title;
@@ -21,6 +25,26 @@ public class Game {
     private double usersScore;
     private double averageScore;
 
+    /**
+     * Constructs new review with specified details.
+     * @param id unique identifier of the game
+     * @param title title of the game
+     * @param developer name of developer of the game
+     * @param releaseDate release date of the game, formatted as string
+     * @param platforms platforms on which the game is available
+     * @param genre genre of the game
+     * @param award boolean flag indicating if the game has received award
+     * @param storeLink url to game's store page
+     * @param description description of the game
+     * @param imagePath path to game's cover image
+     * @param criticsCount number of critic reviews
+     * @param usersCount number of user reviews
+     * @param criticsSum sum of all critic scores
+     * @param usersSum sum of all user scores
+     * @param criticsScore average score from critics
+     * @param usersScore average score from users
+     * @param averageScore calculated average score of the game, combining both critic and user scores
+     */
     public Game(int id, String title, String developer, String releaseDate, String platforms,
                 String genre, boolean award, String storeLink, String description, String imagePath,
                 int criticsCount, int usersCount, int criticsSum, int usersSum,

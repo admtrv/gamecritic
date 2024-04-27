@@ -14,9 +14,19 @@ import javafx.geometry.Insets;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-public class YearsController implements StyleInterface {
+
+/**
+ * Controller class that handles display of different years in which games have
+ * received awards. It allows users to navigate to detailed views for games of each year.
+ */
+public class YearsController implements StyleInterface, ToolBarInterface {
     @FXML private VBox yearsContainer;
     List<String> years;
+
+    /**
+     * Initializes view by fetching a list of years from
+     * the database and displaying them as selectable buttons.
+     */
     public void initialize() {
         try {
             years = DataBaseUtil.getYears();
@@ -26,6 +36,13 @@ public class YearsController implements StyleInterface {
         displayYears(yearsContainer,years);
     }
 
+    /**
+     * Fills provided container with buttons, each representing year, that
+     * has games with awards. Clicking a button navigates to detailed view
+     * of that year's awarded games.
+     * @param yearsContainer container to hold year buttons
+     * @param years list of years to create buttons for
+     */
     @FXML
     private void displayYears(VBox yearsContainer, List<String> years) {
         yearsContainer.setSpacing(15);
@@ -49,13 +66,20 @@ public class YearsController implements StyleInterface {
             yearsContainer.getChildren().add(yearButton);
         }
     }
+
+    @Override
     public void switchToGamesScene() throws IOException {
         SceneController.getInstance().switchScene("games.fxml");
     }
+    @Override
+    public void switchToYearsScene() throws IOException {
+
+    }
+    @Override
     public void switchToHomeScene() throws IOException {
         SceneController.getInstance().switchScene("home.fxml");
     }
-
+    @Override
     public void switchToProfileScene() throws IOException {
         SceneController.getInstance().switchScene("profile.fxml");
     }

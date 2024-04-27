@@ -18,6 +18,11 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import javafx.fxml.FXML;
+
+/**
+ * Controller that manages user interaction for reviewing games. It handles display
+ * and validation for game reviews, and interacts with the database to save results.
+ */
 public class ReviewController implements StyleInterface {
     @FXML private Label scoreLabel;
     @FXML private TextArea reviewTextArea;
@@ -34,6 +39,12 @@ public class ReviewController implements StyleInterface {
     private int CHARACTERS_MAX = 1000; // For user
     private int ADDITIONAL_CHARACTERS_MAX = 500;
 
+    /**
+     * Initializes controller by setting up gui components based on review status and user type.
+     * If user is a {@link Critic}, he can write an extended review with additional fields
+     * to highlight pluses and minuses of the game. It also sets text fields, character limits,
+     * and listeners for dynamic gui changes such as score adjustments.
+     */
     @FXML
     public void initialize() {
         if (review != null) {
@@ -82,6 +93,9 @@ public class ReviewController implements StyleInterface {
         });
     }
 
+    /**
+     * Configures text areas for review content including displaying remaining characters.
+     */
     @FXML
     private void setupTextArea(TextArea textArea, Label charactersLabel, int maxCharacters) {
         String text = textArea.getText();
@@ -108,6 +122,11 @@ public class ReviewController implements StyleInterface {
         });
     }
 
+    /**
+     * Posts the review to the database after validating input.
+     * Works with both new reviews and updates to existing reviews.
+     * If the user is a {@link Critic}, he get paid for writing first review.
+     */
     @FXML
     public void postReview() {
         Logger logger = new TimeLogger(new FileLogger());

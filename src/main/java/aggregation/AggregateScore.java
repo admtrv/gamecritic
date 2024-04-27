@@ -7,7 +7,18 @@ import session.*;
 import utils.*;
 import logger_decorator.*;
 
+/**
+ * Provides utility class for recalculating and updating scores of the game
+ * based on new or updated reviews from users. This class handles the
+ * aggregation of scores and recalculates the overall averages, being one
+ * of the most important classes in the application logic of vote counting.
+ */
 public class AggregateScore {
+
+    /**
+     * This method adjusts totals, recalculates averages, and updates game data in the database.
+     * @param newScore score to update in the review
+     */
     public static void updateScore(int newScore) {
 
         Logger logger = new TimeLogger(new FileLogger());

@@ -14,7 +14,13 @@ import session.CurrentUser;
 import java.io.IOException;
 import java.sql.SQLException;
 import javafx.scene.shape.Line;
-public class ProfileController implements FieldInterface {
+
+/**
+ * Controller class responsible for managing user profile. Includes handling
+ * user information updates, password changes, signing out, and triggering specific actions
+ * like generating awards or transferring funds, depending on user's role.
+ */
+public class ProfileController implements FieldInterface, ToolBarInterface {
     @FXML private TextField usernameField;
     @FXML private PasswordField CurrentPasswordField;
     @FXML private PasswordField NewPasswordField;
@@ -27,6 +33,10 @@ public class ProfileController implements FieldInterface {
     @FXML private Button addNewGameButton;
     private ProfileStrategyInterface profileStrategy;
     User user = CurrentUser.getInstance().getUser();
+
+    /**
+     * Initializes profile page by setting up user-dependent gui elements.
+     */
     @FXML
     private void initialize() {
         usernameField.setText(user.getUsername());
@@ -42,6 +52,9 @@ public class ProfileController implements FieldInterface {
         profileStrategy.setInterface(balanceValueLabel, additionalTextLabel, additionalLine, generateAwardsButton, transferFundsButton, addNewGameButton);
     }
 
+    /**
+     * Updates username after validating it against system rules.
+     */
     @FXML
     public void updateUsername() {
         String newUsername = usernameField.getText();
@@ -86,6 +99,9 @@ public class ProfileController implements FieldInterface {
         }
     }
 
+    /**
+     * Updates password after validating it against system rules.
+     */
     @FXML
     public void updatePassword() {
         String currentPassword = CurrentPasswordField.getText();
@@ -155,6 +171,9 @@ public class ProfileController implements FieldInterface {
         }
     }
 
+    /**
+     * Signs out current user and switches to the login screen.
+     */
     @FXML
     public void signOut() throws IOException {
         Logger logger = new UserDataLogger(new TimeLogger(new FileLogger()), user.getUsername(), user.getPassword());
@@ -168,6 +187,9 @@ public class ProfileController implements FieldInterface {
         SceneController.getInstance().switchScene("login.fxml"); // Switching to the login screen
     }
 
+    /**
+     * Handles generating awards if user is an {@link Administrator}.
+     */
     @FXML
     private void handleGenerateAwards() {
         Logger logger = new TimeLogger(new FileLogger());
@@ -186,6 +208,9 @@ public class ProfileController implements FieldInterface {
         }
     }
 
+    /**
+     * Handles fund transfers if the user is a {@link Critic}.
+     */
     @FXML
     private void handleTransferFunds() {
         if (user instanceof Critic critic) {
@@ -230,16 +255,24 @@ public class ProfileController implements FieldInterface {
         ConfirmPasswordField.setStyle(normalFieldStyle);
     }
 
-
+    @FXML
     public void switchToProcessGameScene() throws IOException {
         SceneController.getInstance().switchScene("process_game.fxml");
     }
+
+    @Override
+    public void switchToProfileScene() throws IOException {
+
+    }
+    @Override
     public void switchToGamesScene() throws IOException {
         SceneController.getInstance().switchScene("games.fxml");
     }
+    @Override
     public void switchToYearsScene() throws IOException {
         SceneController.getInstance().switchScene("years.fxml");
     }
+    @Override
     public void switchToHomeScene() throws IOException {
         SceneController.getInstance().switchScene("home.fxml");
     }

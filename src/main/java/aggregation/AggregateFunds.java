@@ -7,7 +7,16 @@ import logger_decorator.*;
 
 import java.sql.SQLException;
 
+/**
+ * Provides static methods to manage financial aspects of critic accounts, specifically
+ * focusing on calculating and updating balances based on review activities.
+ */
 public class AggregateFunds {
+
+    /**
+     * Calculates and adds income to critics balance based on length of the review.
+     * @param reviewLength length of the review text
+     */
     public static void aggregateIncome(int reviewLength) {
         Critic critic = (Critic) CurrentUser.getInstance().getUser();
 
@@ -35,6 +44,10 @@ public class AggregateFunds {
         }
     }
 
+    /**
+     * Transfers entire current balance of critic to bank account, resetting balance to zero.
+     * @return true if transfer was successful, false otherwise
+     */
     public static boolean aggregateTransfer() {
         Critic critic = (Critic) CurrentUser.getInstance().getUser();
 

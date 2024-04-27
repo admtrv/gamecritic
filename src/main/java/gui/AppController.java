@@ -9,9 +9,21 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import java.io.IOException;
 
+
+/**
+ * Main application controller for initializing and managing primary stage. This class
+ * set up application environment, including loading necessary resources, like fonts
+ * and user data, setting the application stage, and starting gui by choosing between
+ * scenes, based on status of previous user session
+ */
 public class AppController extends Application {
 
     private static Logger logger = new TimeLogger(new FileLogger());
+
+    /**
+     * Starts the primary stage of the application, sets up the environment, and decides which scene to display first.
+     * @param primaryStage Primary stage for this application, on which scene can be set.
+     */
     @Override
     public void start(Stage primaryStage) {
         SceneController sceneController = SceneController.getInstance();
@@ -52,6 +64,10 @@ public class AppController extends Application {
         }
 
     }
+
+    /**
+     * Main entry point for the application.
+     */
     public static void main(String[] args) {
 
         logger.log("Launched app", LoggerLevel.INFO);

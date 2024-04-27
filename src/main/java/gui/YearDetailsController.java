@@ -16,11 +16,23 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import java.sql.SQLException;
 import java.util.List;
-public class YearDetailsController implements StyleInterface {
+
+/**
+ * Controller class responsible for displaying the "Game of the Year" awards
+ * for a selected year. It lists games that have received awards within
+ * different genres and provides functionality to navigate to detailed
+ * game views.
+ */
+public class YearDetailsController implements StyleInterface, ToolBarInterface {
     @FXML private Label mainLabel = new Label();
     @FXML private VBox gamesContainer;
     private List<Game> games;
     String year = CurrentYear.getInstance().getYear();
+
+    /**
+     * Initializes view by setting main label to the selected year and
+     * loading games that received awards in that year.
+     */
     @FXML
     public void initialize(){
         mainLabel.setText("Game of the Year " + year + " Awards");
@@ -34,6 +46,13 @@ public class YearDetailsController implements StyleInterface {
         displayGames(gamesContainer, games);
     }
 
+    /**
+     * Populates given container with visual representations of each game
+     * that won an award. Each game is represented by card containing its
+     * genre nomination, score, and title.
+     * @param gamesContainer container to populate with game entries
+     * @param games list of games to display
+     */
     @FXML
     private void displayGames(VBox gamesContainer, List<Game> games) {
         gamesContainer.setSpacing(15);
@@ -87,19 +106,22 @@ public class YearDetailsController implements StyleInterface {
         }
     }
 
+    @Override
     public void switchToGamesScene() throws IOException {
         CurrentYear.getInstance().resetYear();
         SceneController.getInstance().switchScene("games.fxml");
     }
+    @Override
     public void switchToYearsScene() throws IOException {
         CurrentYear.getInstance().resetYear();
         SceneController.getInstance().switchScene("years.fxml");
     }
+    @Override
     public void switchToProfileScene() throws IOException {
         CurrentYear.getInstance().resetYear();
         SceneController.getInstance().switchScene("profile.fxml");
     }
-
+    @Override
     public void switchToHomeScene() throws IOException {
         CurrentYear.getInstance().resetYear();
         SceneController.getInstance().switchScene("home.fxml");
