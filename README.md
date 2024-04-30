@@ -121,4 +121,4 @@ Thereafter, just click on the desired year to go to the detailed results.
 
 ![image9](src/main/resources/images/github_source/image9.png)
 
-Here you can see the detailed results, where the awarded games are divided by the categories in which they won (In the screenshot above there was only one game for the selected year). And in the same way, if you click on a game card you will be taken to a detailed overview of the game.
+Here you can see the detailed results, where the awarded games are divided by the categories in which they won. And in the same way, if you click on a game card you will be taken to a detailed overview of the game.
