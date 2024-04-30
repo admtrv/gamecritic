@@ -60,17 +60,26 @@ This is how a personal cabinet can look like if the user is a `Сritic`:
 
 ![image3](src/main/resources/images/github_source/image3.png)
 
-Here the critic can see his current balance, which is accrued for reviewing games on the portal (Functionality of operations with funds is not yet realized!). And this is how the personal cabinet can look like, if the user is an `Administrator`:
+Here the critic can see his current balance, which is accrued for reviewing games on the portal. When the balance becomes non-zero, the critic can pseudo withdraw money from his own account to a bank account. 
+
+And this is how the personal cabinet can look like, if the user is an `Administrator`:
 
 ![image4](src/main/resources/images/github_source/image4.png)
 
-Here the administrator can press the button that launches the complex process of awarding the best games for the current year. And in the future, there will be added functionality to add manually new games.
+Here the administrator can press the button that launches the complex process of awarding the best games for the current year. Administrators also have the functionality to add new game to the system directly from the application.
+
+## Games Library
+The Games window is used to navigate through all available games in the application. Here everyone will be able to find the desired game and later give it a review. 
+
+![image10](src/main/resources/images/github_source/image10.png)
 
 ## Detailed Game View
 
 ![image5](src/main/resources/images/github_source/image5.png)
 
-If you click anywhere in the program on a certain game, the user will be taken to a detailed view of the game, which provides full information such as genre, developer, release date and etc. Also there is functionality to `Add Your Own Review` of the game, the option to go to the `Verified Store` to buy this game and also has the option to `See Other Reviews` of users and critics (Functionality is not yet implemented!).
+If you click anywhere in the program on a certain game, the user will be taken to a detailed view of the game, which provides full information such as genre, developer, release date and etc. Also there is functionality to `Add Your Own Review` of the game, the option to go to the `Verified Store` to buy this game. If you scroll down the page below, you can see reviews from other users and critics on this game.
+
+![image5b](src/main/resources/images/github_source/image5b.png)
 
 ## Review Screen
 
@@ -82,9 +91,23 @@ To add your own score just move the slider to the desired result, and to add a r
 
 ![image7](src/main/resources/images/github_source/image7.png)
 
+Critics have the functionality to add a more detailed review, which includes not only the text fields of the review, but also fields where you can separately highlight the pluses and minuses of the game. 
+This allows them to provide a more complete and objective view of the product.
+
+![image6b](src/main/resources/images/github_source/image6b.png)
+
 To save the results just click the `Post` button, otherwise, to return to the game, you can click the `Cancel` button. 
 
 Depending on the score, the interface changes in the same way to make it clear whether the user gives the game a negative, medium or positive score. 
+
+## Adding New Game Window
+This interface window is intended for administrators to add new games to the application database. 
+
+![image11](src/main/resources/images/github_source/image11.png)
+
+After filling in all the fields and pressing the confirmation button, the game is loaded and saved into the system and can be seen by all other users. 
+
+![image12](src/main/resources/images/github_source/image12.png)
 
 ## List of Years
 
