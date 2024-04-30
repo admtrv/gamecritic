@@ -1,7 +1,7 @@
 ![Logo](src/main/resources/images/logos/logo_horizontal_white.png)
 
 ## Introduction
-**GameCritic** is a video game reviews portal that gives players and critics from around
+**gamecritic** is a video game reviews portal that gives players and critics from around
 the world the opportunity to provide their opinions on the latest releases in the
 world of video games. This is a community where every vote counts, and on the
 basis of these votes an objective and comprehensive evaluation of the game is formed.
@@ -121,4 +121,4 @@ Thereafter, just click on the desired year to go to the detailed results.
 
 ![image9](src/main/resources/images/github_source/image9.png)
 
-Here you can see the detailed results, where the awarded games are divided by the categories in which they won (In the screenshot above there was only one game for the selected year). And in the same way, if you click on a game card you will be taken to a detailed overview of the game.
+Here you can see the detailed results, where the awarded games are divided by the categories in which they won. And in the same way, if you click on a game card you will be taken to a detailed overview of the game.
