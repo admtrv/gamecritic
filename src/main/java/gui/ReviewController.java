@@ -53,31 +53,32 @@ public class ReviewController implements StyleInterface {
             scoreSlider.setValue(review.getScore());
 
             reviewTextArea.setText(review.getReviewText());
+            plusesTextArea.setText(((DetailedReview)review).getPluses());
+            minusesTextArea.setText(((DetailedReview)review).getPluses());
         } else {
             scoreLabel.setText("");
             scoreLabel.setStyle(initialScoreStyle + "-fx-border-radius: 22;");
             scoreSlider.setValue(0);
 
             reviewTextArea.clear();
+            plusesTextArea.setText("");
+            minusesTextArea.setText("");
         }
 
-        reviewTextArea.setStyle(normalFieldStyle);
-        titleLabel.setText("Write a review for " + game.getTitle());
-
         if(user instanceof Critic) {
-            DetailedReview detailedReview = (DetailedReview) review;
-
             CHARACTERS_MAX = 5000; // For critic
 
             plusesTextArea.setVisible(true);
-            plusesTextArea.setText(detailedReview.getPluses());
-
             minusesTextArea.setVisible(true);
-            minusesTextArea.setText(detailedReview.getMinuses());
+
         } else {
             plusesTextArea.setVisible(false);
             minusesTextArea.setVisible(false);
         }
+
+        reviewTextArea.setStyle(normalFieldStyle);
+
+        titleLabel.setText("Write a review for " + game.getTitle());
 
         // Observer for Text Area
         setupTextArea(reviewTextArea, charactersLabel, CHARACTERS_MAX);

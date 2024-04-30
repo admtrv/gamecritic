@@ -29,7 +29,7 @@ public class AppController extends Application {
         SceneController sceneController = SceneController.getInstance();
         sceneController.setStage(primaryStage);
 
-        // Loading fonts before starting gui
+        // Loading fonts before starting guiada
         FontUtil.loadProjectFonts();
 
         // Setting stage settings

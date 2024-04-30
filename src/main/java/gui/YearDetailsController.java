@@ -58,6 +58,7 @@ public class YearDetailsController implements StyleInterface, ToolBarInterface {
         gamesContainer.setSpacing(15);
         gamesContainer.setAlignment(Pos.TOP_CENTER);
         gamesContainer.getChildren().clear();
+        gamesContainer.setPadding(new Insets(0, 0, 40, 0));
 
         for (Game game : games) {
             VBox gameBox = new VBox(10);

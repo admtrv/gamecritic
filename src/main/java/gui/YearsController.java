@@ -46,6 +46,7 @@ public class YearsController implements StyleInterface, ToolBarInterface {
     @FXML
     private void displayYears(VBox yearsContainer, List<String> years) {
         yearsContainer.setSpacing(15);
+        yearsContainer.setPadding(new Insets(0, 0, 40, 0));
 
         for (String year : years) {
             Button yearButton = new Button("Game of the Year " + year);

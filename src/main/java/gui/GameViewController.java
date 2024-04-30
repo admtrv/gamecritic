@@ -22,6 +22,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.control.Button;
 import java.awt.Desktop;
+import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.io.IOException;
@@ -84,7 +85,29 @@ public class GameViewController implements StyleInterface, ToolBarInterface {
      */
     @FXML
     private void dispalayDetails(){
-        imageView.setImage(new Image(getClass().getResourceAsStream(game.getImagePath())));
+        // Image
+        String imagePath = game.getImagePath();
+        Image image = null;
+        try {
+            InputStream is = getClass().getResourceAsStream(imagePath);
+            if (is != null) {
+                image = new Image(is);
+            } else {
+                logger.log("Image not found: " + imagePath, LoggerLevel.ERROR);
+                System.err.println("Image not found: " + imagePath);
+
+                // Default image instead
+                image = new Image(getClass().getResourceAsStream("/images/icons/empty_image.png"));
+            }
+        } catch (Exception e) {
+
+            logger.log("Failed to load image: " + imagePath, LoggerLevel.ERROR);
+            System.err.println("Failed to load image: " + imagePath);
+            e.printStackTrace();
+        }
+        imageView.setImage(image);
+
+        // Other information
         titleLabel.setText(game.getTitle());
         genreLabel.setText(game.getGenre());
         developerLabel.setText(game.getDeveloper());
