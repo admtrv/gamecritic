@@ -17,6 +17,8 @@ import javafx.scene.control.TextArea;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.Objects;
+
 import javafx.fxml.FXML;
 
 /**
@@ -53,8 +55,14 @@ public class ReviewController implements StyleInterface {
             scoreSlider.setValue(review.getScore());
 
             reviewTextArea.setText(review.getReviewText());
-            plusesTextArea.setText(((DetailedReview)review).getPluses());
-            minusesTextArea.setText(((DetailedReview)review).getPluses());
+            // Check if review is an instance of DetailedReview before casting
+            if (review instanceof DetailedReview) {
+                plusesTextArea.setText(((DetailedReview)review).getPluses());
+                minusesTextArea.setText(((DetailedReview)review).getMinuses());
+            } else {
+                plusesTextArea.setText("");
+                minusesTextArea.setText("");
+            }
         } else {
             scoreLabel.setText("");
             scoreLabel.setStyle(initialScoreStyle + "-fx-border-radius: 22;");
@@ -158,6 +166,14 @@ public class ReviewController implements StyleInterface {
             System.err.println(reviewRule.getErrorMessage());
 
             return;
+        }
+
+        if (Objects.equals(pluses, "")) {
+            pluses = null;
+        }
+
+        if (Objects.equals(minuses, "")) {
+            minuses = null;
         }
 
         try {
