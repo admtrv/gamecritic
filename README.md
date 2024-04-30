@@ -1,13 +1,15 @@
 ![Logo](src/main/resources/images/logos/logo_horizontal_white.png)
 
 ## Introduction
-**gamecritic** is a video game reviews portal that gives players and critics from around
+**Gamecritic** is a video game reviews portal that gives players and critics from around
 the world the opportunity to provide their opinions on the latest releases in the
 world of video games. This is a community where every vote counts, and on the
 basis of these votes an objective and comprehensive evaluation of the game is formed.
 This further helps in identifying the best games of the year in various genres through
 public voting. This provides users a reliable source of information in choosing games
 for a quality experience.
+
+[Here is project documentation](https://admtrv.github.io/gamecritic/)
 
 ## Functionality
 
@@ -19,6 +21,8 @@ for a quality experience.
 6.	**Awards and year-end results:** At the end of each year there is a summary of the results, where games of different genres and categories will receive deserved awards based on their average score.
 7.	**Categorization:** Games are categorized by genre to provide a fair comparison and competition.
 8.	**Winners:** The games with the highest average scores in each genre are announced as winners and receive «GameCritic Game of the Year» awards.
+
+
 
 ## How to run the project
 
