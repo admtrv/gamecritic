@@ -20,7 +20,7 @@ for a quality experience.
 5.	**Verified stores:** The portal also provides links to verified stores, where you can buy your favorite game without any problems and without fear of scams.
 6.	**Awards and year-end results:** At the end of each year there is a summary of the results, where games of different genres and categories will receive deserved awards based on their average score.
 7.	**Categorization:** Games are categorized by genre to provide a fair comparison and competition.
-8.	**Winners:** The games with the highest average scores in each genre are announced as winners and receive «GameCritic Game of the Year» awards.
+8.	**Winners:** The games with the highest average scores in each genre are announced as winners and receive «Gamecritic Game of the Year» awards.
 
 
 
