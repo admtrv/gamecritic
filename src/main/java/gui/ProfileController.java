@@ -56,7 +56,7 @@ public class ProfileController implements FieldInterface, ToolBarInterface {
      * Updates username after validating it against system rules.
      */
     @FXML
-    public void updateUsername() {
+    private void updateUsername() {
         String newUsername = usernameField.getText();
         setUsernameNormalStyle();
 
@@ -103,7 +103,7 @@ public class ProfileController implements FieldInterface, ToolBarInterface {
      * Updates password after validating it against system rules.
      */
     @FXML
-    public void updatePassword() {
+    private void updatePassword() {
         String currentPassword = CurrentPasswordField.getText();
         String newPassword = NewPasswordField.getText();
         String confirmPassword = ConfirmPasswordField.getText();
@@ -175,7 +175,7 @@ public class ProfileController implements FieldInterface, ToolBarInterface {
      * Signs out current user and switches to the login screen.
      */
     @FXML
-    public void signOut() throws IOException {
+    private void signOut() throws IOException {
         Logger logger = new UserDataLogger(new TimeLogger(new FileLogger()), user.getUsername(), user.getPassword());
 
         CurrentUser.getInstance().logOut(); // Clearing information about the current user

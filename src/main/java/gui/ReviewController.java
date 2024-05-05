@@ -35,9 +35,9 @@ public class ReviewController implements StyleInterface {
     @FXML private Label plusesCharactersLabel;
     @FXML private TextArea minusesTextArea;
     @FXML private Label minusesCharactersLabel;
-    Game game = CurrentGame.getInstance().getGame();
-    User user = CurrentUser.getInstance().getUser();
-    Review review = CurrentReview.getInstance().getReview();
+    private Game game = CurrentGame.getInstance().getGame();
+    private User user = CurrentUser.getInstance().getUser();
+    private Review review = CurrentReview.getInstance().getReview();
     private int CHARACTERS_MAX = 1000; // For user
     private int ADDITIONAL_CHARACTERS_MAX = 500;
 
@@ -48,7 +48,7 @@ public class ReviewController implements StyleInterface {
      * and listeners for dynamic gui changes such as score adjustments.
      */
     @FXML
-    public void initialize() {
+    private void initialize() {
         if (review != null) {
             scoreLabel.setText(Integer.toString(review.getScore()));
             scoreLabel.setStyle(getScoreColor(review.getScore())  + "-fx-background-radius: 22;");
@@ -137,7 +137,7 @@ public class ReviewController implements StyleInterface {
      * If the user is a {@link Critic}, he get paid for writing first review.
      */
     @FXML
-    public void postReview() {
+    private void postReview() {
         Logger logger = new TimeLogger(new FileLogger());
 
         if (scoreLabel.getText().isEmpty()){

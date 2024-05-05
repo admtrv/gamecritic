@@ -21,13 +21,14 @@ import java.util.List;
  */
 public class YearsController implements StyleInterface, ToolBarInterface {
     @FXML private VBox yearsContainer;
-    List<String> years;
+    private List<String> years;
 
     /**
      * Initializes view by fetching a list of years from
      * the database and displaying them as selectable buttons.
      */
-    public void initialize() {
+    @FXML
+    private void initialize() {
         try {
             years = DataBaseUtil.getYears();
         } catch (SQLException e) {

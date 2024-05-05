@@ -41,20 +41,8 @@ public class Review {
         this.id = id;
     }
 
-    public int getGameId() {
-        return gameId;
-    }
-
-    public void setGameId(int gameId) {
-        this.gameId = gameId;
-    }
-
     public int getUserId() {
         return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
     }
 
     public int getScore() {
@@ -69,15 +57,8 @@ public class Review {
         return reviewText;
     }
 
-    public void setReviewText(String reviewText) {
-        this.reviewText = reviewText;
-    }
-
     public String getPublishDate() {
         return publishDate;
     }
 
-    public void setPublishDate(String publishDate) {
-        this.publishDate = publishDate;
-    }
 }

@@ -65,7 +65,7 @@ public class GameViewController implements StyleInterface, ToolBarInterface {
      * method attempts to get all reviews from database and then displays them.
      */
     @FXML
-    public void initialize() {
+    private void initialize() {
         dispalayDetails();
 
         try {

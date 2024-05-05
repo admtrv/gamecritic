@@ -27,14 +27,14 @@ public class YearDetailsController implements StyleInterface, ToolBarInterface {
     @FXML private Label mainLabel = new Label();
     @FXML private VBox gamesContainer;
     private List<Game> games;
-    String year = CurrentYear.getInstance().getYear();
+    private String year = CurrentYear.getInstance().getYear();
 
     /**
      * Initializes view by setting main label to the selected year and
      * loading games that received awards in that year.
      */
     @FXML
-    public void initialize(){
+    private void initialize(){
         mainLabel.setText("Game of the Year " + year + " Awards");
 
         try {

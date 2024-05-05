@@ -30,15 +30,8 @@ public class DetailedReview extends Review{
         return pluses;
     }
 
-    public void setPluses(String pluses) {
-        this.pluses = pluses;
-    }
-
     public String getMinuses() {
         return minuses;
     }
 
-    public void setMinuses(String minuses) {
-        this.minuses = minuses;
-    }
 }

@@ -40,7 +40,7 @@ public class HomeController implements StyleInterface, ToolBarInterface {
      * Games got based on their release dates and scores respectively.
      */
     @FXML
-    public void initialize(){
+    private void initialize(){
         try {
             latestGames = DataBaseUtil.getGames(15, "release_date");
             topGames = DataBaseUtil.getGames(15, "average_score");

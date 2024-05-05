@@ -29,7 +29,7 @@ public class ReviewViewController implements StyleInterface {
      * It finds out user who wrote review from the database and formats gui based on type of user.
      */
     @FXML
-    public void initialize() {
+    private void initialize() {
         // Score label
         scoreLabel.setText(Integer.toString(review.getScore()));
         scoreLabel.setStyle(getScoreColor(review.getScore())  + "-fx-background-radius: 22;");

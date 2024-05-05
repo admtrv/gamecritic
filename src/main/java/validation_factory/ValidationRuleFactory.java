@@ -17,14 +17,11 @@ public class ValidationRuleFactory {
      *         requested validation rule hasnt been implemented
      */
     public static ValidationRule getRule(String ruleName) {
-        if ("username".equals(ruleName)) {
-            return new UsernameValidationRule();
-        } else if ("password".equals(ruleName)) {
-            return new PasswordValidationRule();
-        } else if ("reviews".equals(ruleName)){
-            return new ReviewValidationRule();
-        } else {
-            throw new RuntimeException("Unknown validation factory rule: " + ruleName);
-        }
+        return switch (ruleName) {
+            case "username" -> new UsernameValidationRule();
+            case "password" -> new PasswordValidationRule();
+            case "reviews" -> new ReviewValidationRule();
+            case null, default -> throw new RuntimeException("Unknown validation factory rule: " + ruleName);
+        };
     }
 }

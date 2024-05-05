@@ -38,7 +38,7 @@ public class GamesController implements StyleInterface, ToolBarInterface {
      * method attempts to get all games from database and then displays them.
      */
     @FXML
-    public void initialize(){
+    private void initialize(){
         try {
             allGames = DataBaseUtil.getGames();
         } catch (SQLException e) {
