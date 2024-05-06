@@ -2,7 +2,6 @@ package gui;
 
 import game.*;
 import gui_interfaces.*;
-import logger_decorator.*;
 import session.*;
 import utils.*;
 
@@ -10,13 +9,11 @@ import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.control.Label;
 import java.io.IOException;
-import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -32,7 +29,6 @@ public class GamesController implements StyleInterface, ToolBarInterface {
     private GridPane gamesGrid;
     private List<Game> allGames;
 
-    private static Logger logger = new TimeLogger(new FileLogger());
     /**
      * Initializes games data and gui components when controller is loaded. This
      * method attempts to get all games from database and then displays them.
@@ -91,29 +87,11 @@ public class GamesController implements StyleInterface, ToolBarInterface {
         gameBox.setMaxHeight(200);
 
         // Image
-        String imagePath = game.getImagePath();
-        Image image = null;
-        try {
-            InputStream is = getClass().getResourceAsStream(imagePath);
-            if (is != null) {
-                image = new Image(is);
-            } else {
-                logger.log("Image not found: " + imagePath, LoggerLevel.ERROR);
-                System.err.println("Image not found: " + imagePath);
-
-                // Default image instead
-                image = new Image(getClass().getResourceAsStream("/images/icons/empty_image.png"));
-            }
-        } catch (Exception e) {
-
-            logger.log("Failed to load image: " + imagePath, LoggerLevel.ERROR);
-            System.err.println("Failed to load image: " + imagePath);
-            e.printStackTrace();
-        }
-        ImageView imageView = new ImageView(image);
+        ImageView imageView = new ImageView();
         imageView.setFitWidth(90);
-        imageView.setFitHeight(180);
-        imageView.setPreserveRatio(true);
+        imageView.setFitHeight(140);
+        // Multithreading
+        ImageUtil.loadImageAsynchronously(game.getImagePath(), imageView);
 
         // Text container
         VBox textContainer = new VBox(5);

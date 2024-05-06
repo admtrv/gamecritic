@@ -661,3 +661,75 @@
 2024-05-05 13:52:21 [INFO] Launched app
 2024-05-05 13:52:23 [INFO] User loaded from serialization file
 2024-05-05 13:53:42 [INFO] Application closed
+2024-05-06 16:39:40 [INFO] Launched app
+2024-05-06 16:39:41 [INFO] User not loaded from serialization file
+2024-05-06 16:39:52 [INFO] Found user: Username[admtrv] Password[admtrv123] 
+2024-05-06 16:40:01 [INFO] Awards generated
+2024-05-06 16:40:15 [INFO] Application closed
+2024-05-06 17:35:19 [INFO] Launched app
+2024-05-06 17:35:20 [INFO] User not loaded from serialization file
+2024-05-06 17:35:29 [INFO] Found user: Username[admtrv] Password[admtrv123] 
+2024-05-06 17:35:36 [DEBUG] Problem in finding user: Username[admtrv] Password[admtrv123] 
+2024-05-06 17:35:51 [INFO] Application closed
+2024-05-06 17:38:06 [INFO] Launched app
+2024-05-06 17:38:07 [DEBUG] Problem loading user from serialization file
+2024-05-06 17:38:47 [INFO] Launched app
+2024-05-06 17:38:48 [DEBUG] Problem loading user from serialization file
+2024-05-06 17:39:59 [INFO] Launched app
+2024-05-06 17:40:01 [INFO] User loaded from serialization file
+2024-05-06 17:40:03 [INFO] Application closed
+2024-05-06 18:30:31 [INFO] Launched app
+2024-05-06 18:30:33 [INFO] User loaded from serialization file
+2024-05-06 18:30:37 [INFO] Signed out user: Username[admtrv] Password[admtrv123] 
+2024-05-06 18:30:39 [INFO] Application closed
+2024-05-06 18:30:42 [INFO] Launched app
+2024-05-06 18:30:42 [ERROR] Failed to load user session: Failed to load current user
+2024-05-06 18:48:51 [INFO] Launched app
+2024-05-06 18:48:51 [INFO] User not loaded from serialization file
+2024-05-06 18:49:13 [INFO] Found user: Username[admtrv] Password[admtrv123] 
+2024-05-06 18:49:36 [INFO] Application closed
+2024-05-06 18:49:46 [INFO] Launched app
+2024-05-06 18:49:48 [INFO] User loaded from serialization file
+2024-05-06 18:50:16 [INFO] Application closed
+2024-05-06 19:24:35 [INFO] Launched app
+2024-05-06 19:24:37 [INFO] User loaded from serialization file
+2024-05-06 19:46:21 [INFO] Launched app
+2024-05-06 19:46:21 [INFO] User loaded from serialization file
+2024-05-06 19:46:28 [INFO] Application closed
+2024-05-06 19:46:31 [INFO] Launched app
+2024-05-06 19:46:31 [INFO] User loaded from serialization file
+2024-05-06 19:46:38 [INFO] Application closed
+2024-05-06 19:46:41 [INFO] Launched app
+2024-05-06 19:46:42 [INFO] User loaded from serialization file
+2024-05-06 19:48:59 [INFO] Launched app
+2024-05-06 19:49:00 [INFO] User loaded from serialization file
+2024-05-06 19:49:03 [INFO] Application closed
+2024-05-06 19:49:06 [INFO] Launched app
+2024-05-06 19:49:07 [INFO] User loaded from serialization file
+2024-05-06 20:19:09 [INFO] Launched app
+2024-05-06 20:19:10 [INFO] User loaded from serialization file
+2024-05-06 20:19:39 [INFO] Application closed
+2024-05-06 20:19:42 [INFO] Launched app
+2024-05-06 20:19:43 [INFO] User loaded from serialization file
+2024-05-06 20:19:46 [INFO] Application closed
+2024-05-06 20:19:48 [INFO] Launched app
+2024-05-06 20:19:50 [INFO] User loaded from serialization file
+2024-05-06 20:19:52 [INFO] Application closed
+2024-05-06 20:19:55 [INFO] Launched app
+2024-05-06 20:19:56 [INFO] User loaded from serialization file
+2024-05-06 20:30:42 [INFO] Launched app
+2024-05-06 20:30:43 [INFO] User loaded from serialization file
+2024-05-06 20:31:39 [INFO] Launched app
+2024-05-06 20:31:41 [INFO] User loaded from serialization file
+2024-05-06 20:32:28 [INFO] Launched app
+2024-05-06 20:32:29 [INFO] User loaded from serialization file
+2024-05-06 20:33:15 [INFO] Launched app
+2024-05-06 20:33:16 [INFO] User loaded from serialization file
+2024-05-06 20:44:14 [INFO] Launched app
+2024-05-06 20:44:16 [INFO] User loaded from serialization file
+2024-05-06 20:45:23 [INFO] Loaded new game: [sdfasfasdf]
+2024-05-06 20:45:25 [ERROR] Image not found: /images/games/tumblr_3c2e408d98f04cece02f87493c2d4988_7b27604c_2048.jpg
+2024-05-06 20:46:31 [INFO] Application closed
+2024-05-06 20:59:55 [INFO] Launched app
+2024-05-06 20:59:56 [INFO] User loaded from serialization file
+2024-05-06 21:00:23 [INFO] Application closed

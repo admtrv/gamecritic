@@ -4,13 +4,11 @@ import game.*;
 import gui_interfaces.*;
 import session.*;
 import utils.*;
-import logger_decorator.*;
 
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
@@ -19,7 +17,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import javafx.scene.Cursor;
-import java.io.InputStream;
 
 /**
  * Controller for managing display of games on the home screen of the application.
@@ -32,8 +29,6 @@ public class HomeController implements StyleInterface, ToolBarInterface {
 
     @FXML private HBox LatestGamesContainer;
     @FXML private HBox TopGamesContainer;
-
-    private static Logger logger = new TimeLogger(new FileLogger());
 
     /**
      * Initializes the controller by getting and displaying latest and top-rated games.
@@ -68,28 +63,11 @@ public class HomeController implements StyleInterface, ToolBarInterface {
             gameBox.setStyle("-fx-background-color: " + BoxBackgroundColor + " -fx-background-radius: 10");
 
             // Image
-            String imagePath = game.getImagePath();
-            Image image = null;
-            try {
-                InputStream is = getClass().getResourceAsStream(imagePath);
-                if (is != null) {
-                    image = new Image(is);
-                } else {
-                    logger.log("Image not found: " + imagePath, LoggerLevel.ERROR);
-                    System.err.println("Image not found: " + imagePath);
-
-                    // Default image instead
-                    image = new Image(getClass().getResourceAsStream("/images/icons/empty_image.png"));
-                }
-            } catch (Exception e) {
-                logger.log("Failed to load image: " + imagePath, LoggerLevel.ERROR);
-                System.err.println("Failed to load image: " + imagePath);
-                e.printStackTrace();
-            }
-
-            ImageView imageView = new ImageView(image);
+            ImageView imageView = new ImageView();
             imageView.setFitHeight(160); // Height : Width = 15 : 10
             imageView.setFitWidth(110);
+            // Multithreading
+            ImageUtil.loadImageAsynchronously(game.getImagePath(), imageView);
 
             // Title
             Label titleLabel = new Label(game.getTitle());

@@ -9,7 +9,6 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import java.io.IOException;
 
-
 /**
  * Main application controller for initializing and managing primary stage. This class
  * set up application environment, including loading necessary resources, like fonts
@@ -36,6 +35,8 @@ public class AppController extends Application {
         primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/images/logos/logo_icon.png")));
         primaryStage.setTitle("gamecritic");
         primaryStage.setResizable(false);
+
+        // Lambda expression
         primaryStage.setOnCloseRequest(event -> {
 
             logger.log("Application closed", LoggerLevel.INFO);
