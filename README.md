@@ -9,7 +9,7 @@ This further helps in identifying the best games of the year in various genres t
 public voting. This provides users a reliable source of information in choosing games
 for a quality experience.
 
-[Here is project documentation](https://admtrv.github.io/gamecritic/)
+[JavaDoc Documentation](https://admtrv.github.io/gamecritic/)
 
 ## Functionality
 
